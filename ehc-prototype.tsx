@@ -1,0 +1,808 @@
+import React, { useState, useEffect } from 'react';
+import { Home, Users, Building2, Calendar, FileText, MessageSquare, Link2, CreditCard, LogOut, Menu, X, ChevronRight, MapPin, DollarSign, Bell, Search, Plus, Mail, Phone, Shield, Award } from 'lucide-react';
+
+// Official UT brand palette (https://umac.utexas.edu/brand-center/colors/)
+// Primary: Burnt Orange #BF5700 + White
+// Secondary: Charcoal #333F48, Light Orange #F8971F, Cream #D6D2C4, Slate #9CADB7
+
+// Hidden Longhorn silhouette for easter egg
+const LonghornSilhouette = ({ size = 40, opacity = 0.05 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" style={{ opacity }}>
+    <path d="M50 30 C40 30 30 25 20 20 C15 18 8 15 5 18 C3 20 8 25 15 28 C25 32 35 33 50 33 C65 33 75 32 85 28 C92 25 97 20 95 18 C92 15 85 18 80 20 C70 25 60 30 50 30 Z M50 33 C45 33 42 38 42 45 L58 45 C58 38 55 33 50 33 Z" fill="#BF5700" />
+  </svg>
+);
+
+// EHC Logo - placeholder for prototype. In the real Next.js build, this gets
+// replaced with: <img src="/logo.png" alt="Executive Hunting Club" />
+function EHCLogo({ size = 64, className = '' }) {
+  return (
+    <div
+      className={`flex items-center justify-center rounded-full shrink-0 ${className}`}
+      style={{
+        width: size,
+        height: size,
+        background: '#fdfaf3',
+        border: `${Math.max(2, size * 0.04)}px solid #e84d2e`,
+        boxShadow: 'inset 0 0 0 2px #fdfaf3, inset 0 0 0 3px #e84d2e',
+      }}
+      title="Executive Hunting Club"
+    >
+      <div className="text-center leading-none" style={{ color: '#4a2818' }}>
+        <div className="font-bold tracking-tight" style={{ fontSize: size * 0.32, lineHeight: 1 }}>EHC</div>
+        <div className="italic font-serif mt-0.5" style={{ fontSize: size * 0.13, lineHeight: 1 }}>est. 1975</div>
+      </div>
+    </div>
+  );
+}
+
+// Camo SVG pattern - subtle background texture
+const CamoBackground = ({ opacity = 0.08 }) => (
+  <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="camo" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+        <rect width="200" height="200" fill="#3d2817" />
+        <path d="M20 30 Q40 10 70 25 T120 30 Q140 50 110 70 T60 80 Q30 65 20 30 Z" fill="#2a1a0e" opacity="0.7" />
+        <path d="M130 100 Q160 90 180 110 T180 150 Q150 165 120 150 T130 100 Z" fill="#5a3a22" opacity="0.6" />
+        <path d="M30 130 Q60 120 80 145 T70 175 Q40 185 20 165 T30 130 Z" fill="#1a0f08" opacity="0.6" />
+        <path d="M100 40 Q120 35 130 55 T115 80 Q95 75 100 40 Z" fill="#6b4226" opacity="0.5" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#camo)" opacity={opacity} />
+  </svg>
+);
+
+export default function EHCPrototype() {
+  const [view, setView] = useState('public');
+  const [activeSection, setActiveSection] = useState('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [hookEm, setHookEm] = useState(false);
+  const [logoClicks, setLogoClicks] = useState(0);
+  const [showLonghorn, setShowLonghorn] = useState(false);
+  const [konamiBuffer, setKonamiBuffer] = useState('');
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key.length !== 1) return;
+      const newBuffer = (konamiBuffer + e.key.toLowerCase()).slice(-5);
+      setKonamiBuffer(newBuffer);
+      if (newBuffer === 'texas') {
+        setHookEm(true);
+        setTimeout(() => setHookEm(false), 2500);
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [konamiBuffer]);
+
+  const handleLogoClick = () => {
+    const next = logoClicks + 1;
+    setLogoClicks(next);
+    if (next >= 3) {
+      setShowLonghorn(true);
+      setLogoClicks(0);
+    }
+    setTimeout(() => setLogoClicks(0), 1500);
+  };
+
+  // ===== PUBLIC LANDING PAGE =====
+  if (view === 'public') {
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Light cream header */}
+        <header style={{ backgroundColor: '#D6D2C4', borderBottom: '4px solid #BF5700' }}>
+          <nav className="px-6 py-4 flex items-center justify-between max-w-7xl mx-auto">
+            <div className="flex items-center gap-4">
+              <EHCLogo size={64} />
+              <div className="hidden sm:block">
+                <div className="font-serif text-lg leading-tight font-bold" style={{ color: '#333F48' }}>Executive Hunting Club</div>
+                <div className="text-xs italic font-semibold" style={{ color: '#BF5700' }}>Est. 1975 · "We Promote Wild Life"</div>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center gap-8 text-sm font-semibold" style={{ color: '#333F48' }}>
+              <a href="#" className="hover:underline">About</a>
+              <a href="#" className="hover:underline">Membership</a>
+              <a href="#" className="hover:underline">Events</a>
+              <a href="#" className="hover:underline">Contact</a>
+            </div>
+            <button onClick={() => setView('login')} style={{ backgroundColor: '#BF5700', color: '#ffffff' }} className="px-5 py-2 rounded text-sm font-bold transition hover:opacity-90">
+              Member Login
+            </button>
+          </nav>
+        </header>
+
+        {/* Hero - solid dark charcoal */}
+        <div style={{ backgroundColor: '#1a2128', color: '#ffffff' }}>
+          <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-6 font-bold" style={{ backgroundColor: '#BF5700', color: '#ffffff' }}>
+                <Award className="w-3 h-3" /> Established August 11, 1975 · 50+ Years of Tradition
+              </div>
+              <h1 className="font-serif text-5xl md:text-7xl mb-6 leading-tight" style={{ color: '#ffffff' }}>
+                A Brotherhood of <span style={{ color: '#FFD600' }}>Sportsmen</span>
+              </h1>
+              <p className="text-lg md:text-xl mb-8 max-w-2xl leading-relaxed" style={{ color: '#e7e5e4' }}>
+                A private Texas non-profit hunting and fishing club founded in 1975 by J. Donald Fisher, James G. Testerman, and Gerald K. Mischon. Beach house retreats on the Bolivar Peninsula, organized hunts, and a tradition built across generations.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <button onClick={() => setView('login')} style={{ backgroundColor: '#BF5700', color: '#ffffff' }} className="px-6 py-3 rounded font-bold transition flex items-center gap-2 shadow-lg hover:opacity-90">
+                  Member Portal <ChevronRight className="w-4 h-4" />
+                </button>
+                <button style={{ backgroundColor: '#ffffff', color: '#333F48' }} className="px-6 py-3 rounded font-bold transition shadow-lg hover:opacity-90">
+                  Inquire About Membership
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Features - light section */}
+        <div className="max-w-7xl mx-auto px-6 py-20">
+          <div className="text-center mb-16">
+            <div className="text-sm uppercase tracking-wider mb-3 font-bold" style={{ color: '#BF5700' }}>What We Offer</div>
+            <h2 className="font-serif text-4xl" style={{ color: '#333F48' }}>More Than a Club</h2>
+            <div className="w-24 h-1 mx-auto mt-4" style={{ backgroundColor: '#BF5700' }}></div>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { icon: Building2, title: 'Beach House', desc: 'Private retreat on the Bolivar Peninsula in the Ramada Beach Subdivision, available for member reservations year-round with prime-time scheduling.' },
+              { icon: Calendar, title: 'Hunts & Events', desc: 'Organized group hunts, fishing trips, banquets, and seasonal gatherings — sponsored for members per our 1975 charter.' },
+              { icon: Users, title: 'Membership', desc: 'A vetted community of like-minded sportsmen and business leaders, with a managed waiting list for prospective members.' },
+            ].map((f, i) => (
+              <div key={i} className="bg-white p-8 rounded hover:shadow-lg transition" style={{ border: '2px solid #D6D2C4' }}>
+                <div className="w-14 h-14 rounded flex items-center justify-center mb-5" style={{ backgroundColor: '#BF5700' }}>
+                  <f.icon className="w-7 h-7" style={{ color: '#ffffff' }} />
+                </div>
+                <h3 className="font-serif text-2xl mb-3" style={{ color: '#333F48' }}>{f.title}</h3>
+                <p className="leading-relaxed" style={{ color: '#57534e' }}>{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* History strip - dark */}
+        <div style={{ backgroundColor: '#1a2128', color: '#ffffff' }} className="py-16">
+          <div className="max-w-5xl mx-auto px-6 text-center">
+            <h2 className="font-serif text-3xl md:text-4xl mb-4" style={{ color: '#ffffff' }}>Our Heritage</h2>
+            <p className="text-lg leading-relaxed mb-6" style={{ color: '#e7e5e4' }}>
+              Chartered as a Texas non-profit corporation on August 11, 1975, the Executive Hunting Club was founded to conduct a hunting and fishing club for the benefit of its members, and to promote and sponsor hunting and fishing trips. That mission still guides us today.
+            </p>
+            <p className="italic font-serif text-xl font-semibold" style={{ color: '#FFD600' }}>"We Promote Wild Life"</p>
+          </div>
+        </div>
+
+        {/* CTA - cream */}
+        <div style={{ backgroundColor: '#D6D2C4' }} className="py-16">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <h2 className="font-serif text-3xl md:text-4xl mb-4" style={{ color: '#333F48' }}>Already a Member?</h2>
+            <p className="mb-8" style={{ color: '#44403c' }}>Access the member portal for reservations, events, documents, and more.</p>
+            <button onClick={() => setView('login')} style={{ backgroundColor: '#BF5700', color: '#ffffff' }} className="px-8 py-3 rounded font-bold transition hover:opacity-90">Sign In</button>
+          </div>
+        </div>
+
+        <footer style={{ backgroundColor: '#1a2128', color: '#d6d3d1' }} className="py-8 text-center text-sm">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <EHCLogo size={48} />
+            <span className="font-serif" style={{ color: '#ffffff' }}>Executive Hunting Club</span>
+          </div>
+          <div>© 2026 Executive Hunting Club · Texas Non-Profit · Charter No. 366138 <span className="ml-1" style={{ color: '#BF5700' }} title="Hook 'em Horns!">🤘</span></div>
+        </footer>
+      </div>
+    );
+  }
+
+  // ===== LOGIN =====
+  if (view === 'login') {
+    return (
+      <div className="min-h-screen bg-[#333F48] flex items-center justify-center p-6 relative overflow-hidden">
+        <CamoBackground opacity={0.12} />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#333F48]/95 via-[#1f2730]/90 to-[#333F48]/95"></div>
+        <div className="relative w-full max-w-md">
+            <div className="text-center mb-8">
+            <div className="inline-block mb-4 bg-[#fdfaf3] p-4 rounded-full shadow-xl">
+              <EHCLogo size={120} />
+            </div>
+            <h1 className="font-serif text-3xl text-white mb-2">Member Portal</h1>
+            <p className="text-[#FFD600] text-sm italic font-semibold">"We Promote Wild Life"</p>
+          </div>
+          <div className="bg-white rounded p-8 shadow-2xl border-t-4 border-[#BF5700]">
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-semibold text-[#333F48] mb-1 block">Email</label>
+                <input type="email" defaultValue="member@example.com" className="w-full px-4 py-2.5 border border-stone-300 rounded bg-white focus:outline-none focus:ring-2 focus:ring-[#BF5700]" />
+              </div>
+              <div>
+                <label className="text-sm font-semibold text-[#333F48] mb-1 block">Password</label>
+                <input type="password" defaultValue="••••••••" className="w-full px-4 py-2.5 border border-stone-300 rounded bg-white focus:outline-none focus:ring-2 focus:ring-[#BF5700]" />
+              </div>
+              <button onClick={() => setView('dashboard')} className="w-full bg-[#BF5700] hover:bg-[#a04800] text-white py-2.5 rounded font-semibold transition">Sign In</button>
+              <div className="text-center text-sm text-stone-500">
+                <a href="#" className="hover:text-[#BF5700]">Forgot password?</a>
+              </div>
+            </div>
+          </div>
+          <div className="text-center mt-6">
+            <button onClick={() => setView('public')} className="text-stone-300 hover:text-white text-sm">← Back to home</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ===== MEMBER PORTAL =====
+  const navItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: Home },
+    { id: 'membership', label: 'Membership', icon: Users },
+    { id: 'beachhouse', label: 'Beach House', icon: Building2 },
+    { id: 'events', label: 'Events', icon: Calendar },
+    { id: 'documents', label: 'Documents', icon: FileText },
+    { id: 'payments', label: 'Payments', icon: CreditCard },
+    { id: 'messages', label: 'Messages', icon: MessageSquare },
+    { id: 'links', label: 'Links', icon: Link2 },
+  ];
+
+  return (
+    <div className="min-h-screen bg-stone-50 flex relative">
+      {hookEm && (
+        <div className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center" style={{ animation: 'hookEmFade 2.5s ease-out' }}>
+          <div className="absolute inset-0 bg-[#BF5700]/25"></div>
+          <div className="relative text-center" style={{ animation: 'hookEmScale 2.5s ease-out' }}>
+            <div className="text-9xl mb-4">🤘</div>
+            <div className="font-serif text-6xl text-[#BF5700] font-bold drop-shadow-lg">HOOK 'EM!</div>
+            <div className="text-2xl text-[#a04800] mt-2 italic">Texas Fight</div>
+          </div>
+          <style>{`
+            @keyframes hookEmFade { 0% { opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
+            @keyframes hookEmScale { 0% { transform: scale(0.5) rotate(-10deg); } 20% { transform: scale(1.1) rotate(2deg); } 40% { transform: scale(1) rotate(0deg); } 100% { transform: scale(1) rotate(0deg); } }
+          `}</style>
+        </div>
+      )}
+
+      {/* Sidebar - charcoal with light logo header */}
+      <aside className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed md:static inset-y-0 left-0 z-30 w-64 bg-[#333F48] text-white transition-transform flex flex-col`}>
+        <div className="bg-[#D6D2C4] p-5 border-b-4 border-[#BF5700]">
+          <div className="flex items-center gap-3 cursor-pointer select-none" onClick={handleLogoClick} title={logoClicks > 0 ? `${3 - logoClicks} more...` : ''}>
+            <EHCLogo size={56} />
+            <div>
+              <div className="font-serif text-sm leading-tight text-[#333F48] font-bold">Executive</div>
+              <div className="font-serif text-sm leading-tight text-[#333F48] font-bold">Hunting Club</div>
+              <div className="text-xs italic text-[#BF5700] mt-0.5 font-semibold">Est. 1975</div>
+            </div>
+          </div>
+        </div>
+        <nav className="p-3 flex-1">
+          {navItems.map(item => (
+            <button
+              key={item.id}
+              onClick={() => { setActiveSection(item.id); setSidebarOpen(false); }}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded text-sm transition mb-1 ${activeSection === item.id ? 'bg-[#BF5700] text-white' : 'text-stone-200 hover:bg-[#1f2730]'}`}
+            >
+              <item.icon className="w-4 h-4" />
+              {item.label}
+            </button>
+          ))}
+        </nav>
+        <div className="p-3 border-t border-[#1f2730]">
+          <button onClick={() => setView('public')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded text-sm text-stone-300 hover:bg-[#1f2730] transition">
+            <LogOut className="w-4 h-4" />
+            Sign Out
+          </button>
+        </div>
+      </aside>
+
+      <div className="flex-1 flex flex-col min-w-0">
+        <header className="bg-white border-b-2 border-[#D6D2C4] px-6 py-3 flex items-center justify-between">
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="md:hidden">
+            {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+          <div className="flex-1 max-w-md mx-4 hidden md:block">
+            <div className="relative">
+              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
+              <input placeholder="Search members, events, documents..." className="w-full pl-9 pr-4 py-2 bg-stone-100 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#BF5700]" />
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <button className="relative p-2 hover:bg-stone-100 rounded">
+              <Bell className="w-5 h-5 text-[#333F48]" />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-[#BF5700] rounded-full"></span>
+            </button>
+            <div className="flex items-center gap-2 pl-3 border-l border-stone-200">
+              <div className="w-8 h-8 rounded-full bg-[#333F48] text-white flex items-center justify-center text-sm font-medium">JD</div>
+              <div className="text-sm hidden md:block">
+                <div className="font-medium text-[#333F48] flex items-center gap-1.5">
+                  John Doe {showLonghorn && <span className="text-[#BF5700]" title="Hook 'em Horns!">🤘</span>}
+                </div>
+                <div className="text-xs text-stone-500">
+                  Member · Class of 2018{showLonghorn && <span className="text-[#BF5700] font-semibold"> · UT '14</span>}
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-auto">
+          {activeSection === 'dashboard' && <Dashboard setSection={setActiveSection} />}
+          {activeSection === 'membership' && <Membership />}
+          {activeSection === 'beachhouse' && <BeachHouse />}
+          {activeSection === 'events' && <Events />}
+          {activeSection === 'documents' && <Documents />}
+          {activeSection === 'payments' && <Payments />}
+          {activeSection === 'messages' && <Messages />}
+          {activeSection === 'links' && <Links />}
+        </main>
+      </div>
+    </div>
+  );
+}
+
+function Dashboard({ setSection }) {
+  return (
+    <div className="p-6 max-w-7xl mx-auto relative">
+      <div className="absolute bottom-4 right-4 pointer-events-none" title="🤘">
+        <LonghornSilhouette size={80} opacity={0.06} />
+      </div>
+
+      <div className="mb-8">
+        <h1 className="font-serif text-3xl text-[#333F48] mb-1">Welcome back, John</h1>
+        <p className="text-stone-600">Here's what's happening at the club. <span className="text-xs text-stone-400 italic">Try typing "texas" anywhere...</span></p>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        {[
+          { label: 'Outstanding Balance', value: '$0.00', sub: 'All paid up' },
+          { label: 'Next Reservation', value: 'May 12', sub: '3 nights at Beach House' },
+          { label: 'Upcoming Events', value: '2', sub: 'This month' },
+          { label: 'New Messages', value: '5', sub: 'Unread' },
+        ].map((s, i) => (
+          <div key={i} className="bg-white p-5 rounded border border-[#D6D2C4]">
+            <div className="text-xs uppercase tracking-wider text-stone-500 mb-2">{s.label}</div>
+            <div className="font-serif text-2xl text-[#333F48]">{s.value}</div>
+            <div className="text-xs text-stone-500 mt-1">{s.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        <div className="md:col-span-2 bg-white rounded border border-[#D6D2C4] overflow-hidden">
+          <div className="p-5 border-b border-[#D6D2C4] flex items-center justify-between">
+            <div>
+              <h2 className="font-serif text-xl text-[#333F48]">Beach House Availability</h2>
+              <p className="text-sm text-stone-500">Bolivar Peninsula · Next two weeks</p>
+            </div>
+            <button onClick={() => setSection('beachhouse')} className="text-sm text-[#BF5700] hover:text-[#a04800] flex items-center gap-1 font-medium">View calendar <ChevronRight className="w-4 h-4" /></button>
+          </div>
+          <div className="p-5">
+            <div className="grid grid-cols-7 gap-1 text-center text-xs">
+              {['S','M','T','W','T','F','S'].map((d, i) => <div key={i} className="text-stone-500 font-medium pb-2">{d}</div>)}
+              {Array.from({length: 14}, (_, i) => {
+                const states = ['available','available','booked','available','prime','available','available','available','booked','booked','available','available','available','prime'];
+                const state = states[i];
+                const colors = {
+                  available: 'bg-orange-50 text-[#7a3500] hover:bg-orange-100 cursor-pointer border border-orange-200 font-medium',
+                  booked: 'bg-stone-200 text-stone-500',
+                  prime: 'bg-[#F8971F]/40 text-[#7a3500] border border-[#F8971F] font-semibold',
+                };
+                return (
+                  <div key={i} className={`aspect-square flex items-center justify-center rounded text-sm ${colors[state]}`}>
+                    {i + 12}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="flex items-center gap-4 mt-4 text-xs text-stone-600">
+              <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded bg-orange-50 border border-orange-200"></div>Available</div>
+              <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded bg-stone-200"></div>Booked</div>
+              <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded bg-[#F8971F]/30 border border-[#F8971F]"></div>Prime Time</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded border border-[#D6D2C4]">
+          <div className="p-5 border-b border-[#D6D2C4] flex items-center justify-between">
+            <h2 className="font-serif text-xl text-[#333F48]">Upcoming</h2>
+            <button onClick={() => setSection('events')} className="text-sm text-[#BF5700]"><ChevronRight className="w-4 h-4" /></button>
+          </div>
+          <div className="divide-y divide-stone-100">
+            {[
+              { date: 'May 18', title: 'Spring Banquet', loc: 'Clubhouse' },
+              { date: 'Jun 02', title: 'Fishing Tournament', loc: 'Beach House' },
+              { date: 'Jun 15', title: 'Board Meeting', loc: 'Virtual' },
+            ].map((e, i) => (
+              <div key={i} className="p-4 hover:bg-stone-50 cursor-pointer">
+                <div className="flex items-start gap-3">
+                  <div className="bg-[#333F48] text-white px-2 py-1 rounded text-xs font-medium min-w-[50px] text-center">{e.date}</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-[#333F48] text-sm">{e.title}</div>
+                    <div className="text-xs text-stone-500 flex items-center gap-1 mt-0.5"><MapPin className="w-3 h-3" />{e.loc}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="md:col-span-2 bg-white rounded border border-[#D6D2C4]">
+          <div className="p-5 border-b border-[#D6D2C4]">
+            <h2 className="font-serif text-xl text-[#333F48]">Message Center</h2>
+          </div>
+          <div className="divide-y divide-stone-100">
+            {[
+              { from: 'Board of Directors', subject: '2026 Dues Reminder', time: '2 hours ago', unread: true },
+              { from: 'Tom Williams', subject: 'Beach house weekend swap?', time: 'Yesterday', unread: true },
+              { from: 'Events Committee', subject: 'Spring Banquet RSVP needed', time: '3 days ago', unread: false },
+            ].map((m, i) => (
+              <div key={i} className={`p-4 hover:bg-stone-50 cursor-pointer ${m.unread ? 'bg-orange-50/40' : ''}`}>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="font-medium text-sm text-[#333F48] flex items-center gap-2">
+                    {m.unread && <span className="w-2 h-2 bg-[#BF5700] rounded-full"></span>}
+                    {m.from}
+                  </div>
+                  <div className="text-xs text-stone-500">{m.time}</div>
+                </div>
+                <div className="text-sm text-stone-600 ml-4">{m.subject}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-[#1a2128] text-white rounded p-5">
+          <h2 className="font-serif text-xl mb-4">Quick Actions</h2>
+          <div className="space-y-2">
+            <button onClick={() => setSection('beachhouse')} className="w-full bg-white/10 hover:bg-[#BF5700] px-4 py-2.5 rounded text-sm text-left flex items-center justify-between transition">Book the beach house <ChevronRight className="w-4 h-4" /></button>
+            <button onClick={() => setSection('payments')} className="w-full bg-white/10 hover:bg-[#BF5700] px-4 py-2.5 rounded text-sm text-left flex items-center justify-between transition">Pay 2026 dues <ChevronRight className="w-4 h-4" /></button>
+            <button onClick={() => setSection('membership')} className="w-full bg-white/10 hover:bg-[#BF5700] px-4 py-2.5 rounded text-sm text-left flex items-center justify-between transition">Member directory <ChevronRight className="w-4 h-4" /></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BeachHouse() {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const today = new Date();
+  const monthName = today.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+  return (
+    <div className="p-6 max-w-7xl mx-auto">
+      <div className="mb-6 flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h1 className="font-serif text-3xl text-[#333F48] mb-1">Beach House</h1>
+          <p className="text-stone-600">2940 Tropicana Dr · Ramada Beach Subdivision · Bolivar Peninsula</p>
+        </div>
+        <button className="bg-[#BF5700] hover:bg-[#a04800] text-white px-4 py-2 rounded text-sm font-semibold flex items-center gap-2">
+          <Plus className="w-4 h-4" /> New Reservation
+        </button>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        <div className="md:col-span-2 bg-white rounded border border-[#D6D2C4] p-6">
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="font-serif text-xl text-[#333F48]">{monthName}</h2>
+            <div className="flex gap-1">
+              <button className="w-8 h-8 rounded hover:bg-stone-100 flex items-center justify-center">‹</button>
+              <button className="w-8 h-8 rounded hover:bg-stone-100 flex items-center justify-center">›</button>
+            </div>
+          </div>
+          <div className="grid grid-cols-7 gap-1 text-xs">
+            {['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => <div key={d} className="text-stone-500 font-medium text-center pb-2">{d}</div>)}
+            {Array.from({length: 35}, (_, i) => {
+              const day = i - 2;
+              const isCurrentMonth = day > 0 && day <= 30;
+              const states = {};
+              [3,4,5,12,13,18,19,20,25,26].forEach(d => states[d] = 'booked');
+              [10,11,17,24].forEach(d => states[d] = 'prime');
+              [7,8].forEach(d => states[d] = 'mine');
+              const state = states[day];
+              return (
+                <button
+                  key={i}
+                  disabled={!isCurrentMonth || state === 'booked'}
+                  onClick={() => isCurrentMonth && setSelectedDate(day)}
+                  className={`aspect-square rounded text-sm flex items-center justify-center transition ${
+                    !isCurrentMonth ? 'text-stone-300' :
+                    state === 'booked' ? 'bg-stone-200 text-stone-400 cursor-not-allowed' :
+                    state === 'prime' ? 'bg-[#F8971F]/40 text-[#7a3500] hover:bg-[#F8971F]/60 border border-[#F8971F] font-semibold' :
+                    state === 'mine' ? 'bg-[#333F48] text-white' :
+                    selectedDate === day ? 'bg-[#BF5700] text-white ring-2 ring-[#F8971F]' :
+                    'hover:bg-orange-50 text-[#333F48] border border-stone-100'
+                  }`}
+                >
+                  {isCurrentMonth ? day : ''}
+                </button>
+              );
+            })}
+          </div>
+          <div className="flex flex-wrap gap-4 mt-5 pt-5 border-t border-[#D6D2C4] text-xs text-stone-600">
+            <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded bg-orange-50 border border-stone-200"></div>Available</div>
+            <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded bg-stone-200"></div>Booked</div>
+            <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded bg-[#F8971F]/30 border border-[#F8971F]"></div>Prime Time</div>
+            <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded bg-[#333F48]"></div>Your Booking</div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div className="bg-white rounded border border-[#D6D2C4] p-5">
+            <h3 className="font-serif text-lg text-[#333F48] mb-3">Rates</h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between"><span className="text-stone-600">Off-Season Night</span><span className="font-semibold">$150</span></div>
+              <div className="flex justify-between"><span className="text-stone-600">Peak Night</span><span className="font-semibold">$225</span></div>
+              <div className="flex justify-between"><span className="text-stone-600">Prime Time Week</span><span className="font-semibold">$1,800</span></div>
+              <div className="flex justify-between border-t border-[#D6D2C4] pt-2 mt-2"><span className="text-stone-600">Cleaning Fee</span><span className="font-semibold">$125</span></div>
+            </div>
+          </div>
+          <div className="bg-[#1a2128] text-stone-200 rounded p-5">
+            <h3 className="font-serif text-lg text-white mb-3">Directions</h3>
+            <p className="text-xs leading-relaxed mb-3">From Houston, take I-10 East to Beltway 8, then Hwy 146 to Hwy 124 at Winnie. Take the Galveston Ferry, then 13.3 miles down Hwy 87 to Crystal Beach. Look for Ramada Beach Subdivision.</p>
+            <a href="#" className="text-[#FFD600] hover:text-[#BF5700] text-xs font-semibold">View full map →</a>
+          </div>
+          <div className="bg-white rounded border border-[#D6D2C4] p-5">
+            <h3 className="font-serif text-lg text-[#333F48] mb-3">Quick Links</h3>
+            <div className="space-y-2 text-sm">
+              <a href="#" className="block text-[#BF5700] hover:text-[#a04800]">Prime Time List →</a>
+              <a href="#" className="block text-[#BF5700] hover:text-[#a04800]">House Rules →</a>
+              <a href="#" className="block text-[#BF5700] hover:text-[#a04800]">Photo Gallery →</a>
+              <a href="#" className="block text-[#BF5700] hover:text-[#a04800]">Wi-Fi & Manuals →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Membership() {
+  const members = [
+    { name: 'James Anderson', class: 2008, role: 'President', email: 'janderson@example.com', phone: '(713) 555-0101' },
+    { name: 'Robert Carter', class: 2012, role: 'Vice President', email: 'rcarter@example.com', phone: '(713) 555-0102' },
+    { name: 'Michael Davis', class: 2015, role: 'Treasurer', email: 'mdavis@example.com', phone: '(713) 555-0103' },
+    { name: 'William Evans', class: 2010, role: 'Secretary', email: 'wevans@example.com', phone: '(713) 555-0104' },
+    { name: 'John Doe', class: 2018, role: 'Member', email: 'jdoe@example.com', phone: '(713) 555-0105' },
+    { name: 'Thomas Williams', class: 2019, role: 'Member', email: 'twilliams@example.com', phone: '(713) 555-0106' },
+    { name: 'David Harris', class: 2020, role: 'Member', email: 'dharris@example.com', phone: '(713) 555-0107' },
+    { name: 'Charles Martin', class: 2021, role: 'Member', email: 'cmartin@example.com', phone: '(713) 555-0108' },
+  ];
+  return (
+    <div className="p-6 max-w-7xl mx-auto">
+      <div className="mb-6">
+        <h1 className="font-serif text-3xl text-[#333F48] mb-1">Membership</h1>
+        <p className="text-stone-600">Directory · Board · Waiting List</p>
+      </div>
+      <div className="flex gap-4 mb-6 border-b border-[#D6D2C4] flex-wrap">
+        {['Directory','Board of Directors','Waiting List','New Member Info'].map((t, i) => (
+          <button key={t} className={`px-4 py-2 text-sm border-b-2 transition ${i === 0 ? 'border-[#BF5700] text-[#BF5700] font-semibold' : 'border-transparent text-stone-500 hover:text-[#333F48]'}`}>{t}</button>
+        ))}
+      </div>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {members.map(m => (
+          <div key={m.name} className="bg-white rounded border border-[#D6D2C4] p-5 hover:shadow-md hover:border-[#BF5700] transition">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 rounded-full bg-[#333F48] text-white flex items-center justify-center font-semibold">{m.name.split(' ').map(n => n[0]).join('')}</div>
+              <div className="flex-1 min-w-0">
+                <div className="font-semibold text-[#333F48]">{m.name}</div>
+                <div className="text-xs text-stone-500 mb-2">Class of {m.class} · {m.role}</div>
+                <div className="text-xs text-stone-600 flex items-center gap-1.5"><Mail className="w-3 h-3" />{m.email}</div>
+                <div className="text-xs text-stone-600 flex items-center gap-1.5 mt-1"><Phone className="w-3 h-3" />{m.phone}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Events() {
+  return (
+    <div className="p-6 max-w-7xl mx-auto">
+      <div className="mb-6">
+        <h1 className="font-serif text-3xl text-[#333F48] mb-1">Events</h1>
+        <p className="text-stone-600">Upcoming hunts, gatherings, and meetings</p>
+      </div>
+      <div className="space-y-4">
+        {[
+          { date: 'May 18, 2026', title: 'Spring Banquet', loc: 'Clubhouse', desc: 'Annual spring dinner with guest speaker. Cocktails at 6pm, dinner at 7pm.', price: '$85 per person', rsvp: 24 },
+          { date: 'Jun 02, 2026', title: 'Fishing Tournament', loc: 'Beach House', desc: 'Two-day fishing tournament with prizes. Boats provided. Sign up early — space limited.', price: '$250 per angler', rsvp: 12 },
+          { date: 'Jun 15, 2026', title: 'Board Meeting', loc: 'Virtual', desc: 'Quarterly board meeting. All members welcome to attend.', price: 'Free', rsvp: 8 },
+          { date: 'Jul 04, 2026', title: 'Independence Day Cookout', loc: 'Beach House', desc: 'Family-friendly cookout with fireworks viewing from the deck.', price: '$45 adults / $20 kids', rsvp: 41 },
+        ].map((e, i) => (
+          <div key={i} className="bg-white rounded border border-[#D6D2C4] p-6 hover:shadow-md hover:border-[#BF5700] transition">
+            <div className="flex flex-col md:flex-row md:items-center gap-4">
+              <div className="bg-[#1a2128] text-white rounded p-4 text-center min-w-[100px]">
+                <div className="text-xs uppercase tracking-wider text-[#FFD600] font-semibold">{e.date.split(',')[0].split(' ')[0]}</div>
+                <div className="font-serif text-2xl">{e.date.split(' ')[1].replace(',','')}</div>
+                <div className="text-xs text-[#FFD600] font-semibold">{e.date.split(',')[1]}</div>
+              </div>
+              <div className="flex-1">
+                <h3 className="font-serif text-xl text-[#333F48] mb-1">{e.title}</h3>
+                <div className="text-xs text-stone-500 flex items-center gap-3 mb-2 flex-wrap">
+                  <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{e.loc}</span>
+                  <span className="flex items-center gap-1"><DollarSign className="w-3 h-3" />{e.price}</span>
+                  <span className="flex items-center gap-1"><Users className="w-3 h-3" />{e.rsvp} attending</span>
+                </div>
+                <p className="text-sm text-stone-600">{e.desc}</p>
+              </div>
+              <button className="bg-[#BF5700] hover:bg-[#a04800] text-white px-5 py-2 rounded text-sm font-semibold transition whitespace-nowrap">RSVP & Pay</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Documents() {
+  return (
+    <div className="p-6 max-w-7xl mx-auto">
+      <div className="mb-6">
+        <h1 className="font-serif text-3xl text-[#333F48] mb-1">Documents</h1>
+        <p className="text-stone-600">Articles · Bylaws · Financials · Board Minutes</p>
+      </div>
+      <div className="grid md:grid-cols-3 gap-4">
+        {[
+          { cat: 'Founding Documents', items: ['Articles of Incorporation (1975)', 'Charter No. 366138', 'Club Bylaws (Current)', 'Beach House Rules', 'Code of Conduct'] },
+          { cat: 'Financials', items: ['2025 Annual Report', '2025 Q4 Financial Statement', '2025 Q3 Financial Statement', '2025 Q2 Financial Statement'] },
+          { cat: 'Board Minutes', items: ['Apr 2026 Board Meeting', 'Jan 2026 Board Meeting', 'Oct 2025 Board Meeting', 'Jul 2025 Board Meeting'] },
+        ].map(c => (
+          <div key={c.cat} className="bg-white rounded border border-[#D6D2C4]">
+            <div className="p-5 border-b border-[#D6D2C4] bg-[#D6D2C4]/40">
+              <h2 className="font-serif text-xl text-[#333F48]">{c.cat}</h2>
+            </div>
+            <div className="divide-y divide-stone-100">
+              {c.items.map(item => (
+                <a key={item} href="#" className="flex items-center gap-3 p-4 hover:bg-stone-50 transition">
+                  <FileText className="w-4 h-4 text-[#BF5700] flex-shrink-0" />
+                  <span className="text-sm text-[#333F48] flex-1 truncate">{item}</span>
+                  <ChevronRight className="w-4 h-4 text-stone-400" />
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Payments() {
+  return (
+    <div className="p-6 max-w-7xl mx-auto">
+      <div className="mb-6">
+        <h1 className="font-serif text-3xl text-[#333F48] mb-1">Payments</h1>
+        <p className="text-stone-600">Dues · Reservations · Trips & Events</p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-4 mb-6">
+        <div className="bg-[#1a2128] text-white rounded p-6">
+          <div className="text-xs uppercase tracking-wider text-[#FFD600] mb-2 font-semibold">Current Balance</div>
+          <div className="font-serif text-3xl mb-1">$0.00</div>
+          <div className="text-sm text-stone-300">All paid up</div>
+        </div>
+        <div className="bg-white rounded border border-[#D6D2C4] p-6">
+          <div className="text-xs uppercase tracking-wider text-stone-500 mb-2">2026 Dues</div>
+          <div className="font-serif text-3xl text-[#333F48] mb-1">$2,400</div>
+          <div className="text-sm text-[#BF5700] flex items-center gap-1 font-semibold"><Shield className="w-3 h-3" /> Paid · Mar 2026</div>
+        </div>
+        <div className="bg-white rounded border border-[#D6D2C4] p-6">
+          <div className="text-xs uppercase tracking-wider text-stone-500 mb-2">YTD Spend</div>
+          <div className="font-serif text-3xl text-[#333F48] mb-1">$3,275</div>
+          <div className="text-sm text-stone-500">Across 6 transactions</div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded border border-[#D6D2C4]">
+        <div className="p-5 border-b border-[#D6D2C4] flex items-center justify-between">
+          <h2 className="font-serif text-xl text-[#333F48]">Recent Transactions</h2>
+          <button className="text-sm text-[#BF5700] hover:text-[#a04800] font-medium">Download Statement</button>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-[#D6D2C4]/40 text-xs uppercase tracking-wider text-stone-600">
+              <tr>
+                <th className="text-left px-5 py-3">Date</th>
+                <th className="text-left px-5 py-3">Description</th>
+                <th className="text-left px-5 py-3">Method</th>
+                <th className="text-right px-5 py-3">Amount</th>
+                <th className="text-center px-5 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-stone-100 text-sm">
+              {[
+                { date: 'Apr 18', desc: 'Beach House — May 12-15', method: 'ACH', amt: '$575.00', status: 'Paid' },
+                { date: 'Apr 02', desc: 'Spring Banquet RSVP (2)', method: 'Card', amt: '$170.00', status: 'Paid' },
+                { date: 'Mar 28', desc: 'Fishing Tournament Entry', method: 'Card', amt: '$250.00', status: 'Paid' },
+                { date: 'Mar 15', desc: '2026 Annual Dues', method: 'ACH', amt: '$2,400.00', status: 'Paid' },
+                { date: 'Feb 10', desc: 'Beach House — Feb 14-16', method: 'Card', amt: '$425.00', status: 'Paid' },
+              ].map((t, i) => (
+                <tr key={i} className="hover:bg-stone-50">
+                  <td className="px-5 py-3 text-stone-600 whitespace-nowrap">{t.date}</td>
+                  <td className="px-5 py-3 text-[#333F48]">{t.desc}</td>
+                  <td className="px-5 py-3 text-stone-600">{t.method}</td>
+                  <td className="px-5 py-3 text-right font-semibold text-[#333F48] whitespace-nowrap">{t.amt}</td>
+                  <td className="px-5 py-3 text-center">
+                    <span className="inline-block px-2 py-0.5 bg-[#F8971F]/30 text-[#7a3500] rounded text-xs font-semibold">{t.status}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Messages() {
+  return (
+    <div className="p-6 max-w-7xl mx-auto">
+      <div className="mb-6 flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h1 className="font-serif text-3xl text-[#333F48] mb-1">Message Center</h1>
+          <p className="text-stone-600">Announcements and member discussions</p>
+        </div>
+        <button className="bg-[#BF5700] hover:bg-[#a04800] text-white px-4 py-2 rounded text-sm font-semibold flex items-center gap-2">
+          <Plus className="w-4 h-4" /> New Post
+        </button>
+      </div>
+      <div className="space-y-4">
+        {[
+          { from: 'Board of Directors', time: '2 hours ago', subject: '2026 Dues Reminder', body: 'Friendly reminder that 2026 dues are due by April 30. You can pay online via the Payments page or mail a check to the treasurer.', pinned: true },
+          { from: 'Tom Williams', time: 'Yesterday', subject: 'Beach house weekend swap?', body: 'Anyone interested in swapping my June 7-9 weekend for a July weekend? Family conflict came up. Reply or text me.' },
+          { from: 'Events Committee', time: '3 days ago', subject: 'Spring Banquet RSVP needed', body: 'Spring Banquet is May 18. Please RSVP by May 10 so we can finalize the count with the caterer.' },
+          { from: 'James Anderson', time: '1 week ago', subject: 'New beach house grill', body: 'The new grill has been installed. Please clean it after use — instructions are taped to the cabinet next to it.' },
+        ].map((m, i) => (
+          <div key={i} className={`bg-white rounded border p-5 ${m.pinned ? 'border-[#BF5700] bg-orange-50/30' : 'border-[#D6D2C4]'}`}>
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-[#333F48] text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">{m.from.split(' ').map(n => n[0]).join('').slice(0,2)}</div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <span className="font-semibold text-[#333F48] text-sm">{m.from}</span>
+                  {m.pinned && <span className="text-xs px-2 py-0.5 bg-[#BF5700] text-white rounded font-medium">Pinned</span>}
+                  <span className="text-xs text-stone-500 ml-auto">{m.time}</span>
+                </div>
+                <h3 className="font-serif text-lg text-[#333F48] mb-2">{m.subject}</h3>
+                <p className="text-sm text-stone-600 leading-relaxed">{m.body}</p>
+                <div className="flex gap-3 mt-3 text-xs text-stone-500">
+                  <button className="hover:text-[#BF5700]">Reply</button>
+                  <button className="hover:text-[#BF5700]">3 comments</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Links() {
+  return (
+    <div className="p-6 max-w-7xl mx-auto">
+      <div className="mb-6">
+        <h1 className="font-serif text-3xl text-[#333F48] mb-1">Useful Links</h1>
+        <p className="text-stone-600">Resources for members</p>
+      </div>
+      <div className="grid md:grid-cols-2 gap-4">
+        {[
+          { cat: 'Hunting & Fishing', items: ['Texas Parks & Wildlife', 'License Renewal', 'Hunting Season Dates'] },
+          { cat: 'Bolivar Peninsula', items: ['Galveston Ferry Schedule', 'Crystal Beach Weather', 'Stingaree Restaurant & Marina'] },
+          { cat: 'Member Resources', items: ['Recommended Vendors', 'Insurance Info', 'Tax Documents'] },
+          { cat: 'External Sites', items: ['Sister Clubs', 'Conservation Partners', 'Industry News'] },
+        ].map(c => (
+          <div key={c.cat} className="bg-white rounded border border-[#D6D2C4]">
+            <div className="p-5 border-b border-[#D6D2C4] bg-[#D6D2C4]/40">
+              <h2 className="font-serif text-lg text-[#333F48]">{c.cat}</h2>
+            </div>
+            <div className="divide-y divide-stone-100">
+              {c.items.map(item => (
+                <a key={item} href="#" className="flex items-center justify-between p-4 hover:bg-stone-50 transition">
+                  <span className="text-sm text-[#333F48]">{item}</span>
+                  <Link2 className="w-4 h-4 text-stone-400" />
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
