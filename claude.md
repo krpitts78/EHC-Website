@@ -16,7 +16,18 @@ Member portal and public website for the Executive Hunting Club, a Texas non-pro
 
 ## Design Reference
 
-The visual prototype lives at `/docs/prototype/prototype.tsx`. Use it as the source of truth for layout, color usage, and component structure. The actual logo PNG is at `/public/logo.png`.
+The visual prototype lives at `/ehc-prototype.tsx` (React/JSX source) and a runnable standalone version at `/prototype.html` (open directly in a browser — uses React + Tailwind + lucide via CDN). Use them as the source of truth for layout, color usage, and component structure. The official club logo is at `/logo.png` (EHC Logo Color 2012). In the real Next.js build this gets moved to `/public/logo.png`.
+
+## Current State (2026-04-25)
+
+Repo contains:
+- `claude.md` / `README.md` — project docs
+- `ehc-prototype.tsx` — React prototype source
+- `prototype.html` — standalone runnable prototype (CDN-based, no build step)
+- `logo.png` — official club logo
+- `readme.txt` — quick-start notes
+
+Next.js app has not been scaffolded yet. Phase 1 work hasn't started.
 
 ## Brand Colors (Official UT Austin Palette)
 
