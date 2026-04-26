@@ -1,6 +1,10 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { canManageBeachHouse, getCurrentMemberPerm } from "@/lib/permissions";
+import {
+  canManageBeachHouse,
+  getCurrentMemberPerm,
+  isSiteAdmin,
+} from "@/lib/permissions";
 
 export default async function AdminLayout({
   children,
@@ -9,19 +13,42 @@ export default async function AdminLayout({
 }) {
   const perm = await getCurrentMemberPerm();
   if (!perm) redirect("/login");
-  if (!canManageBeachHouse(perm)) redirect("/dashboard");
+  // Layout-level: require beach-house admin OR any board/admin (which all
+  // current admin pages need at minimum).
+  if (!canManageBeachHouse(perm) && !isSiteAdmin(perm)) redirect("/dashboard");
+
+  const showBeachHouse = canManageBeachHouse(perm);
+  const showInquiries = isSiteAdmin(perm);
 
   return (
     <>
       <div className="border-b border-[#333F48] bg-[#0f1419]">
-        <div className="mx-auto flex max-w-6xl gap-4 px-4 py-2 text-xs uppercase tracking-wide text-[#D6D2C4]">
+        <div className="mx-auto flex max-w-6xl flex-wrap gap-4 px-4 py-2 text-xs uppercase tracking-wide text-[#D6D2C4]">
           <span className="text-[#F8971F]">Admin</span>
-          <Link href="/dashboard/admin/reservations" className="hover:text-white">
-            Reservations
-          </Link>
-          <Link href="/dashboard/admin/prime-list" className="hover:text-white">
-            Prime list
-          </Link>
+          {showBeachHouse && (
+            <>
+              <Link
+                href="/dashboard/admin/reservations"
+                className="hover:text-white"
+              >
+                Reservations
+              </Link>
+              <Link
+                href="/dashboard/admin/prime-list"
+                className="hover:text-white"
+              >
+                Prime list
+              </Link>
+            </>
+          )}
+          {showInquiries && (
+            <Link
+              href="/dashboard/admin/inquiries"
+              className="hover:text-white"
+            >
+              Inquiries
+            </Link>
+          )}
         </div>
       </div>
       {children}

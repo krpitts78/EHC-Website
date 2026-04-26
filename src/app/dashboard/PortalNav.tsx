@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { canManageBeachHouse, getCurrentMemberPerm } from "@/lib/permissions";
+import {
+  canManageBeachHouse,
+  getCurrentMemberPerm,
+  isSiteAdmin,
+} from "@/lib/permissions";
 
 export async function PortalNav() {
   const perm = await getCurrentMemberPerm();
-  const showAdmin = canManageBeachHouse(perm);
+  const showAdmin = canManageBeachHouse(perm) || isSiteAdmin(perm);
   return (
     <header className="sticky top-0 z-10 border-b border-[#333F48] bg-[#1a2128] text-[#D6D2C4]">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
@@ -42,7 +46,11 @@ export async function PortalNav() {
           </Link>
           {showAdmin && (
             <Link
-              href="/dashboard/admin/reservations"
+              href={
+                canManageBeachHouse(perm)
+                  ? "/dashboard/admin/reservations"
+                  : "/dashboard/admin/inquiries"
+              }
               className="text-[#F8971F] hover:text-white"
             >
               Admin
