@@ -61,10 +61,10 @@ export default function Home() {
               instrumental in formalizing the club shortly afterward.
             </p>
             <p>
-              For 50+ years EHC has been a fellowship of Texans bound together
-              by hunting, fishing, and the outdoors. Membership is by sponsor
-              proposal — every member is brought in by another, and the Board
-              reviews each candidate.
+              For 50+ years EHC has been a fellowship of sportsmen bound
+              together by hunting, fishing, and the outdoors. Membership is by
+              sponsor proposal — every member is brought in by another, and the
+              Board reviews each candidate.
             </p>
           </div>
         </div>
