@@ -45,12 +45,30 @@ export default async function DashboardPage() {
           </p>
         </Link>
         <Link
+          href="/dashboard/beach-house"
+          className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
+        >
+          <h2 className="text-lg font-medium text-white">Beach House</h2>
+          <p className="mt-1 text-sm text-[#D6D2C4]">
+            Rules, contact information, and (soon) reservation calendar.
+          </p>
+        </Link>
+        <Link
           href="/dashboard/documents"
           className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
         >
           <h2 className="text-lg font-medium text-white">Documents</h2>
           <p className="mt-1 text-sm text-[#D6D2C4]">
-            Bylaws, financials, board minutes, beach house references.
+            Tax returns, financial statements, articles of incorporation.
+          </p>
+        </Link>
+        <Link
+          href="/dashboard/p/bylaws"
+          className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
+        >
+          <h2 className="text-lg font-medium text-white">Bylaws</h2>
+          <p className="mt-1 text-sm text-[#D6D2C4]">
+            The club&apos;s governing document.
           </p>
         </Link>
         <Link
