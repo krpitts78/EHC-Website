@@ -27,8 +27,15 @@ export async function createReservationAction(
   const friday = toUtcDate(week);
   if (friday.getUTCDay() !== 5)
     return { error: "Selected date is not a Friday." };
-  if (friday.getTime() < toUtcDate(new Date()).getTime())
+  const today = toUtcDate(new Date());
+  if (friday.getTime() < today.getTime())
     return { error: "Cannot book a week in the past." };
+  const oneYearOut = addDays(today, 365);
+  if (friday.getTime() > oneYearOut.getTime())
+    return {
+      error:
+        "Reservations open one year before the start date. This week is too far out.",
+    };
 
   const isPrime = isPrimeFriday(friday);
   const rateCents = rateCentsFor(isPrime);
@@ -59,6 +66,31 @@ export async function createReservationAction(
     .maybeSingle();
   if (existing)
     return { error: "That week already has a request or booking." };
+
+  // Per-year limit per the rules:
+  //   Prime-list members: 1 prime + 1 non-prime per calendar year.
+  //   Non-prime-list members: 1 non-prime per calendar year.
+  const year = friday.getUTCFullYear();
+  const yearStart = `${year}-01-01`;
+  const yearEnd = `${year}-12-31`;
+  const { data: ownYear } = await supabase
+    .from("reservations")
+    .select("is_prime")
+    .eq("member_id", member.id)
+    .eq("kind", "rental")
+    .in("status", ["requested", "confirmed"])
+    .gte("week_start_friday", yearStart)
+    .lte("week_start_friday", yearEnd);
+  const primeCount = (ownYear ?? []).filter((r) => r.is_prime).length;
+  const nonPrimeCount = (ownYear ?? []).filter((r) => !r.is_prime).length;
+  if (isPrime && primeCount >= 1)
+    return {
+      error: `You already have a prime-week reservation in ${year}. Only one prime week per member per year.`,
+    };
+  if (!isPrime && nonPrimeCount >= 1)
+    return {
+      error: `You already have a non-prime reservation in ${year}. Only one non-prime week per member per year.`,
+    };
 
   const { error } = await supabase.from("reservations").insert({
     member_id: member.id,
