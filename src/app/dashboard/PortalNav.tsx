@@ -25,6 +25,9 @@ export function PortalNav() {
           <Link href="/dashboard/directory" className="hover:text-white">
             Directory
           </Link>
+          <Link href="/dashboard/documents" className="hover:text-white">
+            Documents
+          </Link>
           <Link href="/dashboard/profile" className="hover:text-white">
             Profile
           </Link>

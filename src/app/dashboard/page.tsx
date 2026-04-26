@@ -45,6 +45,15 @@ export default async function DashboardPage() {
           </p>
         </Link>
         <Link
+          href="/dashboard/documents"
+          className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
+        >
+          <h2 className="text-lg font-medium text-white">Documents</h2>
+          <p className="mt-1 text-sm text-[#D6D2C4]">
+            Bylaws, financials, board minutes, beach house references.
+          </p>
+        </Link>
+        <Link
           href="/dashboard/profile"
           className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
         >
