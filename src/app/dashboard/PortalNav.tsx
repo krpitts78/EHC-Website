@@ -10,7 +10,7 @@ export async function PortalNav() {
   const perm = await getCurrentMemberPerm();
   const showAdmin = canManageBeachHouse(perm) || isSiteAdmin(perm);
   return (
-    <header className="sticky top-0 z-10 border-b border-[#4a5d3e] bg-[#1d2a1d] text-[#d4c89c]">
+    <header className="sticky top-0 z-10 border-b border-[#5a6470] bg-[#333F48] text-[#d4c89c]">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href="/dashboard" className="flex items-center gap-3">
           <Image
@@ -51,7 +51,7 @@ export async function PortalNav() {
                   ? "/dashboard/admin/reservations"
                   : "/dashboard/admin/inquiries"
               }
-              className="text-[#F8971F] hover:text-white"
+              className="text-[#BF5700] hover:text-white"
             >
               Admin
             </Link>

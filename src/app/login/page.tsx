@@ -13,32 +13,32 @@ export default function LoginPage() {
   );
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center bg-[#1d2a1d] px-6 py-16">
+    <main className="flex flex-1 flex-col items-center justify-center bg-[#333F48] px-6 py-16">
       <form
         action={formAction}
         className="w-full max-w-sm rounded-lg bg-white p-8 shadow-lg"
       >
-        <h1 className="text-2xl font-semibold text-[#1d2a1d]">Log in</h1>
+        <h1 className="text-2xl font-semibold text-[#333F48]">Log in</h1>
 
-        <label className="mt-6 block text-sm font-medium text-[#4a5d3e]">
+        <label className="mt-6 block text-sm font-medium text-[#5a6470]">
           Email
           <input
             type="email"
             name="email"
             required
             autoComplete="email"
-            className="mt-1 w-full rounded border border-[#d4c89c] bg-white px-3 py-2 text-[#1d2a1d] focus:border-[#BF5700] focus:outline-none"
+            className="mt-1 w-full rounded border border-[#d4c89c] bg-white px-3 py-2 text-[#333F48] focus:border-[#BF5700] focus:outline-none"
           />
         </label>
 
-        <label className="mt-4 block text-sm font-medium text-[#4a5d3e]">
+        <label className="mt-4 block text-sm font-medium text-[#5a6470]">
           Password
           <input
             type="password"
             name="password"
             required
             autoComplete="current-password"
-            className="mt-1 w-full rounded border border-[#d4c89c] bg-white px-3 py-2 text-[#1d2a1d] focus:border-[#BF5700] focus:outline-none"
+            className="mt-1 w-full rounded border border-[#d4c89c] bg-white px-3 py-2 text-[#333F48] focus:border-[#BF5700] focus:outline-none"
           />
         </label>
 
@@ -54,7 +54,7 @@ export default function LoginPage() {
           {pending ? "Logging in..." : "Log in"}
         </button>
 
-        <p className="mt-4 text-center text-sm text-[#4a5d3e]">
+        <p className="mt-4 text-center text-sm text-[#5a6470]">
           New member?{" "}
           <Link href="/signup" className="text-[#BF5700] hover:underline">
             Create an account

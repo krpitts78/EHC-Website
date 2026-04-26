@@ -57,7 +57,7 @@ export function InquiryForm() {
           name="message"
           rows={4}
           placeholder="Tell us a bit about yourself, who you know in the club, and your hunting/fishing background."
-          className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
+          className="mt-1 w-full rounded border border-[#5a6470] bg-[#4a5763] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
         />
       </label>
 
@@ -100,7 +100,7 @@ function Field({
         name={name}
         required={required}
         autoComplete={autoComplete}
-        className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
+        className="mt-1 w-full rounded border border-[#5a6470] bg-[#4a5763] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
       />
     </label>
   );

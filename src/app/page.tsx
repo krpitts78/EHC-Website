@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col bg-[#1d2a1d]">
+    <div className="flex flex-1 flex-col bg-[#333F48]">
       <SiteHeader />
       <Hero />
       <About />
@@ -17,7 +17,7 @@ export default function Home() {
 
 function SiteHeader() {
   return (
-    <header className="sticky top-0 z-20 border-b border-[#4a5d3e]/60 bg-[#141a10]/95 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-[#5a6470]/60 bg-[#1a2128]/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link href="/" className="flex items-center gap-3">
           <Image
@@ -44,7 +44,7 @@ function SiteHeader() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-[#4a5d3e]/60 bg-[#1d2a1d]">
+    <section className="relative overflow-hidden border-b border-[#5a6470]/60 bg-[#333F48]">
       {/* Faint topographic-feel SVG background */}
       <svg
         aria-hidden="true"
@@ -95,7 +95,7 @@ function Hero() {
 
 function About() {
   return (
-    <section className="bg-[#f4ecd5] text-[#1d2a1d]">
+    <section className="bg-[#D6D2C4] text-[#333F48]">
       <div className="mx-auto grid max-w-5xl gap-10 px-6 py-20 md:grid-cols-[2fr_1fr] md:py-24">
         <div>
           <SectionHeading kicker="About the Club" title="Five decades of fellowship in the field" />
@@ -116,7 +116,7 @@ function About() {
         </div>
 
         <aside className="rounded-lg border-l-4 border-[#BF5700] bg-white/60 p-6 shadow-sm">
-          <p className="font-[family-name:var(--font-display)] text-xl italic leading-relaxed text-[#1d2a1d]">
+          <p className="font-[family-name:var(--font-display)] text-xl italic leading-relaxed text-[#333F48]">
             &ldquo;Charter members participated in the organized hunting trip
             to Laredo, Texas in September of 1973 … and were instrumental in
             the formation and structure of The Executive Hunting Club.&rdquo;
@@ -132,7 +132,7 @@ function About() {
 
 function Activities() {
   return (
-    <section className="border-t border-[#4a5d3e]/60 bg-[#1d2a1d] text-white">
+    <section className="border-t border-[#5a6470]/60 bg-[#333F48] text-white">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
         <div className="text-center">
           <SectionHeading
@@ -165,7 +165,7 @@ function Activities() {
 
 function BeachHouse() {
   return (
-    <section className="bg-[#f4ecd5] text-[#1d2a1d]">
+    <section className="bg-[#D6D2C4] text-[#333F48]">
       <div className="mx-auto max-w-3xl px-6 py-20 md:py-24">
         <SectionHeading kicker="The Beach House" title="On the Bolivar Peninsula" />
         <div className="mt-8 space-y-5 text-lg leading-relaxed text-[#3a3826]">
@@ -208,7 +208,7 @@ function HowToJoin() {
     },
   ];
   return (
-    <section className="border-t border-[#4a5d3e]/60 bg-[#141a10] text-white">
+    <section className="border-t border-[#5a6470]/60 bg-[#1a2128] text-white">
       <div className="mx-auto max-w-5xl px-6 py-20 md:py-24">
         <div className="text-center">
           <SectionHeading
@@ -221,7 +221,7 @@ function HowToJoin() {
           {steps.map((s) => (
             <li
               key={s.n}
-              className="rounded-lg border border-[#4a5d3e] bg-[#1d2a1d] p-6"
+              className="rounded-lg border border-[#5a6470] bg-[#333F48] p-6"
             >
               <span className="font-[family-name:var(--font-display)] text-3xl text-[#d4c89c]">
                 {s.n}
@@ -242,7 +242,7 @@ function HowToJoin() {
 
 function SiteFooter() {
   return (
-    <footer className="border-t border-[#4a5d3e]/60 bg-[#141a10]">
+    <footer className="border-t border-[#5a6470]/60 bg-[#1a2128]">
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-10 text-sm text-[#d4c89c]/70 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="font-[family-name:var(--font-display)] text-base text-[#BF5700]">
@@ -252,7 +252,7 @@ function SiteFooter() {
             Houston, Texas · Charter No.&nbsp;366138 · Founded August 11, 1975
           </p>
         </div>
-        <Link href="/login" className="text-[#F8971F] hover:text-white">
+        <Link href="/login" className="text-[#BF5700] hover:text-white">
           Member login →
         </Link>
       </div>
@@ -265,11 +265,11 @@ function SiteFooter() {
 function Divider() {
   return (
     <div className="my-6 flex items-center gap-3">
-      <span className="h-px w-12 bg-[#BF5700]/70" />
-      <span aria-hidden className="text-[#BF5700]">
+      <span className="h-px w-12 bg-[#D4AF37]/80" />
+      <span aria-hidden className="text-[#D4AF37]">
         ✦
       </span>
-      <span className="h-px w-12 bg-[#BF5700]/70" />
+      <span className="h-px w-12 bg-[#D4AF37]/80" />
     </div>
   );
 }
@@ -287,14 +287,14 @@ function SectionHeading({
     <>
       <p
         className={`text-xs font-semibold uppercase tracking-[0.25em] ${
-          dark ? "text-[#F8971F]" : "text-[#7a3500]"
+          dark ? "text-[#BF5700]" : "text-[#7a3500]"
         }`}
       >
         {kicker}
       </p>
       <h2
         className={`mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold sm:text-4xl ${
-          dark ? "text-white" : "text-[#1d2a1d]"
+          dark ? "text-white" : "text-[#333F48]"
         }`}
       >
         {title}
@@ -313,7 +313,7 @@ function Activity({
   body: string;
 }) {
   return (
-    <article className="group rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-6 transition-colors hover:border-[#BF5700]">
+    <article className="group rounded-lg border border-[#5a6470] bg-[#4a5763] p-6 transition-colors hover:border-[#BF5700]">
       <span className="font-[family-name:var(--font-display)] text-3xl text-[#d4c89c]">
         {number}
       </span>

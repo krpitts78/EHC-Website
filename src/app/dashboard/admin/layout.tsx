@@ -21,9 +21,9 @@ export default async function AdminLayout({
 
   return (
     <>
-      <div className="border-b border-[#4a5d3e] bg-[#141a10]">
+      <div className="border-b border-[#5a6470] bg-[#1a2128]">
         <div className="mx-auto flex max-w-6xl flex-wrap gap-4 px-4 py-2 text-xs uppercase tracking-wide text-[#d4c89c]">
-          <span className="text-[#F8971F]">Admin</span>
+          <span className="text-[#BF5700]">Admin</span>
           {showBeachHouse && (
             <>
               <Link

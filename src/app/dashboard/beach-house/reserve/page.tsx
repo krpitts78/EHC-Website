@@ -61,17 +61,17 @@ export default async function ReservePage({
   const past = friday.getTime() < toUtcDate(new Date()).getTime();
 
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-12 text-white">
-      <p className="text-xs uppercase tracking-wide text-[#d4c89c]/60">
+    <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-12 text-[#1a2128]">
+      <p className="text-xs uppercase tracking-wide text-[#5a6470]/60">
         Reserve beach house
       </p>
       <h1 className="mt-1 text-3xl font-semibold">{formatWeekRange(friday)}</h1>
-      <p className="mt-1 text-sm text-[#d4c89c]">
+      <p className="mt-1 text-sm text-[#5a6470]">
         Friday {formatLong(friday)} 4:00 PM → Friday 12:00 PM (
         {prime ? "Prime week" : "Non-Prime week"})
       </p>
 
-      <section className="mt-6 rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5 text-sm">
+      <section className="mt-6 rounded-lg border border-[#a8a395] bg-white p-5 text-sm">
         <dl className="space-y-2">
           <Row label="Weekly rate" value={dollars(rateCents)} />
           <Row label="Housekeeping fee" value={dollars(CLEANING_FEE_CENTS)} />
@@ -123,8 +123,8 @@ function Row({
 }) {
   return (
     <div className="flex justify-between">
-      <dt className="text-[#d4c89c]">{label}</dt>
-      <dd className={bold ? "font-semibold text-white" : "text-white"}>
+      <dt className="text-[#5a6470]">{label}</dt>
+      <dd className={bold ? "font-semibold text-[#1a2128]" : "text-[#1a2128]"}>
         {value}
       </dd>
     </div>

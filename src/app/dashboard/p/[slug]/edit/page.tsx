@@ -34,8 +34,8 @@ export default async function EditPage({
   if (!page) notFound();
 
   return (
-    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-white">
-      <p className="text-xs uppercase tracking-wide text-[#d4c89c]/60">
+    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-[#1a2128]">
+      <p className="text-xs uppercase tracking-wide text-[#5a6470]/60">
         Editing /dashboard/p/{slug}
       </p>
       <h1 className="mt-1 text-3xl font-semibold">{page.title}</h1>

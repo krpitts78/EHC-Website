@@ -18,10 +18,10 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 const STATUS_BADGE: Record<string, string> = {
-  requested: "bg-[#BF5700]/20 text-[#F8971F]",
+  requested: "bg-[#BF5700]/20 text-[#BF5700]",
   confirmed: "bg-green-700/30 text-green-300",
-  cancelled: "bg-[#4a5d3e] text-[#d4c89c]/70",
-  completed: "bg-[#4a5d3e] text-[#d4c89c]",
+  cancelled: "bg-[#5a6470] text-[#5a6470]/70",
+  completed: "bg-[#5a6470] text-[#5a6470]",
 };
 
 function dollars(cents: number): string {
@@ -57,7 +57,7 @@ export default async function MyReservationsPage({
     .order("week_start_friday", { ascending: false });
 
   return (
-    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-white">
+    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-[#1a2128]">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <h1 className="text-3xl font-semibold">My reservations</h1>
         <Link
@@ -75,7 +75,7 @@ export default async function MyReservationsPage({
       )}
 
       {(!reservations || reservations.length === 0) && (
-        <p className="mt-12 text-[#d4c89c]/70">
+        <p className="mt-12 text-[#5a6470]/70">
           No reservations yet. Browse the calendar to request a week.
         </p>
       )}
@@ -87,17 +87,17 @@ export default async function MyReservationsPage({
           return (
             <article
               key={r.id}
-              className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5"
+              className="rounded-lg border border-[#a8a395] bg-white p-5"
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h2 className="text-lg font-medium">
                     {formatWeekRange(friday)}
                     {r.is_prime && (
-                      <span className="ml-2 text-xs text-[#F8971F]">★ Prime</span>
+                      <span className="ml-2 text-xs text-[#BF5700]">★ Prime</span>
                     )}
                   </h2>
-                  <p className="text-xs text-[#d4c89c]/70">
+                  <p className="text-xs text-[#5a6470]/70">
                     {formatLong(friday)} 4:00 PM
                   </p>
                 </div>
@@ -128,7 +128,7 @@ export default async function MyReservationsPage({
               </dl>
 
               {r.notes && (
-                <p className="mt-3 rounded border border-[#4a5d3e] bg-[#1d2a1d] px-3 py-2 text-xs text-[#d4c89c]">
+                <p className="mt-3 rounded border border-[#a8a395] bg-white px-3 py-2 text-xs text-[#5a6470]">
                   Notes: {r.notes}
                 </p>
               )}
@@ -166,8 +166,8 @@ function Row({
 }) {
   return (
     <div className="flex justify-between sm:justify-start sm:gap-3">
-      <dt className="text-[#d4c89c]/70">{label}</dt>
-      <dd className={bold ? "font-semibold text-white" : "text-white"}>
+      <dt className="text-[#5a6470]/70">{label}</dt>
+      <dd className={bold ? "font-semibold text-[#1a2128]" : "text-[#1a2128]"}>
         {value}
       </dd>
     </div>

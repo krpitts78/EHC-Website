@@ -20,9 +20,9 @@ export default async function UploadPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-12 text-white">
+    <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-12 text-[#1a2128]">
       <h1 className="text-3xl font-semibold">Upload document</h1>
-      <p className="mt-2 text-sm text-[#d4c89c]">
+      <p className="mt-2 text-sm text-[#5a6470]">
         Visible to all signed-in members. PDF, DOCX, etc. — up to 25 MB.
       </p>
       <UploadForm />

@@ -36,11 +36,11 @@ export default async function DocumentsPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-12 text-white">
+    <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-12 text-[#1a2128]">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold">Documents</h1>
-          <p className="mt-2 text-sm text-[#d4c89c]">
+          <p className="mt-2 text-sm text-[#5a6470]">
             Bylaws, financials, board minutes, and beach house references.
           </p>
         </div>
@@ -55,7 +55,7 @@ export default async function DocumentsPage() {
       </div>
 
       {(!documents || documents.length === 0) && (
-        <p className="mt-12 text-[#d4c89c]/70">
+        <p className="mt-12 text-[#5a6470]/70">
           No documents yet.
           {canManage ? " Upload one to get started." : ""}
         </p>
@@ -67,10 +67,10 @@ export default async function DocumentsPage() {
           if (list.length === 0) return null;
           return (
             <section key={cat.id}>
-              <h2 className="text-lg font-semibold text-[#d4c89c]">
+              <h2 className="text-lg font-semibold text-[#5a6470]">
                 {cat.label}
               </h2>
-              <ul className="mt-3 divide-y divide-[#4a5d3e] rounded-lg border border-[#4a5d3e] bg-[#2a3624]">
+              <ul className="mt-3 divide-y divide-[#a8a395] rounded-lg border border-[#a8a395] bg-white">
                 {list.map((doc) => (
                   <li
                     key={doc.id}
@@ -79,17 +79,17 @@ export default async function DocumentsPage() {
                     <div className="flex-1 min-w-0">
                       <a
                         href={`/dashboard/documents/${doc.id}/download`}
-                        className="font-medium text-white hover:text-[#F8971F]"
+                        className="font-medium text-white hover:text-[#BF5700]"
                       >
                         {doc.title}
                       </a>
                       {doc.description && (
-                        <p className="mt-0.5 text-xs text-[#d4c89c]/70 truncate">
+                        <p className="mt-0.5 text-xs text-[#5a6470]/70 truncate">
                           {doc.description}
                         </p>
                       )}
                     </div>
-                    <span className="text-xs text-[#d4c89c]/60">
+                    <span className="text-xs text-[#5a6470]/60">
                       {formatSize(doc.size_bytes)}
                     </span>
                     {canManage && (
@@ -112,7 +112,7 @@ export default async function DocumentsPage() {
       </div>
 
       {documents && documents.length > 0 && byCategory.size === 0 && (
-        <p className="mt-8 text-sm text-[#d4c89c]/70">
+        <p className="mt-8 text-sm text-[#5a6470]/70">
           {documents.length} document(s) — none in known categories.
         </p>
       )}

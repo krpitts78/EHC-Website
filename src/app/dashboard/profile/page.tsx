@@ -19,7 +19,7 @@ export default async function ProfilePage() {
 
   if (error || !member) {
     return (
-      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-white">
+      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-[#1a2128]">
         <p className="text-red-400">
           Could not load your member profile. Contact a board member.
         </p>
@@ -32,40 +32,40 @@ export default async function ProfilePage() {
     : "—";
 
   return (
-    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-white">
+    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-[#1a2128]">
       <h1 className="text-3xl font-semibold">Your profile</h1>
 
-      <section className="mt-6 rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-[#d4c89c]/70">
+      <section className="mt-6 rounded-lg border border-[#a8a395] bg-white p-5">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-[#5a6470]/70">
           Membership
         </h2>
         <dl className="mt-3 grid gap-3 text-sm sm:grid-cols-2">
           <div>
-            <dt className="text-[#d4c89c]/70">Member number</dt>
+            <dt className="text-[#5a6470]/70">Member number</dt>
             <dd>{member.member_number}</dd>
           </div>
           <div>
-            <dt className="text-[#d4c89c]/70">Joined</dt>
+            <dt className="text-[#5a6470]/70">Joined</dt>
             <dd>{member.joined_year ?? "—"}</dd>
           </div>
           <div>
-            <dt className="text-[#d4c89c]/70">Email</dt>
+            <dt className="text-[#5a6470]/70">Email</dt>
             <dd>{member.email ?? "—"}</dd>
           </div>
           <div>
-            <dt className="text-[#d4c89c]/70">Annual dues</dt>
+            <dt className="text-[#5a6470]/70">Annual dues</dt>
             <dd>{dues}</dd>
           </div>
           {(member.board_role_label || member.is_admin) && (
             <div className="sm:col-span-2">
-              <dt className="text-[#d4c89c]/70">Role</dt>
+              <dt className="text-[#5a6470]/70">Role</dt>
               <dd>
                 {member.board_role_label ? (
-                  <span className="rounded bg-[#BF5700] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-white">
+                  <span className="rounded bg-[#BF5700] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-[#1a2128]">
                     {member.board_role_label}
                   </span>
                 ) : (
-                  <span className="rounded bg-[#4a5d3e] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-[#d4c89c]">
+                  <span className="rounded bg-[#5a6470] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-[#5a6470]">
                     Website Admin
                   </span>
                 )}
@@ -73,7 +73,7 @@ export default async function ProfilePage() {
             </div>
           )}
         </dl>
-        <p className="mt-4 text-xs text-[#d4c89c]/60">
+        <p className="mt-4 text-xs text-[#5a6470]/60">
           To change your email or membership details, contact a board member.
         </p>
       </section>

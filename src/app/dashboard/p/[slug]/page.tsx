@@ -38,20 +38,20 @@ export default async function ContentPage({
   });
 
   return (
-    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-white">
+    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-[#1a2128]">
       <div className="flex items-start justify-between gap-4">
         <h1 className="text-3xl font-semibold">{page.title}</h1>
         {canEdit && (
           <Link
             href={`/dashboard/p/${slug}/edit`}
-            className="rounded border border-[#d4c89c]/40 px-3 py-1 text-xs text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
+            className="rounded border border-[#d4c89c]/40 px-3 py-1 text-xs text-[#5a6470] hover:border-[#d4c89c] hover:text-[#1a2128]"
           >
             Edit
           </Link>
         )}
       </div>
       <article
-        className="prose prose-invert mt-8 max-w-none prose-headings:text-white prose-a:text-[#F8971F] prose-strong:text-white"
+        className="prose mt-8 max-w-none prose-headings:text-[#1a2128] prose-a:text-[#BF5700] prose-strong:text-[#1a2128]"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </main>

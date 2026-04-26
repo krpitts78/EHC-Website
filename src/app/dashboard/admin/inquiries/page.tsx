@@ -10,9 +10,9 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 const STATUS_BADGE: Record<string, string> = {
-  pending: "bg-[#BF5700]/20 text-[#F8971F]",
+  pending: "bg-[#BF5700]/20 text-[#BF5700]",
   reviewed: "bg-blue-900/30 text-blue-200",
-  archived: "bg-[#4a5d3e] text-[#d4c89c]/70",
+  archived: "bg-[#5a6470] text-[#5a6470]/70",
 };
 
 export default async function InquiriesPage() {
@@ -27,28 +27,28 @@ export default async function InquiriesPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-12 text-white">
+    <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-12 text-[#1a2128]">
       <h1 className="text-3xl font-semibold">Membership inquiries</h1>
-      <p className="mt-2 text-sm text-[#d4c89c]">
+      <p className="mt-2 text-sm text-[#5a6470]">
         Submissions from the public site&apos;s inquiry form.
       </p>
 
       {(!inquiries || inquiries.length === 0) && (
-        <p className="mt-12 text-[#d4c89c]/70">No inquiries yet.</p>
+        <p className="mt-12 text-[#5a6470]/70">No inquiries yet.</p>
       )}
 
       <div className="mt-6 space-y-3">
         {(inquiries ?? []).map((q) => (
           <article
             key={q.id}
-            className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5"
+            className="rounded-lg border border-[#a8a395] bg-white p-5"
           >
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <h2 className="text-base font-medium">{q.full_name}</h2>
-                <p className="text-xs text-[#d4c89c]/70">
+                <p className="text-xs text-[#5a6470]/70">
                   <a
-                    className="text-[#F8971F] hover:underline"
+                    className="text-[#BF5700] hover:underline"
                     href={`mailto:${q.email}`}
                   >
                     {q.email}
@@ -62,7 +62,7 @@ export default async function InquiriesPage() {
                     </>
                   )}
                   {q.sponsor_name && (
-                    <> · sponsor: <span className="text-white">{q.sponsor_name}</span></>
+                    <> · sponsor: <span className="text-[#1a2128]">{q.sponsor_name}</span></>
                   )}
                 </p>
               </div>
@@ -76,12 +76,12 @@ export default async function InquiriesPage() {
             </div>
 
             {q.message && (
-              <p className="mt-3 whitespace-pre-wrap rounded border border-[#4a5d3e] bg-[#1d2a1d] px-3 py-2 text-sm text-[#d4c89c]">
+              <p className="mt-3 whitespace-pre-wrap rounded border border-[#a8a395] bg-white px-3 py-2 text-sm text-[#5a6470]">
                 {q.message}
               </p>
             )}
 
-            <p className="mt-2 text-xs text-[#d4c89c]/60">
+            <p className="mt-2 text-xs text-[#5a6470]/60">
               Submitted {new Date(q.created_at).toLocaleString()}
             </p>
 
@@ -104,7 +104,7 @@ export default async function InquiriesPage() {
                   <input type="hidden" name="status" value="archived" />
                   <button
                     type="submit"
-                    className="rounded border border-[#d4c89c]/40 px-3 py-1 text-xs text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
+                    className="rounded border border-[#d4c89c]/40 px-3 py-1 text-xs text-[#5a6470] hover:border-[#d4c89c] hover:text-[#1a2128]"
                   >
                     Archive
                   </button>
@@ -116,7 +116,7 @@ export default async function InquiriesPage() {
                   <input type="hidden" name="status" value="pending" />
                   <button
                     type="submit"
-                    className="rounded border border-[#BF5700]/60 px-3 py-1 text-xs text-[#F8971F] hover:bg-[#BF5700]/20"
+                    className="rounded border border-[#BF5700]/60 px-3 py-1 text-xs text-[#BF5700] hover:bg-[#BF5700]/20"
                   >
                     Reopen
                   </button>

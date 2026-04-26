@@ -35,13 +35,13 @@ function Field({
 }) {
   return (
     <label className="block text-sm">
-      <span className="text-[#d4c89c]">{label}</span>
+      <span className="text-[#5a6470]">{label}</span>
       <input
         type={type}
         name={name}
         defaultValue={defaultValue ?? ""}
         autoComplete={autoComplete}
-        className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
+        className="mt-1 w-full rounded border border-[#a8a395] bg-white px-3 py-2 text-[#1a2128] focus:border-[#BF5700] focus:outline-none"
       />
     </label>
   );
@@ -86,7 +86,7 @@ export function ProfileForm({ member }: { member: Member }) {
       </div>
 
       <div>
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-[#d4c89c]/70">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-[#5a6470]/70">
           Phone
         </h2>
         <div className="mt-3 grid gap-4 sm:grid-cols-3">
@@ -113,7 +113,7 @@ export function ProfileForm({ member }: { member: Member }) {
       </div>
 
       <div>
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-[#d4c89c]/70">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-[#5a6470]/70">
           Address
         </h2>
         <div className="mt-3 grid gap-4 sm:grid-cols-6">
