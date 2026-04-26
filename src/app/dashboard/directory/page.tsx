@@ -15,7 +15,7 @@ export default async function DirectoryPage() {
   const { data, error } = await supabase
     .from("members")
     .select(
-      "id, first_name, last_name, preferred_name, suffix, spouse_name, member_number, board_role, board_role_label, email, phone_home, phone_work, phone_cell, address_line1, city, state, zip, joined_year",
+      "id, first_name, last_name, preferred_name, suffix, spouse_name, member_number, board_role, board_role_label, is_admin, email, phone_home, phone_work, phone_cell, address_line1, city, state, zip, joined_year",
     );
 
   if (error) {

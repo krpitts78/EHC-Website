@@ -9,7 +9,7 @@ export default async function DashboardPage() {
 
   const { data: member } = await supabase
     .from("members")
-    .select("first_name, last_name, member_number, board_role_label")
+    .select("first_name, last_name, member_number, board_role_label, is_admin")
     .eq("auth_user_id", user!.id)
     .maybeSingle();
 
@@ -22,11 +22,15 @@ export default async function DashboardPage() {
         <p className="mt-2 text-[#D6D2C4]">
           {member.first_name} {member.last_name} &middot; Member{" "}
           {member.member_number}
-          {member.board_role_label && (
+          {member.board_role_label ? (
             <span className="ml-2 rounded bg-[#BF5700] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-white">
               {member.board_role_label}
             </span>
-          )}
+          ) : member.is_admin ? (
+            <span className="ml-2 rounded bg-[#333F48] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-[#D6D2C4]">
+              Website Admin
+            </span>
+          ) : null}
         </p>
       )}
 

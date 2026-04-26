@@ -12,6 +12,7 @@ export type DirectoryMember = {
   member_number: string;
   board_role: string | null;
   board_role_label: string | null;
+  is_admin: boolean;
   email: string | null;
   phone_home: string | null;
   phone_work: string | null;
@@ -62,11 +63,15 @@ function MemberCard({ m }: { m: DirectoryMember }) {
             </p>
           )}
         </div>
-        {m.board_role_label && (
+        {m.board_role_label ? (
           <span className="shrink-0 rounded bg-[#BF5700] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white">
             {m.board_role_label}
           </span>
-        )}
+        ) : m.is_admin ? (
+          <span className="shrink-0 rounded bg-[#333F48] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[#D6D2C4]">
+            Website Admin
+          </span>
+        ) : null}
       </div>
 
       <div className="mt-3 space-y-1 text-sm text-[#D6D2C4]">
