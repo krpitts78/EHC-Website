@@ -24,25 +24,25 @@ Member portal and public website for the Executive Hunting Club, a Texas non-pro
 - `_docs_source/` — gitignored staging area for source PDFs (member directory, calendars, etc.)
 - `public/logo.png` — official club logo
 
-## Brand Colors (Hunting + UT Accent)
+## Brand Colors (Charcoal + Cream + UT Accent)
 
-Theme tokens defined in `src/app/globals.css` via `@theme`. Most components currently use inline hex literals — keep that pattern when adding new components, or refactor to the token names.
+Theme tokens defined in `src/app/globals.css` via `@theme`. Components currently use inline hex literals; that pattern is fine for new code.
 
 | Color | Hex | Token | Use |
 |-------|-----|-------|-----|
-| Burnt Orange | `#BF5700` | `--color-burnt-orange` | Primary CTAs, links, accents (UT touch) |
+| Burnt Orange | `#BF5700` | `--color-burnt-orange` | Wordmarks, primary CTAs, board-role badges, links (the "Texas touch") |
 | Burnt Orange Dark | `#7a3500` | `--color-burnt-orange-dark` | Hover state for primary CTAs |
-| Light Orange | `#F8971F` | `--color-light-orange` | Inline accents on dark bg, prime-week ★ |
-| UT Yellow | `#FFD600` | `--color-ut-yellow` | Reserve for hidden UT easter eggs |
-| Forest | `#1d2a1d` | `--color-forest` | Page bg, hero |
-| Forest Deep | `#141a10` | `--color-forest-deep` | Footer, deepest dark sections |
-| Forest Accent | `#2a3624` | `--color-forest-accent` | Slightly lighter section bg |
-| Forest Card | `#2f3d27` | `--color-forest-card` | Card backgrounds (when distinct from sections) |
-| Olive Border | `#4a5d3e` | `--color-olive-border` | Borders, dividers |
-| Buckskin | `#d4c89c` | `--color-buckskin` | Body text on dark |
-| Buckskin Dim | `#a89970` | `--color-buckskin-dim` | Muted body text |
+| Gold | `#D4AF37` | `--color-gold` | Hero divider only (decorative) |
+| UT Yellow | `#FFD600` | `--color-ut-yellow` | Reserved for hidden UT easter eggs |
+| Charcoal | `#333F48` | `--color-charcoal` | Public hero, public dark section bg, portal nav, auth screens |
+| Charcoal Deep | `#1a2128` | `--color-charcoal-deep` | Footer, admin sub-nav strip, default dark text |
+| Charcoal Accent | `#4a5763` | `--color-charcoal-accent` | Cards on dark surfaces |
+| Slate Border | `#5a6470` | `--color-slate-border` | Borders on dark surfaces, Website Admin badge bg |
+| Cream | `#D6D2C4` | `--color-cream` | Dashboard bg, public alternate light sections |
+| Cream Border | `#a8a395` | `--color-cream-border` | Borders on light surfaces |
+| Buckskin | `#d4c89c` | `--color-buckskin` | Warm text on dark bg (in nav, hero subtitle) |
 
-**Critical contrast rule:** never use `#F8971F` as text color on white/cream backgrounds. Use `#BF5700` or `#7a3500` instead.
+**Contrast rule:** the Website Admin badge (`bg-[#5a6470]`) and Director badge (`bg-[#BF5700]`) must use `text-white`. Card titles on white surfaces must use `text-[#1a2128]`, not `text-white`.
 
 ## Database Schema (Supabase)
 
@@ -71,7 +71,7 @@ Source-of-truth directory. 83 rows seeded from "Membership Directory 2.13.26.pdf
 RLS: any authed user reads; members update own row; admins (any board or admin) full access.
 
 ### `documents`
-Metadata for files in private `documents` storage bucket. 6 files seeded (3 categories: tax_returns, financial_statements, articles).
+Metadata for files in private `documents` storage bucket. 13 files seeded across categories (tax_returns, financial_statements, articles, board_minutes, other).
 - `storage_path, title, category, description, size_bytes, mime_type, uploaded_by`
 - Categories: `tax_returns | financial_statements | bylaws | articles | board_minutes | beach_house | other`
 
@@ -80,10 +80,11 @@ RLS: members read; admins write. Storage policies match.
 Downloads issue 60s signed URLs via `/dashboard/documents/[id]/download`.
 
 ### `content_pages`
-Editable narrative pages. 4 seeded from PDFs.
+Editable narrative pages.
 - `slug` (PK), `title, body_markdown, updated_by, updated_at`
-- Current pages: `bylaws`, `beach-house-rules`, `beach-house-dos-donts`, `beach-house-contacts`
-- Renderer: `marked` → `dangerouslySetInnerHTML` with Tailwind `prose prose-invert`
+- Current pages: `bylaws`, `beach-house-rules`, `beach-house-dos-donts`, `beach-house-contacts`, `payment-instructions`
+- Renderer: `marked` → `dangerouslySetInnerHTML` with Tailwind `prose` (light surface)
+- RLS write: any board member or `is_admin`. Editing on the rendered page itself via "Edit" button.
 
 ### `reservations`
 Beach house bookings AND blocks/events.
@@ -148,7 +149,7 @@ Helpers in `src/lib/permissions.ts` (`isSiteAdmin`, `canManageBeachHouse`, `getC
 - `/dashboard/documents` — list + download
 - `/dashboard/documents/upload` — admin upload
 - `/dashboard/documents/[id]/download` — issues signed URL
-- `/dashboard/p/bylaws`, `/dashboard/p/beach-house-rules`, `/dashboard/p/beach-house-dos-donts`, `/dashboard/p/beach-house-contacts`
+- `/dashboard/p/bylaws`, `/dashboard/p/beach-house-rules`, `/dashboard/p/beach-house-dos-donts`, `/dashboard/p/beach-house-contacts`, `/dashboard/p/payment-instructions`
 - `/dashboard/p/[slug]/edit` — admin/board markdown editor
 - `/dashboard/beach-house` — hub
 - `/dashboard/beach-house/calendar` — year-grid (52 weeks, ★ on prime, color-coded)
@@ -158,6 +159,10 @@ Helpers in `src/lib/permissions.ts` (`isSiteAdmin`, `canManageBeachHouse`, `getC
 ### Admin (VP Beach House + site admin)
 - `/dashboard/admin/reservations` — pending queue, confirmed list, payment tracking, cancel
 - `/dashboard/admin/prime-list` — toggle members on/off prime list
+
+## Mobile
+
+`src/app/dashboard/PortalNav.tsx` is a server component that loads permissions and hands an item list to `NavMenu.tsx` (client component). On `>= md` the nav renders inline; below `md` a hamburger toggles a stacked dropdown. Public homepage is responsive via Tailwind `sm:` / `md:` breakpoints. Card grids collapse to single column on small screens.
 
 ## Conventions
 

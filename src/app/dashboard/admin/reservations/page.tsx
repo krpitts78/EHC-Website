@@ -156,13 +156,13 @@ function PendingCard({ r }: { r: ReservationRow }) {
             Approve
           </button>
         </form>
-        <form action={rejectReservationAction} className="flex gap-2">
+        <form action={rejectReservationAction} className="flex flex-wrap gap-2 sm:flex-nowrap">
           <input type="hidden" name="id" value={r.id} />
           <input
             type="text"
             name="reason"
             placeholder="Reject reason (optional)"
-            className="rounded border border-[#a8a395] bg-white px-2 py-1 text-xs text-[#1a2128]"
+            className="min-w-0 flex-1 rounded border border-[#a8a395] bg-white px-2 py-1 text-xs text-[#1a2128]"
           />
           <button
             type="submit"

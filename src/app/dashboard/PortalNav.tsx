@@ -5,13 +5,35 @@ import {
   getCurrentMemberPerm,
   isSiteAdmin,
 } from "@/lib/permissions";
+import { NavMenu } from "./NavMenu";
 
 export async function PortalNav() {
   const perm = await getCurrentMemberPerm();
   const showAdmin = canManageBeachHouse(perm) || isSiteAdmin(perm);
+
+  const items = [
+    { href: "/dashboard", label: "Dashboard" },
+    { href: "/dashboard/directory", label: "Directory" },
+    { href: "/dashboard/beach-house", label: "Beach House" },
+    { href: "/dashboard/documents", label: "Documents" },
+    { href: "/dashboard/p/bylaws", label: "Bylaws" },
+    { href: "/dashboard/profile", label: "Profile" },
+    ...(showAdmin
+      ? [
+          {
+            href: canManageBeachHouse(perm)
+              ? "/dashboard/admin/reservations"
+              : "/dashboard/admin/inquiries",
+            label: "Admin",
+            accent: true,
+          },
+        ]
+      : []),
+  ];
+
   return (
-    <header className="sticky top-0 z-10 border-b border-[#5a6470] bg-[#333F48] text-[#d4c89c]">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <header className="sticky top-0 z-20 border-b border-[#5a6470] bg-[#333F48] text-[#d4c89c]">
+      <div className="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href="/dashboard" className="flex items-center gap-3">
           <Image
             src="/logo.png"
@@ -20,51 +42,12 @@ export async function PortalNav() {
             height={36}
             className="brightness-0 invert"
           />
-          <span className="text-sm font-semibold uppercase tracking-wider text-white">
-            Executive Hunting Club
+          <span className="text-sm font-semibold uppercase tracking-wider text-white sm:tracking-wide">
+            <span className="hidden sm:inline">Executive Hunting Club</span>
+            <span className="sm:hidden">EHC</span>
           </span>
         </Link>
-
-        <nav className="flex items-center gap-4 text-sm">
-          <Link href="/dashboard" className="hover:text-white">
-            Dashboard
-          </Link>
-          <Link href="/dashboard/directory" className="hover:text-white">
-            Directory
-          </Link>
-          <Link href="/dashboard/beach-house" className="hover:text-white">
-            Beach House
-          </Link>
-          <Link href="/dashboard/documents" className="hover:text-white">
-            Documents
-          </Link>
-          <Link href="/dashboard/p/bylaws" className="hover:text-white">
-            Bylaws
-          </Link>
-          <Link href="/dashboard/profile" className="hover:text-white">
-            Profile
-          </Link>
-          {showAdmin && (
-            <Link
-              href={
-                canManageBeachHouse(perm)
-                  ? "/dashboard/admin/reservations"
-                  : "/dashboard/admin/inquiries"
-              }
-              className="text-[#BF5700] hover:text-white"
-            >
-              Admin
-            </Link>
-          )}
-          <form action="/auth/signout" method="post">
-            <button
-              type="submit"
-              className="rounded border border-[#d4c89c]/40 px-3 py-1 text-xs hover:border-[#d4c89c] hover:text-white"
-            >
-              Sign out
-            </button>
-          </form>
-        </nav>
+        <NavMenu items={items} />
       </div>
     </header>
   );
