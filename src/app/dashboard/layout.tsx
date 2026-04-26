@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { PortalNav } from "./PortalNav";
 
 export default async function DashboardLayout({
   children,
@@ -12,5 +13,10 @@ export default async function DashboardLayout({
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  return <>{children}</>;
+  return (
+    <div className="flex min-h-full flex-1 flex-col bg-[#1a2128]">
+      <PortalNav />
+      {children}
+    </div>
+  );
 }

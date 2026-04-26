@@ -1,0 +1,176 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
+export type DirectoryMember = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  preferred_name: string | null;
+  suffix: string | null;
+  spouse_name: string | null;
+  member_number: string;
+  board_role: string | null;
+  board_role_label: string | null;
+  email: string | null;
+  phone_home: string | null;
+  phone_work: string | null;
+  phone_cell: string | null;
+  address_line1: string | null;
+  city: string | null;
+  state: string | null;
+  zip: string | null;
+  joined_year: number | null;
+};
+
+function displayName(m: DirectoryMember) {
+  const first = m.preferred_name ?? m.first_name;
+  const suffix = m.suffix ? ` ${m.suffix}` : "";
+  return `${first} ${m.last_name}${suffix}`;
+}
+
+function searchHaystack(m: DirectoryMember) {
+  return [
+    m.first_name,
+    m.last_name,
+    m.preferred_name,
+    m.member_number,
+    m.email,
+    m.city,
+    m.state,
+    m.spouse_name,
+    m.board_role_label,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
+
+function MemberCard({ m }: { m: DirectoryMember }) {
+  return (
+    <article className="rounded-lg border border-[#333F48] bg-[#222b33] p-4">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h3 className="text-base font-semibold text-white">{displayName(m)}</h3>
+          <p className="mt-0.5 text-xs text-[#D6D2C4]/70">
+            {m.member_number}
+            {m.joined_year ? ` · joined ${m.joined_year}` : ""}
+          </p>
+          {m.spouse_name && (
+            <p className="text-xs text-[#D6D2C4]/70">
+              Spouse: {m.spouse_name}
+            </p>
+          )}
+        </div>
+        {m.board_role_label && (
+          <span className="shrink-0 rounded bg-[#BF5700] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white">
+            {m.board_role_label}
+          </span>
+        )}
+      </div>
+
+      <div className="mt-3 space-y-1 text-sm text-[#D6D2C4]">
+        {m.email && (
+          <p>
+            <a
+              href={`mailto:${m.email}`}
+              className="text-[#F8971F] hover:underline"
+            >
+              {m.email}
+            </a>
+          </p>
+        )}
+        {m.phone_cell && (
+          <p>
+            <a href={`tel:${m.phone_cell}`} className="hover:underline">
+              {m.phone_cell}
+            </a>{" "}
+            <span className="text-[#D6D2C4]/60">cell</span>
+          </p>
+        )}
+        {m.phone_home && (
+          <p>
+            <a href={`tel:${m.phone_home}`} className="hover:underline">
+              {m.phone_home}
+            </a>{" "}
+            <span className="text-[#D6D2C4]/60">home</span>
+          </p>
+        )}
+        {m.phone_work && (
+          <p>
+            <a href={`tel:${m.phone_work}`} className="hover:underline">
+              {m.phone_work}
+            </a>{" "}
+            <span className="text-[#D6D2C4]/60">work</span>
+          </p>
+        )}
+        {(m.address_line1 || m.city) && (
+          <p className="text-[#D6D2C4]/80">
+            {m.address_line1}
+            {m.address_line1 && (m.city || m.state) ? ", " : ""}
+            {m.city}
+            {m.city && m.state ? ", " : ""}
+            {m.state} {m.zip}
+          </p>
+        )}
+      </div>
+    </article>
+  );
+}
+
+export function DirectoryList({
+  board,
+  everyone,
+}: {
+  board: DirectoryMember[];
+  everyone: DirectoryMember[];
+}) {
+  const [query, setQuery] = useState("");
+
+  const q = query.trim().toLowerCase();
+  const filtered = useMemo(() => {
+    if (!q) return { board, everyone };
+    return {
+      board: board.filter((m) => searchHaystack(m).includes(q)),
+      everyone: everyone.filter((m) => searchHaystack(m).includes(q)),
+    };
+  }, [q, board, everyone]);
+
+  return (
+    <div className="mt-6">
+      <input
+        type="search"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search by name, city, member #..."
+        className="w-full max-w-md rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-sm text-white placeholder-[#D6D2C4]/50 focus:border-[#BF5700] focus:outline-none"
+      />
+
+      {filtered.board.length > 0 && (
+        <section className="mt-8">
+          <h2 className="text-lg font-semibold text-[#D6D2C4]">
+            Board of Directors
+          </h2>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.board.map((m) => (
+              <MemberCard key={m.id} m={m} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="mt-10">
+        <h2 className="text-lg font-semibold text-[#D6D2C4]">All Members</h2>
+        {filtered.everyone.length === 0 ? (
+          <p className="mt-3 text-sm text-[#D6D2C4]/70">No matches.</p>
+        ) : (
+          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.everyone.map((m) => (
+              <MemberCard key={m.id} m={m} />
+            ))}
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}

@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import Link from "next/link";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -13,36 +14,32 @@ export default async function DashboardPage() {
     .maybeSingle();
 
   return (
-    <main className="flex flex-1 flex-col bg-[#1a2128] px-6 py-16 text-white">
-      <div className="mx-auto w-full max-w-3xl">
-        <h1 className="text-3xl font-semibold">
-          Welcome{member ? `, ${member.first_name}` : ""}
-        </h1>
-        {member && (
-          <p className="mt-2 text-[#D6D2C4]">
-            {member.first_name} {member.last_name} &middot; Member{" "}
-            {member.member_number}
-            {member.board_role_label && (
-              <span className="ml-2 rounded bg-[#BF5700] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-white">
-                {member.board_role_label}
-              </span>
-            )}
-          </p>
-        )}
-
-        <p className="mt-12 text-[#D6D2C4]">
-          Member portal coming soon. Directory, beach house reservations, events,
-          and documents will land here.
+    <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-12 text-white">
+      <h1 className="text-3xl font-semibold">
+        Welcome{member ? `, ${member.first_name}` : ""}
+      </h1>
+      {member && (
+        <p className="mt-2 text-[#D6D2C4]">
+          {member.first_name} {member.last_name} &middot; Member{" "}
+          {member.member_number}
+          {member.board_role_label && (
+            <span className="ml-2 rounded bg-[#BF5700] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-white">
+              {member.board_role_label}
+            </span>
+          )}
         </p>
+      )}
 
-        <form action="/auth/signout" method="post" className="mt-8">
-          <button
-            type="submit"
-            className="rounded border border-[#D6D2C4] px-4 py-2 text-sm font-medium text-[#D6D2C4] hover:bg-[#D6D2C4] hover:text-[#1a2128]"
-          >
-            Sign out
-          </button>
-        </form>
+      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <Link
+          href="/dashboard/directory"
+          className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
+        >
+          <h2 className="text-lg font-medium text-white">Member directory</h2>
+          <p className="mt-1 text-sm text-[#D6D2C4]">
+            Browse all members and the current board.
+          </p>
+        </Link>
       </div>
     </main>
   );
