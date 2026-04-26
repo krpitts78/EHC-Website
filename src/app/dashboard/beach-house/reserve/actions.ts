@@ -3,9 +3,11 @@
 import { createClient } from "@/lib/supabase/server";
 import {
   CLEANING_FEE_CENTS,
+  addDays,
   isPrimeFriday,
   rateCentsFor,
   toUtcDate,
+  ymd,
 } from "@/lib/beach-house";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -61,6 +63,8 @@ export async function createReservationAction(
   const { error } = await supabase.from("reservations").insert({
     member_id: member.id,
     week_start_friday: week,
+    end_date: ymd(addDays(friday, 7)),
+    kind: "rental",
     is_prime: isPrime,
     rate_cents: rateCents,
     cleaning_fee_cents: CLEANING_FEE_CENTS,

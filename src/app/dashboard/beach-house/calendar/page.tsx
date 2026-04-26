@@ -6,29 +6,39 @@ import {
   ymd,
   formatWeekRange,
   toUtcDate,
+  addDays,
+  formatShort,
 } from "@/lib/beach-house";
 
 type SearchParams = Promise<{ year?: string }>;
 
-type Reservation = {
+type Entry = {
   week_start_friday: string;
+  end_date: string;
+  kind: "rental" | "block" | "event";
   status: "requested" | "confirmed" | "cancelled" | "completed";
+  notes: string | null;
   member: { first_name: string; last_name: string } | null;
 };
 
 const STATUS_STYLES: Record<string, string> = {
   available:
     "border-[#333F48] bg-[#222b33] hover:border-[#BF5700] text-white",
-  requested:
-    "border-[#BF5700] bg-[#BF5700]/15 text-[#F8971F]",
-  confirmed:
-    "border-[#333F48] bg-[#333F48] text-[#D6D2C4]",
-  past:
-    "border-[#333F48]/30 bg-[#222b33]/40 text-[#D6D2C4]/40",
+  requested: "border-[#BF5700] bg-[#BF5700]/15 text-[#F8971F]",
+  confirmed: "border-[#333F48] bg-[#333F48] text-[#D6D2C4]",
+  block: "border-yellow-700/50 bg-yellow-900/20 text-yellow-200/90",
+  event: "border-blue-700/50 bg-blue-900/20 text-blue-200/90",
+  past: "border-[#333F48]/30 bg-[#222b33]/40 text-[#D6D2C4]/40",
 };
 
-function statusBadge(status: keyof typeof STATUS_STYLES): string {
-  return STATUS_STYLES[status];
+function rangesOverlap(
+  aStart: string,
+  aEnd: string,
+  bStart: string,
+  bEnd: string,
+): boolean {
+  // Half-open: [start, end)
+  return aStart < bEnd && bStart < aEnd;
 }
 
 export default async function CalendarPage({
@@ -42,23 +52,21 @@ export default async function CalendarPage({
   const year = Number(params.year ?? currentYear);
 
   const supabase = await createClient();
+  // Pull anything that overlaps the year — start before year-end AND end after year-start.
   const startOfYear = `${year}-01-01`;
   const endOfYear = `${year}-12-31`;
+  const yearAfter = `${year + 1}-01-08`;
 
   const { data: reservations } = await supabase
     .from("reservations")
     .select(
-      "week_start_friday, status, member:member_id ( first_name, last_name )",
+      "week_start_friday, end_date, kind, status, notes, member:member_id ( first_name, last_name )",
     )
-    .gte("week_start_friday", startOfYear)
-    .lte("week_start_friday", endOfYear)
+    .lte("week_start_friday", yearAfter)
+    .gte("end_date", startOfYear)
     .in("status", ["requested", "confirmed"]);
 
-  const byWeek = new Map<string, Reservation>();
-  for (const r of (reservations ?? []) as unknown as Reservation[]) {
-    byWeek.set(r.week_start_friday, r);
-  }
-
+  const entries = (reservations ?? []) as unknown as Entry[];
   const fridays = fridaysOfYear(year);
   const todayMs = toUtcDate(today).getTime();
 
@@ -87,6 +95,8 @@ export default async function CalendarPage({
         <Legend label="Available" cls={STATUS_STYLES.available} />
         <Legend label="Pending request" cls={STATUS_STYLES.requested} />
         <Legend label="Confirmed (booked)" cls={STATUS_STYLES.confirmed} />
+        <Legend label="Maintenance" cls={STATUS_STYLES.block} />
+        <Legend label="Club event" cls={STATUS_STYLES.event} />
         <Legend label="Past" cls={STATUS_STYLES.past} />
         <span className="text-[#F8971F]">★ = Prime week</span>
       </div>
@@ -94,22 +104,50 @@ export default async function CalendarPage({
       <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {fridays.map((friday) => {
           const fridayStr = ymd(friday);
-          const res = byWeek.get(fridayStr);
+          const nextFriday = ymd(addDays(friday, 7));
           const past = friday.getTime() < todayMs;
           const prime = isPrimeFriday(friday);
 
+          // Find any entry overlapping [friday, nextFriday). Priority:
+          // confirmed rental > requested rental > confirmed block > confirmed event.
+          const overlapping = entries.filter((e) =>
+            rangesOverlap(e.week_start_friday, e.end_date, fridayStr, nextFriday),
+          );
+          const rental = overlapping.find((e) => e.kind === "rental");
+          const blockEntry = overlapping.find((e) => e.kind === "block");
+          const eventEntry = overlapping.find((e) => e.kind === "event");
+          const winner = rental ?? blockEntry ?? eventEntry ?? null;
+
           let kind: keyof typeof STATUS_STYLES = "available";
-          if (past) kind = "past";
-          else if (res?.status === "confirmed") kind = "confirmed";
-          else if (res?.status === "requested") kind = "requested";
+          let label = "";
+          let interactive = false;
+          if (past) {
+            kind = "past";
+            label = winner?.member
+              ? `${winner.member.first_name} ${winner.member.last_name}`
+              : winner?.notes?.replace(/^\[seed\]\s*/, "") ?? "—";
+          } else if (winner?.kind === "rental") {
+            kind = winner.status === "confirmed" ? "confirmed" : "requested";
+            label = winner.member
+              ? `${winner.status === "confirmed" ? "" : "Pending — "}${winner.member.first_name} ${winner.member.last_name}`
+              : winner.status;
+          } else if (winner?.kind === "block") {
+            kind = "block";
+            label = winner.notes?.replace(/^\[seed\]\s*/, "") ?? "Maintenance";
+          } else if (winner?.kind === "event") {
+            kind = "event";
+            label = winner.notes?.replace(/^\[seed\]\s*/, "") ?? "Club event";
+          } else {
+            kind = "available";
+            label = prime ? "Prime · $1,000" : "$600";
+            interactive = true;
+          }
 
-          const interactive = kind === "available";
-
-          const inner = (
+          const card = (
             <div
-              className={`rounded-lg border px-4 py-3 transition-colors ${statusBadge(
-                kind,
-              )} ${interactive ? "cursor-pointer" : ""}`}
+              className={`rounded-lg border px-4 py-3 transition-colors ${
+                STATUS_STYLES[kind]
+              } ${interactive ? "cursor-pointer" : ""}`}
             >
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">
@@ -117,14 +155,16 @@ export default async function CalendarPage({
                 </span>
                 {prime && <span className="text-[#F8971F]">★</span>}
               </div>
-              <p className="mt-1 text-xs">
-                {kind === "available" && (prime ? "Prime · $1,000" : "$600")}
-                {kind === "requested" && res?.member &&
-                  `Pending — ${res.member.first_name} ${res.member.last_name}`}
-                {kind === "confirmed" && res?.member &&
-                  `${res.member.first_name} ${res.member.last_name}`}
-                {kind === "past" && "—"}
-              </p>
+              <p className="mt-1 line-clamp-2 text-xs">{label}</p>
+              {winner &&
+                winner.kind !== "rental" &&
+                (winner.week_start_friday !== fridayStr ||
+                  winner.end_date !== nextFriday) && (
+                  <p className="mt-0.5 text-[10px] text-[#D6D2C4]/60">
+                    {formatShort(toUtcDate(winner.week_start_friday))} –{" "}
+                    {formatShort(toUtcDate(winner.end_date))}
+                  </p>
+                )}
             </div>
           );
 
@@ -133,10 +173,10 @@ export default async function CalendarPage({
               key={fridayStr}
               href={`/dashboard/beach-house/reserve?week=${fridayStr}`}
             >
-              {inner}
+              {card}
             </Link>
           ) : (
-            <div key={fridayStr}>{inner}</div>
+            <div key={fridayStr}>{card}</div>
           );
         })}
       </div>
