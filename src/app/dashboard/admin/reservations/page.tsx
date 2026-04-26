@@ -57,7 +57,7 @@ export default async function AdminReservationsPage() {
 
       <Section title={`Pending requests (${pending.length})`}>
         {pending.length === 0 ? (
-          <p className="text-sm text-[#D6D2C4]/70">Nothing pending.</p>
+          <p className="text-sm text-[#d4c89c]/70">Nothing pending.</p>
         ) : (
           pending.map((r) => <PendingCard key={r.id} r={r} />)
         )}
@@ -65,7 +65,7 @@ export default async function AdminReservationsPage() {
 
       <Section title={`Confirmed (${confirmed.length})`}>
         {confirmed.length === 0 ? (
-          <p className="text-sm text-[#D6D2C4]/70">No confirmed bookings.</p>
+          <p className="text-sm text-[#d4c89c]/70">No confirmed bookings.</p>
         ) : (
           confirmed.map((r) => <ConfirmedCard key={r.id} r={r} />)
         )}
@@ -73,7 +73,7 @@ export default async function AdminReservationsPage() {
 
       <Section title={`Past / cancelled (${past.length})`}>
         {past.length === 0 ? (
-          <p className="text-sm text-[#D6D2C4]/70">None.</p>
+          <p className="text-sm text-[#d4c89c]/70">None.</p>
         ) : (
           past.map((r) => <PastCard key={r.id} r={r} />)
         )}
@@ -91,7 +91,7 @@ function Section({
 }) {
   return (
     <section className="mt-10">
-      <h2 className="text-lg font-semibold text-[#D6D2C4]">{title}</h2>
+      <h2 className="text-lg font-semibold text-[#d4c89c]">{title}</h2>
       <div className="mt-3 space-y-3">{children}</div>
     </section>
   );
@@ -101,7 +101,7 @@ function MemberLine({ r }: { r: ReservationRow }) {
   const m = r.member;
   if (!m) return null;
   return (
-    <p className="text-xs text-[#D6D2C4]/80">
+    <p className="text-xs text-[#d4c89c]/80">
       {m.first_name} {m.last_name} · {m.member_number}
       {m.email && (
         <>
@@ -125,7 +125,7 @@ function WeekHeader({ r }: { r: ReservationRow }) {
         {r.is_prime && (
           <span className="ml-2 text-xs text-[#F8971F]">★ Prime</span>
         )}
-        <span className="ml-2 text-xs text-[#D6D2C4]/60">
+        <span className="ml-2 text-xs text-[#d4c89c]/60">
           ({formatLong(friday)})
         </span>
       </h3>
@@ -137,14 +137,14 @@ function WeekHeader({ r }: { r: ReservationRow }) {
 function PendingCard({ r }: { r: ReservationRow }) {
   const total = r.rate_cents + r.cleaning_fee_cents;
   return (
-    <article className="rounded-lg border border-[#BF5700]/50 bg-[#222b33] p-4">
+    <article className="rounded-lg border border-[#BF5700]/50 bg-[#2a3624] p-4">
       <WeekHeader r={r} />
-      <p className="mt-2 text-sm text-[#D6D2C4]">
+      <p className="mt-2 text-sm text-[#d4c89c]">
         Rate {dollars(r.rate_cents)} + cleaning {dollars(r.cleaning_fee_cents)} ={" "}
         <span className="font-medium text-white">{dollars(total)}</span>
       </p>
       {r.notes && (
-        <p className="mt-2 text-xs text-[#D6D2C4]/80">Notes: {r.notes}</p>
+        <p className="mt-2 text-xs text-[#d4c89c]/80">Notes: {r.notes}</p>
       )}
       <div className="mt-3 flex flex-wrap gap-2">
         <form action={approveReservationAction}>
@@ -162,7 +162,7 @@ function PendingCard({ r }: { r: ReservationRow }) {
             type="text"
             name="reason"
             placeholder="Reject reason (optional)"
-            className="rounded border border-[#333F48] bg-[#1a2128] px-2 py-1 text-xs text-white"
+            className="rounded border border-[#4a5d3e] bg-[#1d2a1d] px-2 py-1 text-xs text-white"
           />
           <button
             type="submit"
@@ -179,9 +179,9 @@ function PendingCard({ r }: { r: ReservationRow }) {
 function ConfirmedCard({ r }: { r: ReservationRow }) {
   const total = r.rate_cents + r.cleaning_fee_cents;
   return (
-    <article className="rounded-lg border border-[#333F48] bg-[#222b33] p-4">
+    <article className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-4">
       <WeekHeader r={r} />
-      <p className="mt-2 text-sm text-[#D6D2C4]">
+      <p className="mt-2 text-sm text-[#d4c89c]">
         Total {dollars(total)} ·{" "}
         <span className={r.deposit_paid_at ? "text-green-300" : "text-amber-300"}>
           deposit {r.deposit_paid_at ? "paid" : "outstanding"}
@@ -192,7 +192,7 @@ function ConfirmedCard({ r }: { r: ReservationRow }) {
         </span>
       </p>
       {r.notes && (
-        <p className="mt-2 text-xs text-[#D6D2C4]/80">Notes: {r.notes}</p>
+        <p className="mt-2 text-xs text-[#d4c89c]/80">Notes: {r.notes}</p>
       )}
       <div className="mt-3 flex flex-wrap gap-2">
         <form action={markDepositPaidAction}>
@@ -200,7 +200,7 @@ function ConfirmedCard({ r }: { r: ReservationRow }) {
           <input type="hidden" name="paid" value={r.deposit_paid_at ? "false" : "true"} />
           <button
             type="submit"
-            className="rounded border border-[#D6D2C4]/40 px-3 py-1 text-xs text-[#D6D2C4] hover:border-[#D6D2C4] hover:text-white"
+            className="rounded border border-[#d4c89c]/40 px-3 py-1 text-xs text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
           >
             {r.deposit_paid_at ? "Unmark deposit paid" : "Mark deposit paid"}
           </button>
@@ -210,7 +210,7 @@ function ConfirmedCard({ r }: { r: ReservationRow }) {
           <input type="hidden" name="paid" value={r.balance_paid_at ? "false" : "true"} />
           <button
             type="submit"
-            className="rounded border border-[#D6D2C4]/40 px-3 py-1 text-xs text-[#D6D2C4] hover:border-[#D6D2C4] hover:text-white"
+            className="rounded border border-[#d4c89c]/40 px-3 py-1 text-xs text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
           >
             {r.balance_paid_at ? "Unmark balance paid" : "Mark balance paid"}
           </button>
@@ -231,9 +231,9 @@ function ConfirmedCard({ r }: { r: ReservationRow }) {
 
 function PastCard({ r }: { r: ReservationRow }) {
   return (
-    <article className="rounded-lg border border-[#333F48]/60 bg-[#222b33]/40 p-3 text-sm text-[#D6D2C4]/80">
+    <article className="rounded-lg border border-[#4a5d3e]/60 bg-[#2a3624]/40 p-3 text-sm text-[#d4c89c]/80">
       <WeekHeader r={r} />
-      <p className="mt-1 text-xs text-[#D6D2C4]/60">
+      <p className="mt-1 text-xs text-[#d4c89c]/60">
         Status: {r.status}
         {r.notes && ` · ${r.notes}`}
       </p>

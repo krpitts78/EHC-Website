@@ -62,16 +62,16 @@ export default async function ReservePage({
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-12 text-white">
-      <p className="text-xs uppercase tracking-wide text-[#D6D2C4]/60">
+      <p className="text-xs uppercase tracking-wide text-[#d4c89c]/60">
         Reserve beach house
       </p>
       <h1 className="mt-1 text-3xl font-semibold">{formatWeekRange(friday)}</h1>
-      <p className="mt-1 text-sm text-[#D6D2C4]">
+      <p className="mt-1 text-sm text-[#d4c89c]">
         Friday {formatLong(friday)} 4:00 PM → Friday 12:00 PM (
         {prime ? "Prime week" : "Non-Prime week"})
       </p>
 
-      <section className="mt-6 rounded-lg border border-[#333F48] bg-[#222b33] p-5 text-sm">
+      <section className="mt-6 rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5 text-sm">
         <dl className="space-y-2">
           <Row label="Weekly rate" value={dollars(rateCents)} />
           <Row label="Housekeeping fee" value={dollars(CLEANING_FEE_CENTS)} />
@@ -123,7 +123,7 @@ function Row({
 }) {
   return (
     <div className="flex justify-between">
-      <dt className="text-[#D6D2C4]">{label}</dt>
+      <dt className="text-[#d4c89c]">{label}</dt>
       <dd className={bold ? "font-semibold text-white" : "text-white"}>
         {value}
       </dd>

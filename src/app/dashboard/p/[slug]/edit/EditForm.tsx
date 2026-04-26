@@ -25,24 +25,24 @@ export function EditForm({
       <input type="hidden" name="slug" value={slug} />
 
       <label className="block text-sm">
-        <span className="text-[#D6D2C4]">Title</span>
+        <span className="text-[#d4c89c]">Title</span>
         <input
           name="title"
           defaultValue={title}
           required
-          className="mt-1 w-full rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
+          className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
         />
       </label>
 
       <label className="block text-sm">
-        <span className="text-[#D6D2C4]">
+        <span className="text-[#d4c89c]">
           Body (Markdown — # heading, **bold**, * bullet, [link](https://…))
         </span>
         <textarea
           name="body_markdown"
           defaultValue={body_markdown}
           rows={28}
-          className="mt-1 w-full rounded border border-[#333F48] bg-[#222b33] px-3 py-2 font-mono text-sm text-white focus:border-[#BF5700] focus:outline-none"
+          className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 font-mono text-sm text-white focus:border-[#BF5700] focus:outline-none"
         />
       </label>
 
@@ -58,7 +58,7 @@ export function EditForm({
         </button>
         <Link
           href={`/dashboard/p/${slug}`}
-          className="rounded border border-[#D6D2C4]/40 px-5 py-2 text-[#D6D2C4] hover:border-[#D6D2C4] hover:text-white"
+          className="rounded border border-[#d4c89c]/40 px-5 py-2 text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
         >
           Cancel
         </Link>

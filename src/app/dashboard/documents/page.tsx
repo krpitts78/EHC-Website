@@ -40,7 +40,7 @@ export default async function DocumentsPage() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold">Documents</h1>
-          <p className="mt-2 text-sm text-[#D6D2C4]">
+          <p className="mt-2 text-sm text-[#d4c89c]">
             Bylaws, financials, board minutes, and beach house references.
           </p>
         </div>
@@ -55,7 +55,7 @@ export default async function DocumentsPage() {
       </div>
 
       {(!documents || documents.length === 0) && (
-        <p className="mt-12 text-[#D6D2C4]/70">
+        <p className="mt-12 text-[#d4c89c]/70">
           No documents yet.
           {canManage ? " Upload one to get started." : ""}
         </p>
@@ -67,10 +67,10 @@ export default async function DocumentsPage() {
           if (list.length === 0) return null;
           return (
             <section key={cat.id}>
-              <h2 className="text-lg font-semibold text-[#D6D2C4]">
+              <h2 className="text-lg font-semibold text-[#d4c89c]">
                 {cat.label}
               </h2>
-              <ul className="mt-3 divide-y divide-[#333F48] rounded-lg border border-[#333F48] bg-[#222b33]">
+              <ul className="mt-3 divide-y divide-[#4a5d3e] rounded-lg border border-[#4a5d3e] bg-[#2a3624]">
                 {list.map((doc) => (
                   <li
                     key={doc.id}
@@ -84,12 +84,12 @@ export default async function DocumentsPage() {
                         {doc.title}
                       </a>
                       {doc.description && (
-                        <p className="mt-0.5 text-xs text-[#D6D2C4]/70 truncate">
+                        <p className="mt-0.5 text-xs text-[#d4c89c]/70 truncate">
                           {doc.description}
                         </p>
                       )}
                     </div>
-                    <span className="text-xs text-[#D6D2C4]/60">
+                    <span className="text-xs text-[#d4c89c]/60">
                       {formatSize(doc.size_bytes)}
                     </span>
                     {canManage && (
@@ -112,7 +112,7 @@ export default async function DocumentsPage() {
       </div>
 
       {documents && documents.length > 0 && byCategory.size === 0 && (
-        <p className="mt-8 text-sm text-[#D6D2C4]/70">
+        <p className="mt-8 text-sm text-[#d4c89c]/70">
           {documents.length} document(s) — none in known categories.
         </p>
       )}

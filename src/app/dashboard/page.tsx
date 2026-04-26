@@ -19,7 +19,7 @@ export default async function DashboardPage() {
         Welcome{member ? `, ${member.first_name}` : ""}
       </h1>
       {member && (
-        <p className="mt-2 text-[#D6D2C4]">
+        <p className="mt-2 text-[#d4c89c]">
           {member.first_name} {member.last_name} &middot; Member{" "}
           {member.member_number}
           {member.board_role_label ? (
@@ -27,7 +27,7 @@ export default async function DashboardPage() {
               {member.board_role_label}
             </span>
           ) : member.is_admin ? (
-            <span className="ml-2 rounded bg-[#333F48] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-[#D6D2C4]">
+            <span className="ml-2 rounded bg-[#4a5d3e] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-[#d4c89c]">
               Website Admin
             </span>
           ) : null}
@@ -37,46 +37,46 @@ export default async function DashboardPage() {
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Link
           href="/dashboard/directory"
-          className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
+          className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-6 hover:border-[#BF5700]"
         >
           <h2 className="text-lg font-medium text-white">Member directory</h2>
-          <p className="mt-1 text-sm text-[#D6D2C4]">
+          <p className="mt-1 text-sm text-[#d4c89c]">
             Browse all members and the current board.
           </p>
         </Link>
         <Link
           href="/dashboard/beach-house"
-          className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
+          className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-6 hover:border-[#BF5700]"
         >
           <h2 className="text-lg font-medium text-white">Beach House</h2>
-          <p className="mt-1 text-sm text-[#D6D2C4]">
+          <p className="mt-1 text-sm text-[#d4c89c]">
             Rules, contact information, and (soon) reservation calendar.
           </p>
         </Link>
         <Link
           href="/dashboard/documents"
-          className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
+          className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-6 hover:border-[#BF5700]"
         >
           <h2 className="text-lg font-medium text-white">Documents</h2>
-          <p className="mt-1 text-sm text-[#D6D2C4]">
+          <p className="mt-1 text-sm text-[#d4c89c]">
             Tax returns, financial statements, articles of incorporation.
           </p>
         </Link>
         <Link
           href="/dashboard/p/bylaws"
-          className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
+          className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-6 hover:border-[#BF5700]"
         >
           <h2 className="text-lg font-medium text-white">Bylaws</h2>
-          <p className="mt-1 text-sm text-[#D6D2C4]">
+          <p className="mt-1 text-sm text-[#d4c89c]">
             The club&apos;s governing document.
           </p>
         </Link>
         <Link
           href="/dashboard/profile"
-          className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
+          className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-6 hover:border-[#BF5700]"
         >
           <h2 className="text-lg font-medium text-white">Your profile</h2>
-          <p className="mt-1 text-sm text-[#D6D2C4]">
+          <p className="mt-1 text-sm text-[#d4c89c]">
             Update your contact info, spouse, and address.
           </p>
         </Link>

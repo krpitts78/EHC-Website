@@ -20,8 +20,8 @@ const STATUS_LABEL: Record<string, string> = {
 const STATUS_BADGE: Record<string, string> = {
   requested: "bg-[#BF5700]/20 text-[#F8971F]",
   confirmed: "bg-green-700/30 text-green-300",
-  cancelled: "bg-[#333F48] text-[#D6D2C4]/70",
-  completed: "bg-[#333F48] text-[#D6D2C4]",
+  cancelled: "bg-[#4a5d3e] text-[#d4c89c]/70",
+  completed: "bg-[#4a5d3e] text-[#d4c89c]",
 };
 
 function dollars(cents: number): string {
@@ -75,7 +75,7 @@ export default async function MyReservationsPage({
       )}
 
       {(!reservations || reservations.length === 0) && (
-        <p className="mt-12 text-[#D6D2C4]/70">
+        <p className="mt-12 text-[#d4c89c]/70">
           No reservations yet. Browse the calendar to request a week.
         </p>
       )}
@@ -87,7 +87,7 @@ export default async function MyReservationsPage({
           return (
             <article
               key={r.id}
-              className="rounded-lg border border-[#333F48] bg-[#222b33] p-5"
+              className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5"
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
@@ -97,7 +97,7 @@ export default async function MyReservationsPage({
                       <span className="ml-2 text-xs text-[#F8971F]">★ Prime</span>
                     )}
                   </h2>
-                  <p className="text-xs text-[#D6D2C4]/70">
+                  <p className="text-xs text-[#d4c89c]/70">
                     {formatLong(friday)} 4:00 PM
                   </p>
                 </div>
@@ -128,7 +128,7 @@ export default async function MyReservationsPage({
               </dl>
 
               {r.notes && (
-                <p className="mt-3 rounded border border-[#333F48] bg-[#1a2128] px-3 py-2 text-xs text-[#D6D2C4]">
+                <p className="mt-3 rounded border border-[#4a5d3e] bg-[#1d2a1d] px-3 py-2 text-xs text-[#d4c89c]">
                   Notes: {r.notes}
                 </p>
               )}
@@ -166,7 +166,7 @@ function Row({
 }) {
   return (
     <div className="flex justify-between sm:justify-start sm:gap-3">
-      <dt className="text-[#D6D2C4]/70">{label}</dt>
+      <dt className="text-[#d4c89c]/70">{label}</dt>
       <dd className={bold ? "font-semibold text-white" : "text-white"}>
         {value}
       </dd>

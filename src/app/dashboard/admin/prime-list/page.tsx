@@ -14,7 +14,7 @@ export default async function PrimeListPage() {
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-white">
       <h1 className="text-3xl font-semibold">Prime-time list</h1>
-      <p className="mt-2 text-sm text-[#D6D2C4]">
+      <p className="mt-2 text-sm text-[#d4c89c]">
         Members on this list can reserve Prime weeks (May–Labor Day).
       </p>
 
@@ -42,10 +42,10 @@ function Section({
 }) {
   return (
     <section className="mt-8">
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-[#D6D2C4]/70">
+      <h2 className="text-sm font-semibold uppercase tracking-wide text-[#d4c89c]/70">
         {title}
       </h2>
-      <ul className="mt-2 divide-y divide-[#333F48] rounded-lg border border-[#333F48] bg-[#222b33]">
+      <ul className="mt-2 divide-y divide-[#4a5d3e] rounded-lg border border-[#4a5d3e] bg-[#2a3624]">
         {children}
       </ul>
     </section>
@@ -67,7 +67,7 @@ function Row({
     <li className="flex items-center justify-between px-4 py-2 text-sm">
       <span>
         {m.last_name}, {m.first_name}{" "}
-        <span className="text-[#D6D2C4]/60">{m.member_number}</span>
+        <span className="text-[#d4c89c]/60">{m.member_number}</span>
       </span>
       <form action={togglePrimeListAction}>
         <input type="hidden" name="id" value={m.id} />
@@ -76,7 +76,7 @@ function Row({
           type="submit"
           className={`rounded px-3 py-1 text-xs font-medium ${
             m.is_prime_list
-              ? "border border-[#D6D2C4]/40 text-[#D6D2C4] hover:border-[#D6D2C4] hover:text-white"
+              ? "border border-[#d4c89c]/40 text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
               : "bg-[#BF5700] text-white hover:bg-[#7a3500]"
           }`}
         >

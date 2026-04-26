@@ -17,7 +17,7 @@ export function InquiryForm() {
         <p className="text-lg font-medium text-green-200">
           Thanks — we&apos;ve received your inquiry.
         </p>
-        <p className="mt-2 text-sm text-[#D6D2C4]">
+        <p className="mt-2 text-sm text-[#d4c89c]">
           A board member will be in touch. If you have a sponsor in the club,
           let them know to expect a question or two.
         </p>
@@ -52,12 +52,12 @@ export function InquiryForm() {
       </div>
 
       <label className="block text-sm">
-        <span className="text-[#D6D2C4]">Message (optional)</span>
+        <span className="text-[#d4c89c]">Message (optional)</span>
         <textarea
           name="message"
           rows={4}
           placeholder="Tell us a bit about yourself, who you know in the club, and your hunting/fishing background."
-          className="mt-1 w-full rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
+          className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
         />
       </label>
 
@@ -71,7 +71,7 @@ export function InquiryForm() {
         {pending ? "Sending…" : "Submit inquiry"}
       </button>
 
-      <p className="text-xs text-[#D6D2C4]/60">
+      <p className="text-xs text-[#d4c89c]/60">
         Per the club&apos;s bylaws, prospective members must be proposed by one
         member and seconded by another. The Board reviews each proposal.
       </p>
@@ -94,13 +94,13 @@ function Field({
 }) {
   return (
     <label className="block text-sm">
-      <span className="text-[#D6D2C4]">{label}</span>
+      <span className="text-[#d4c89c]">{label}</span>
       <input
         type={type}
         name={name}
         required={required}
         autoComplete={autoComplete}
-        className="mt-1 w-full rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
+        className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
       />
     </label>
   );

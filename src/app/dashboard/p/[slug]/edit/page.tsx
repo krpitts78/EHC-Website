@@ -35,7 +35,7 @@ export default async function EditPage({
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-white">
-      <p className="text-xs uppercase tracking-wide text-[#D6D2C4]/60">
+      <p className="text-xs uppercase tracking-wide text-[#d4c89c]/60">
         Editing /dashboard/p/{slug}
       </p>
       <h1 className="mt-1 text-3xl font-semibold">{page.title}</h1>

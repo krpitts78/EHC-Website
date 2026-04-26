@@ -24,19 +24,23 @@ Member portal and public website for the Executive Hunting Club, a Texas non-pro
 - `_docs_source/` — gitignored staging area for source PDFs (member directory, calendars, etc.)
 - `public/logo.png` — official club logo
 
-## Brand Colors (Official UT Austin Palette)
+## Brand Colors (Hunting + UT Accent)
 
-The site owner is a UT graduate; the design uses official UT colors. Hex tokens are exposed as Tailwind colors in `globals.css` (e.g., `bg-burnt-orange`, `text-cream`).
+Theme tokens defined in `src/app/globals.css` via `@theme`. Most components currently use inline hex literals — keep that pattern when adding new components, or refactor to the token names.
 
-| Color | Hex | Use |
-|-------|-----|-----|
-| Burnt Orange | `#BF5700` | Primary CTAs, links, accents |
-| Burnt Orange Dark | `#7a3500` | Hover state for primary CTAs |
-| Charcoal | `#333F48` | Headings, dark surface borders |
-| Dark Charcoal | `#1a2128` | Hero, footer, deep dark sections |
-| Light Orange | `#F8971F` | Accent only — NEVER as text on light bg (fails contrast) |
-| Cream/Tan | `#D6D2C4` | Header background, body text on dark |
-| UT Yellow | `#FFD600` | Accent text on dark backgrounds (high contrast) |
+| Color | Hex | Token | Use |
+|-------|-----|-------|-----|
+| Burnt Orange | `#BF5700` | `--color-burnt-orange` | Primary CTAs, links, accents (UT touch) |
+| Burnt Orange Dark | `#7a3500` | `--color-burnt-orange-dark` | Hover state for primary CTAs |
+| Light Orange | `#F8971F` | `--color-light-orange` | Inline accents on dark bg, prime-week ★ |
+| UT Yellow | `#FFD600` | `--color-ut-yellow` | Reserve for hidden UT easter eggs |
+| Forest | `#1d2a1d` | `--color-forest` | Page bg, hero |
+| Forest Deep | `#141a10` | `--color-forest-deep` | Footer, deepest dark sections |
+| Forest Accent | `#2a3624` | `--color-forest-accent` | Slightly lighter section bg |
+| Forest Card | `#2f3d27` | `--color-forest-card` | Card backgrounds (when distinct from sections) |
+| Olive Border | `#4a5d3e` | `--color-olive-border` | Borders, dividers |
+| Buckskin | `#d4c89c` | `--color-buckskin` | Body text on dark |
+| Buckskin Dim | `#a89970` | `--color-buckskin-dim` | Muted body text |
 
 **Critical contrast rule:** never use `#F8971F` as text color on white/cream backgrounds. Use `#BF5700` or `#7a3500` instead.
 

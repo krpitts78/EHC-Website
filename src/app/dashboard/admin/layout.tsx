@@ -22,8 +22,8 @@ export default async function AdminLayout({
 
   return (
     <>
-      <div className="border-b border-[#333F48] bg-[#0f1419]">
-        <div className="mx-auto flex max-w-6xl flex-wrap gap-4 px-4 py-2 text-xs uppercase tracking-wide text-[#D6D2C4]">
+      <div className="border-b border-[#4a5d3e] bg-[#141a10]">
+        <div className="mx-auto flex max-w-6xl flex-wrap gap-4 px-4 py-2 text-xs uppercase tracking-wide text-[#d4c89c]">
           <span className="text-[#F8971F]">Admin</span>
           {showBeachHouse && (
             <>

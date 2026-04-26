@@ -10,7 +10,7 @@ export async function PortalNav() {
   const perm = await getCurrentMemberPerm();
   const showAdmin = canManageBeachHouse(perm) || isSiteAdmin(perm);
   return (
-    <header className="sticky top-0 z-10 border-b border-[#333F48] bg-[#1a2128] text-[#D6D2C4]">
+    <header className="sticky top-0 z-10 border-b border-[#4a5d3e] bg-[#1d2a1d] text-[#d4c89c]">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href="/dashboard" className="flex items-center gap-3">
           <Image
@@ -59,7 +59,7 @@ export async function PortalNav() {
           <form action="/auth/signout" method="post">
             <button
               type="submit"
-              className="rounded border border-[#D6D2C4]/40 px-3 py-1 text-xs hover:border-[#D6D2C4] hover:text-white"
+              className="rounded border border-[#d4c89c]/40 px-3 py-1 text-xs hover:border-[#d4c89c] hover:text-white"
             >
               Sign out
             </button>

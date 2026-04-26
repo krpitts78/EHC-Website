@@ -4,7 +4,7 @@ export default function BeachHousePage() {
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 text-white">
       <h1 className="text-3xl font-semibold">Beach House</h1>
-      <p className="mt-2 text-[#D6D2C4]">
+      <p className="mt-2 text-[#d4c89c]">
         2940 Tropicana Dr, Ramada Beach Subdivision, Bolivar Peninsula —
         ~13 miles past the Galveston Ferry on Hwy 87.
       </p>
@@ -12,46 +12,46 @@ export default function BeachHousePage() {
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
         <Link
           href="/dashboard/beach-house/calendar"
-          className="rounded-lg border border-[#333F48] bg-[#222b33] p-5 hover:border-[#BF5700]"
+          className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5 hover:border-[#BF5700]"
         >
           <h2 className="text-base font-medium text-white">Calendar</h2>
-          <p className="mt-1 text-sm text-[#D6D2C4]/80">
+          <p className="mt-1 text-sm text-[#d4c89c]/80">
             Browse open weeks and request a reservation.
           </p>
         </Link>
         <Link
           href="/dashboard/beach-house/my-reservations"
-          className="rounded-lg border border-[#333F48] bg-[#222b33] p-5 hover:border-[#BF5700]"
+          className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5 hover:border-[#BF5700]"
         >
           <h2 className="text-base font-medium text-white">My reservations</h2>
-          <p className="mt-1 text-sm text-[#D6D2C4]/80">
+          <p className="mt-1 text-sm text-[#d4c89c]/80">
             Status, payments, and history of your bookings.
           </p>
         </Link>
         <Link
           href="/dashboard/p/beach-house-rules"
-          className="rounded-lg border border-[#333F48] bg-[#222b33] p-5 hover:border-[#BF5700]"
+          className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5 hover:border-[#BF5700]"
         >
           <h2 className="text-base font-medium text-white">Rules</h2>
-          <p className="mt-1 text-sm text-[#D6D2C4]/80">
+          <p className="mt-1 text-sm text-[#d4c89c]/80">
             Reservations, rates, arrival, staying, departing.
           </p>
         </Link>
         <Link
           href="/dashboard/p/beach-house-dos-donts"
-          className="rounded-lg border border-[#333F48] bg-[#222b33] p-5 hover:border-[#BF5700]"
+          className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5 hover:border-[#BF5700]"
         >
           <h2 className="text-base font-medium text-white">Do's and Don'ts</h2>
-          <p className="mt-1 text-sm text-[#D6D2C4]/80">
+          <p className="mt-1 text-sm text-[#d4c89c]/80">
             Quick-reference checklist for any stay.
           </p>
         </Link>
         <Link
           href="/dashboard/p/beach-house-contacts"
-          className="rounded-lg border border-[#333F48] bg-[#222b33] p-5 hover:border-[#BF5700]"
+          className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-5 hover:border-[#BF5700]"
         >
           <h2 className="text-base font-medium text-white">Contact information</h2>
-          <p className="mt-1 text-sm text-[#D6D2C4]/80">
+          <p className="mt-1 text-sm text-[#d4c89c]/80">
             Utilities, vendors, housekeeper, WiFi.
           </p>
         </Link>

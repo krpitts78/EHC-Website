@@ -4,8 +4,8 @@ import { InquiryForm } from "./InquiryForm";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col bg-[#1a2128] text-white">
-      <header className="border-b border-[#333F48]/60">
+    <div className="flex flex-1 flex-col bg-[#1d2a1d] text-white">
+      <header className="border-b border-[#4a5d3e]/60">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
             <Image src="/logo.png" alt="EHC" width={48} height={48} />
@@ -14,7 +14,7 @@ export default function Home() {
             </span>
           </div>
           <div className="flex items-center gap-3 text-sm">
-            <a href="#inquire" className="hidden text-[#D6D2C4] hover:text-white sm:inline">
+            <a href="#inquire" className="hidden text-[#d4c89c] hover:text-white sm:inline">
               Membership inquiry
             </a>
             <Link
@@ -28,7 +28,7 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="border-b border-[#333F48]/60">
+      <section className="border-b border-[#4a5d3e]/60">
         <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-20 text-center">
           <Image
             src="/logo.png"
@@ -40,20 +40,20 @@ export default function Home() {
           <h1 className="mt-8 text-4xl font-semibold tracking-tight sm:text-5xl">
             Executive Hunting Club
           </h1>
-          <p className="mt-3 text-lg text-[#D6D2C4]">
+          <p className="mt-3 text-lg text-[#d4c89c]">
             A Texas non-profit hunting and fishing club, founded 1975.
           </p>
-          <p className="mt-1 text-sm text-[#D6D2C4]/70">
+          <p className="mt-1 text-sm text-[#d4c89c]/70">
             Charter No.&nbsp;366138 &middot; Houston, Texas
           </p>
         </div>
       </section>
 
       {/* About */}
-      <section className="border-b border-[#333F48]/60">
+      <section className="border-b border-[#4a5d3e]/60">
         <div className="mx-auto max-w-3xl px-6 py-16">
           <h2 className="text-2xl font-semibold">About the Club</h2>
-          <div className="mt-6 space-y-4 text-[#D6D2C4]">
+          <div className="mt-6 space-y-4 text-[#d4c89c]">
             <p>
               The Executive Hunting Club traces its roots to an organized
               hunting trip to Laredo, Texas in September 1973. Charter members
@@ -71,7 +71,7 @@ export default function Home() {
       </section>
 
       {/* Activities */}
-      <section className="border-b border-[#333F48]/60 bg-[#222b33]/40">
+      <section className="border-b border-[#4a5d3e]/60 bg-[#2a3624]/40">
         <div className="mx-auto max-w-5xl px-6 py-16">
           <h2 className="text-2xl font-semibold">What members do</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -92,10 +92,10 @@ export default function Home() {
       </section>
 
       {/* Beach House detail */}
-      <section className="border-b border-[#333F48]/60">
+      <section className="border-b border-[#4a5d3e]/60">
         <div className="mx-auto max-w-3xl px-6 py-16">
           <h2 className="text-2xl font-semibold">The Beach House</h2>
-          <div className="mt-6 space-y-4 text-[#D6D2C4]">
+          <div className="mt-6 space-y-4 text-[#d4c89c]">
             <p>
               The EHC owns a member-only beach house at{" "}
               <span className="text-white">2940 Tropicana Drive</span> in the
@@ -112,10 +112,10 @@ export default function Home() {
       </section>
 
       {/* Membership */}
-      <section className="border-b border-[#333F48]/60 bg-[#222b33]/40">
+      <section className="border-b border-[#4a5d3e]/60 bg-[#2a3624]/40">
         <div className="mx-auto max-w-3xl px-6 py-16">
           <h2 className="text-2xl font-semibold">Membership</h2>
-          <div className="mt-6 space-y-4 text-[#D6D2C4]">
+          <div className="mt-6 space-y-4 text-[#d4c89c]">
             <p>
               Per the club&apos;s bylaws, any adult is eligible for membership
               provided they are proposed by one member and seconded by another.
@@ -133,10 +133,10 @@ export default function Home() {
       </section>
 
       {/* Inquiry */}
-      <section id="inquire" className="border-b border-[#333F48]/60">
+      <section id="inquire" className="border-b border-[#4a5d3e]/60">
         <div className="mx-auto max-w-2xl px-6 py-16">
           <h2 className="text-2xl font-semibold">Membership inquiry</h2>
-          <p className="mt-2 text-[#D6D2C4]">
+          <p className="mt-2 text-[#d4c89c]">
             Interested in joining? Tell us a bit about yourself. A board member
             will be in touch.
           </p>
@@ -147,8 +147,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0f1419]">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-10 text-sm text-[#D6D2C4]/70 sm:flex-row sm:items-center sm:justify-between">
+      <footer className="bg-[#141a10]">
+        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-10 text-sm text-[#d4c89c]/70 sm:flex-row sm:items-center sm:justify-between">
           <div>
             Executive Hunting Club &middot; Houston, Texas
             <br />
@@ -165,10 +165,10 @@ export default function Home() {
 
 function Card({ title, body }: { title: string; body: string }) {
   return (
-    <article className="rounded-lg border border-[#333F48] bg-[#1a2128] p-6">
+    <article className="rounded-lg border border-[#4a5d3e] bg-[#1d2a1d] p-6">
       <h3 className="text-lg font-medium text-white">{title}</h3>
       <p
-        className="mt-2 text-sm text-[#D6D2C4]"
+        className="mt-2 text-sm text-[#d4c89c]"
         dangerouslySetInnerHTML={{ __html: body }}
       />
     </article>

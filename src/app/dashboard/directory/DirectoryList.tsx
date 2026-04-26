@@ -49,16 +49,16 @@ function searchHaystack(m: DirectoryMember) {
 
 function MemberCard({ m }: { m: DirectoryMember }) {
   return (
-    <article className="rounded-lg border border-[#333F48] bg-[#222b33] p-4">
+    <article className="rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-4">
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3 className="text-base font-semibold text-white">{displayName(m)}</h3>
-          <p className="mt-0.5 text-xs text-[#D6D2C4]/70">
+          <p className="mt-0.5 text-xs text-[#d4c89c]/70">
             {m.member_number}
             {m.joined_year ? ` · joined ${m.joined_year}` : ""}
           </p>
           {m.spouse_name && (
-            <p className="text-xs text-[#D6D2C4]/70">
+            <p className="text-xs text-[#d4c89c]/70">
               Spouse: {m.spouse_name}
             </p>
           )}
@@ -68,13 +68,13 @@ function MemberCard({ m }: { m: DirectoryMember }) {
             {m.board_role_label}
           </span>
         ) : m.is_admin ? (
-          <span className="shrink-0 rounded bg-[#333F48] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[#D6D2C4]">
+          <span className="shrink-0 rounded bg-[#4a5d3e] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[#d4c89c]">
             Website Admin
           </span>
         ) : null}
       </div>
 
-      <div className="mt-3 space-y-1 text-sm text-[#D6D2C4]">
+      <div className="mt-3 space-y-1 text-sm text-[#d4c89c]">
         {m.email && (
           <p>
             <a
@@ -90,7 +90,7 @@ function MemberCard({ m }: { m: DirectoryMember }) {
             <a href={`tel:${m.phone_cell}`} className="hover:underline">
               {m.phone_cell}
             </a>{" "}
-            <span className="text-[#D6D2C4]/60">cell</span>
+            <span className="text-[#d4c89c]/60">cell</span>
           </p>
         )}
         {m.phone_home && (
@@ -98,7 +98,7 @@ function MemberCard({ m }: { m: DirectoryMember }) {
             <a href={`tel:${m.phone_home}`} className="hover:underline">
               {m.phone_home}
             </a>{" "}
-            <span className="text-[#D6D2C4]/60">home</span>
+            <span className="text-[#d4c89c]/60">home</span>
           </p>
         )}
         {m.phone_work && (
@@ -106,11 +106,11 @@ function MemberCard({ m }: { m: DirectoryMember }) {
             <a href={`tel:${m.phone_work}`} className="hover:underline">
               {m.phone_work}
             </a>{" "}
-            <span className="text-[#D6D2C4]/60">work</span>
+            <span className="text-[#d4c89c]/60">work</span>
           </p>
         )}
         {(m.address_line1 || m.city) && (
-          <p className="text-[#D6D2C4]/80">
+          <p className="text-[#d4c89c]/80">
             {m.address_line1}
             {m.address_line1 && (m.city || m.state) ? ", " : ""}
             {m.city}
@@ -153,16 +153,16 @@ export function DirectoryList({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by name, city, member #..."
-          className="w-full max-w-md rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-sm text-white placeholder-[#D6D2C4]/50 focus:border-[#BF5700] focus:outline-none"
+          className="w-full max-w-md rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-sm text-white placeholder-[#d4c89c]/50 focus:border-[#BF5700] focus:outline-none"
         />
-        <div className="inline-flex rounded border border-[#333F48] bg-[#222b33] p-0.5 text-sm">
+        <div className="inline-flex rounded border border-[#4a5d3e] bg-[#2a3624] p-0.5 text-sm">
           <button
             type="button"
             onClick={() => setScope("all")}
             className={`rounded px-3 py-1 ${
               scope === "all"
                 ? "bg-[#BF5700] text-white"
-                : "text-[#D6D2C4] hover:text-white"
+                : "text-[#d4c89c] hover:text-white"
             }`}
           >
             All
@@ -173,7 +173,7 @@ export function DirectoryList({
             className={`rounded px-3 py-1 ${
               scope === "board"
                 ? "bg-[#BF5700] text-white"
-                : "text-[#D6D2C4] hover:text-white"
+                : "text-[#d4c89c] hover:text-white"
             }`}
           >
             Board only
@@ -183,7 +183,7 @@ export function DirectoryList({
 
       {showBoard && filtered.board.length > 0 && (
         <section className="mt-8">
-          <h2 className="text-lg font-semibold text-[#D6D2C4]">
+          <h2 className="text-lg font-semibold text-[#d4c89c]">
             Board of Directors
           </h2>
           <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -196,9 +196,9 @@ export function DirectoryList({
 
       {showEveryone && (
         <section className="mt-10">
-          <h2 className="text-lg font-semibold text-[#D6D2C4]">All Members</h2>
+          <h2 className="text-lg font-semibold text-[#d4c89c]">All Members</h2>
           {filtered.everyone.length === 0 ? (
-            <p className="mt-3 text-sm text-[#D6D2C4]/70">No matches.</p>
+            <p className="mt-3 text-sm text-[#d4c89c]/70">No matches.</p>
           ) : (
             <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.everyone.map((m) => (
@@ -210,7 +210,7 @@ export function DirectoryList({
       )}
 
       {scope === "board" && filtered.board.length === 0 && (
-        <p className="mt-8 text-sm text-[#D6D2C4]/70">No board matches.</p>
+        <p className="mt-8 text-sm text-[#d4c89c]/70">No board matches.</p>
       )}
     </div>
   );

@@ -44,7 +44,7 @@ export default async function ContentPage({
         {canEdit && (
           <Link
             href={`/dashboard/p/${slug}/edit`}
-            className="rounded border border-[#D6D2C4]/40 px-3 py-1 text-xs text-[#D6D2C4] hover:border-[#D6D2C4] hover:text-white"
+            className="rounded border border-[#d4c89c]/40 px-3 py-1 text-xs text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
           >
             Edit
           </Link>

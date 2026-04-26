@@ -2,16 +2,23 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
+  /* UT accents — used sparingly, primary CTAs and highlights */
   --color-burnt-orange: #BF5700;
   --color-burnt-orange-dark: #7a3500;
   --color-light-orange: #F8971F;
-  --color-charcoal: #333F48;
-  --color-charcoal-dark: #1a2128;
-  --color-cream: #D6D2C4;
   --color-ut-yellow: #FFD600;
 
+  /* Hunting palette */
+  --color-forest: #1d2a1d;          /* page bg, hero */
+  --color-forest-deep: #141a10;     /* footer, deepest section */
+  --color-forest-accent: #2a3624;   /* slightly lighter section bg */
+  --color-forest-card: #2f3d27;     /* card backgrounds */
+  --color-olive-border: #4a5d3e;    /* borders, dividers */
+  --color-buckskin: #d4c89c;        /* warm body text on dark */
+  --color-buckskin-dim: #a89970;    /* muted body text */
+
   --color-background: #ffffff;
-  --color-foreground: #1a2128;
+  --color-foreground: #1d2a1d;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

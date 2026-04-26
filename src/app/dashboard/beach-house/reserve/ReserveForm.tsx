@@ -24,18 +24,18 @@ export function ReserveForm({
     <form action={formAction} className="mt-6 space-y-5">
       <input type="hidden" name="week" value={week} />
 
-      <div className="rounded border border-[#333F48] bg-[#222b33]/60 px-4 py-3 text-sm">
-        <span className="text-[#D6D2C4]">Reserving as</span>{" "}
+      <div className="rounded border border-[#4a5d3e] bg-[#2a3624]/60 px-4 py-3 text-sm">
+        <span className="text-[#d4c89c]">Reserving as</span>{" "}
         <span className="font-medium">{memberName}</span>
       </div>
 
       <label className="block text-sm">
-        <span className="text-[#D6D2C4]">Notes for VP Beach House (optional)</span>
+        <span className="text-[#d4c89c]">Notes for VP Beach House (optional)</span>
         <textarea
           name="notes"
           rows={3}
           placeholder="Anything to flag — number of guests, late arrival, etc."
-          className="mt-1 w-full rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
+          className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
         />
       </label>
 
@@ -43,7 +43,7 @@ export function ReserveForm({
         <p className="text-sm text-red-400">{state.error}</p>
       )}
 
-      <p className="text-xs text-[#D6D2C4]/70">
+      <p className="text-xs text-[#d4c89c]/70">
         After submitting, the request goes to the VP Beach House for approval.
         Once confirmed, send your $100 deposit (Zelle or check) within 2 weeks
         to hold the reservation. Total of ${(totalCents / 100).toLocaleString()}{" "}
@@ -60,7 +60,7 @@ export function ReserveForm({
         </button>
         <Link
           href="/dashboard/beach-house/calendar"
-          className="rounded border border-[#D6D2C4]/40 px-5 py-2 text-[#D6D2C4] hover:border-[#D6D2C4] hover:text-white"
+          className="rounded border border-[#d4c89c]/40 px-5 py-2 text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
         >
           Cancel
         </Link>

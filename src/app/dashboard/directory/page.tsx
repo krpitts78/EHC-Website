@@ -46,7 +46,7 @@ export default async function DirectoryPage() {
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-12 text-white">
       <h1 className="text-3xl font-semibold">Membership Directory</h1>
-      <p className="mt-2 text-sm text-[#D6D2C4]">
+      <p className="mt-2 text-sm text-[#d4c89c]">
         {members.length} members &middot; {board.length} board
       </p>
       <DirectoryList board={board} everyone={everyone} />

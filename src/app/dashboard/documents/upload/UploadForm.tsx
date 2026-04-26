@@ -25,22 +25,22 @@ export function UploadForm() {
   return (
     <form action={formAction} className="mt-6 space-y-5">
       <label className="block text-sm">
-        <span className="text-[#D6D2C4]">Title</span>
+        <span className="text-[#d4c89c]">Title</span>
         <input
           name="title"
           required
           placeholder="e.g. Bylaws (revised 2024)"
-          className="mt-1 w-full rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
+          className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
         />
       </label>
 
       <label className="block text-sm">
-        <span className="text-[#D6D2C4]">Category</span>
+        <span className="text-[#d4c89c]">Category</span>
         <select
           name="category"
           required
           defaultValue=""
-          className="mt-1 w-full rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
+          className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
         >
           <option value="" disabled>
             Choose…
@@ -54,21 +54,21 @@ export function UploadForm() {
       </label>
 
       <label className="block text-sm">
-        <span className="text-[#D6D2C4]">Description (optional)</span>
+        <span className="text-[#d4c89c]">Description (optional)</span>
         <textarea
           name="description"
           rows={3}
-          className="mt-1 w-full rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
+          className="mt-1 w-full rounded border border-[#4a5d3e] bg-[#2a3624] px-3 py-2 text-white focus:border-[#BF5700] focus:outline-none"
         />
       </label>
 
       <label className="block text-sm">
-        <span className="text-[#D6D2C4]">File</span>
+        <span className="text-[#d4c89c]">File</span>
         <input
           type="file"
           name="file"
           required
-          className="mt-1 block w-full text-sm text-[#D6D2C4] file:mr-4 file:rounded file:border-0 file:bg-[#BF5700] file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-[#7a3500]"
+          className="mt-1 block w-full text-sm text-[#d4c89c] file:mr-4 file:rounded file:border-0 file:bg-[#BF5700] file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-[#7a3500]"
         />
       </label>
 

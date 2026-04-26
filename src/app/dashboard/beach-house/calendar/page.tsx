@@ -23,12 +23,12 @@ type Entry = {
 
 const STATUS_STYLES: Record<string, string> = {
   available:
-    "border-[#333F48] bg-[#222b33] hover:border-[#BF5700] text-white",
+    "border-[#4a5d3e] bg-[#2a3624] hover:border-[#BF5700] text-white",
   requested: "border-[#BF5700] bg-[#BF5700]/15 text-[#F8971F]",
-  confirmed: "border-[#333F48] bg-[#333F48] text-[#D6D2C4]",
+  confirmed: "border-[#4a5d3e] bg-[#4a5d3e] text-[#d4c89c]",
   block: "border-yellow-700/50 bg-yellow-900/20 text-yellow-200/90",
   event: "border-blue-700/50 bg-blue-900/20 text-blue-200/90",
-  past: "border-[#333F48]/30 bg-[#222b33]/40 text-[#D6D2C4]/40",
+  past: "border-[#4a5d3e]/30 bg-[#2a3624]/40 text-[#d4c89c]/40",
 };
 
 function rangesOverlap(
@@ -82,7 +82,7 @@ export default async function CalendarPage({
               className={`rounded px-3 py-1 ${
                 y === year
                   ? "bg-[#BF5700] text-white"
-                  : "border border-[#333F48] text-[#D6D2C4] hover:border-[#D6D2C4]"
+                  : "border border-[#4a5d3e] text-[#d4c89c] hover:border-[#d4c89c]"
               }`}
             >
               {y}
@@ -91,7 +91,7 @@ export default async function CalendarPage({
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-[#D6D2C4]">
+      <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-[#d4c89c]">
         <Legend label="Available" cls={STATUS_STYLES.available} />
         <Legend label="Pending request" cls={STATUS_STYLES.requested} />
         <Legend label="Confirmed (booked)" cls={STATUS_STYLES.confirmed} />
@@ -160,7 +160,7 @@ export default async function CalendarPage({
                 winner.kind !== "rental" &&
                 (winner.week_start_friday !== fridayStr ||
                   winner.end_date !== nextFriday) && (
-                  <p className="mt-0.5 text-[10px] text-[#D6D2C4]/60">
+                  <p className="mt-0.5 text-[10px] text-[#d4c89c]/60">
                     {formatShort(toUtcDate(winner.week_start_friday))} –{" "}
                     {formatShort(toUtcDate(winner.end_date))}
                   </p>

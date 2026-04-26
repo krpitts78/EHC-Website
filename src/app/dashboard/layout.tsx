@@ -14,7 +14,7 @@ export default async function DashboardLayout({
   if (!user) redirect("/login");
 
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[#1a2128]">
+    <div className="flex min-h-full flex-1 flex-col bg-[#1d2a1d]">
       <PortalNav />
       {children}
     </div>
