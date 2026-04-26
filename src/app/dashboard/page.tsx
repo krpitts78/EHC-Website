@@ -72,6 +72,15 @@ export default async function DashboardPage() {
           </p>
         </Link>
         <Link
+          href="/dashboard/p/payment-instructions"
+          className="rounded-lg border border-[#a8a395] bg-white p-6 hover:border-[#BF5700]"
+        >
+          <h2 className="text-lg font-medium text-[#1a2128]">Payment instructions</h2>
+          <p className="mt-1 text-sm text-[#5a6470]">
+            How to pay dues, beach house fees, and event fees by Zelle or check.
+          </p>
+        </Link>
+        <Link
           href="/dashboard/profile"
           className="rounded-lg border border-[#a8a395] bg-white p-6 hover:border-[#BF5700]"
         >
