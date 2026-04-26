@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -16,9 +17,21 @@ export default function Home() {
       <p className="mt-3 text-[#D6D2C4] text-center max-w-xl">
         A Texas non-profit hunting and fishing club, founded August 11, 1975.
       </p>
-      <p className="mt-12 text-sm text-[#D6D2C4]/70">
-        Member portal coming soon.
-      </p>
+
+      <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+        <Link
+          href="/login"
+          className="rounded bg-[#BF5700] px-6 py-2.5 font-medium text-white hover:bg-[#7a3500]"
+        >
+          Member login
+        </Link>
+        <Link
+          href="/signup"
+          className="rounded border border-[#D6D2C4] px-6 py-2.5 font-medium text-[#D6D2C4] hover:bg-[#D6D2C4] hover:text-[#1a2128]"
+        >
+          New member signup
+        </Link>
+      </div>
     </main>
   );
 }

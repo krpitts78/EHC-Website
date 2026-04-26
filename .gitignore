@@ -37,6 +37,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# source documents (uploaded to Supabase Storage instead of committed)
+/_docs_source/*
+!/_docs_source/.gitkeep
+
+# scratch / secrets
+/passwords.txt
+/*.local.txt
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
