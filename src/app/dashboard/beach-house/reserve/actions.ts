@@ -37,6 +37,25 @@ export async function createReservationAction(
         "Reservations open one year before the start date. This week is too far out.",
     };
 
+  // 6 AM Houston-time gate on the exact opening day. The opening moment is
+  // 6:00 AM Central on the date exactly 365 days before the Friday.
+  if (friday.getTime() === oneYearOut.getTime()) {
+    const houstonHour = parseInt(
+      new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/Chicago",
+        hour: "numeric",
+        hour12: false,
+      }).format(new Date()),
+      10,
+    );
+    if (houstonHour < 6) {
+      return {
+        error:
+          "Reservations for this week open at 6:00 AM Central. Try again then.",
+      };
+    }
+  }
+
   const isPrime = isPrimeFriday(friday);
   const rateCents = rateCentsFor(isPrime);
 
@@ -56,6 +75,20 @@ export async function createReservationAction(
     return {
       error:
         "Prime weeks are reservable only by members on the prime-time list. Contact the VP Beach House.",
+    };
+
+  // Pending-request limit: only one outstanding pending request per member.
+  const { data: pending } = await supabase
+    .from("reservations")
+    .select("id")
+    .eq("member_id", member.id)
+    .eq("kind", "rental")
+    .eq("status", "requested")
+    .limit(1);
+  if (pending && pending.length > 0)
+    return {
+      error:
+        "You already have a pending reservation request. Wait for it to be approved or cancel it before requesting another.",
     };
 
   const { data: existing } = await supabase

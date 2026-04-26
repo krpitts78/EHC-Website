@@ -21,6 +21,8 @@ type ReservationRow = {
   cleaning_fee_cents: number;
   deposit_paid_at: string | null;
   balance_paid_at: string | null;
+  confirmed_at: string | null;
+  cancelled_at: string | null;
   notes: string | null;
   member: {
     first_name: string;
@@ -35,12 +37,34 @@ function dollars(cents: number): string {
   return `$${(cents / 100).toLocaleString()}`;
 }
 
+const DAY_MS = 86_400_000;
+
+function daysSince(iso: string | null): number | null {
+  if (!iso) return null;
+  return Math.floor((Date.now() - new Date(iso).getTime()) / DAY_MS);
+}
+
+function isDepositOverdue(r: ReservationRow): boolean {
+  if (r.status !== "confirmed") return false;
+  if (r.deposit_paid_at) return false;
+  const days = daysSince(r.confirmed_at);
+  return days !== null && days > 14;
+}
+
+function isLateCancellation(r: ReservationRow): boolean {
+  if (r.status !== "cancelled") return false;
+  if (!r.cancelled_at) return false;
+  const stay = new Date(r.week_start_friday + "T00:00:00Z").getTime();
+  const cancelled = new Date(r.cancelled_at).getTime();
+  return stay - cancelled < 28 * DAY_MS;
+}
+
 export default async function AdminReservationsPage() {
   const supabase = await createClient();
   const result = await supabase
     .from("reservations")
     .select(
-      "id, week_start_friday, is_prime, status, rate_cents, cleaning_fee_cents, deposit_paid_at, balance_paid_at, notes, member:member_id ( first_name, last_name, member_number, email, phone_cell )",
+      "id, week_start_friday, is_prime, status, rate_cents, cleaning_fee_cents, deposit_paid_at, balance_paid_at, confirmed_at, cancelled_at, notes, member:member_id ( first_name, last_name, member_number, email, phone_cell )",
     )
     .order("week_start_friday", { ascending: true });
   const reservations = (result.data ?? []) as unknown as ReservationRow[];
@@ -50,10 +74,45 @@ export default async function AdminReservationsPage() {
   const past = reservations.filter(
     (r) => r.status === "cancelled" || r.status === "completed",
   );
+  const overdueDeposits = confirmed.filter(isDepositOverdue);
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-12 text-[#1a2128]">
       <h1 className="text-3xl font-semibold">Reservations</h1>
+
+      {overdueDeposits.length > 0 && (
+        <section className="mt-6 rounded-lg border border-amber-700/50 bg-amber-50 p-4">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-amber-900">
+            Deposit overdue ({overdueDeposits.length})
+          </h2>
+          <p className="mt-1 text-xs text-amber-900/80">
+            Confirmed more than 14 days ago and the $100 deposit hasn&apos;t
+            been recorded. Reach out to the member.
+          </p>
+          <ul className="mt-3 space-y-1 text-sm text-amber-900">
+            {overdueDeposits.map((r) => (
+              <li key={r.id}>
+                <strong>
+                  {r.member?.first_name} {r.member?.last_name}
+                </strong>{" "}
+                · {formatWeekRange(toUtcDate(r.week_start_friday))} · confirmed{" "}
+                {daysSince(r.confirmed_at)} days ago
+                {r.member?.email && (
+                  <>
+                    {" · "}
+                    <a
+                      href={`mailto:${r.member.email}`}
+                      className="text-[#BF5700] hover:underline"
+                    >
+                      {r.member.email}
+                    </a>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <Section title={`Pending requests (${pending.length})`}>
         {pending.length === 0 ? (
@@ -178,16 +237,28 @@ function PendingCard({ r }: { r: ReservationRow }) {
 
 function ConfirmedCard({ r }: { r: ReservationRow }) {
   const total = r.rate_cents + r.cleaning_fee_cents;
+  const overdue = isDepositOverdue(r);
   return (
-    <article className="rounded-lg border border-[#a8a395] bg-white p-4">
+    <article
+      className={`rounded-lg border p-4 ${
+        overdue
+          ? "border-amber-600/60 bg-amber-50"
+          : "border-[#a8a395] bg-white"
+      }`}
+    >
       <WeekHeader r={r} />
+      {overdue && (
+        <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-amber-900">
+          Deposit overdue · {daysSince(r.confirmed_at)} days since confirmation
+        </p>
+      )}
       <p className="mt-2 text-sm text-[#5a6470]">
         Total {dollars(total)} ·{" "}
-        <span className={r.deposit_paid_at ? "text-green-300" : "text-amber-300"}>
+        <span className={r.deposit_paid_at ? "text-green-700" : "text-amber-700"}>
           deposit {r.deposit_paid_at ? "paid" : "outstanding"}
         </span>{" "}
         ·{" "}
-        <span className={r.balance_paid_at ? "text-green-300" : "text-amber-300"}>
+        <span className={r.balance_paid_at ? "text-green-700" : "text-amber-700"}>
           balance {r.balance_paid_at ? "paid" : "outstanding"}
         </span>
       </p>
@@ -230,10 +301,22 @@ function ConfirmedCard({ r }: { r: ReservationRow }) {
 }
 
 function PastCard({ r }: { r: ReservationRow }) {
+  const lateCancel = isLateCancellation(r);
   return (
-    <article className="rounded-lg border border-[#a8a395]/60 bg-white/40 p-3 text-sm text-[#5a6470]/80">
+    <article
+      className={`rounded-lg border p-3 text-sm ${
+        lateCancel
+          ? "border-red-700/40 bg-red-50 text-red-900"
+          : "border-[#a8a395]/60 bg-white/40 text-[#5a6470]/80"
+      }`}
+    >
       <WeekHeader r={r} />
-      <p className="mt-1 text-xs text-[#5a6470]/60">
+      {lateCancel && (
+        <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-red-900">
+          Late cancellation · member liable for full rental fee
+        </p>
+      )}
+      <p className="mt-1 text-xs">
         Status: {r.status}
         {r.notes && ` · ${r.notes}`}
       </p>
