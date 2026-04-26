@@ -18,7 +18,7 @@ export async function PortalNav() {
             alt="EHC"
             width={36}
             height={36}
-            className="rounded"
+            className="brightness-0 invert"
           />
           <span className="text-sm font-semibold uppercase tracking-wider text-white">
             Executive Hunting Club

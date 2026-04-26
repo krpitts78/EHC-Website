@@ -18,7 +18,6 @@ export default async function AdminLayout({
   if (!canManageBeachHouse(perm) && !isSiteAdmin(perm)) redirect("/dashboard");
 
   const showBeachHouse = canManageBeachHouse(perm);
-  const showInquiries = isSiteAdmin(perm);
 
   return (
     <>
@@ -40,14 +39,6 @@ export default async function AdminLayout({
                 Prime list
               </Link>
             </>
-          )}
-          {showInquiries && (
-            <Link
-              href="/dashboard/admin/inquiries"
-              className="hover:text-white"
-            >
-              Inquiries
-            </Link>
           )}
         </div>
       </div>

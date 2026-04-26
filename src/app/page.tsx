@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { InquiryForm } from "./InquiryForm";
 
 export default function Home() {
   return (
@@ -11,7 +10,6 @@ export default function Home() {
       <Activities />
       <BeachHouse />
       <HowToJoin />
-      <Inquire />
       <SiteFooter />
     </div>
   );
@@ -22,25 +20,23 @@ function SiteHeader() {
     <header className="sticky top-0 z-20 border-b border-[#4a5d3e]/60 bg-[#141a10]/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/logo.png" alt="EHC" width={40} height={40} />
+          <Image
+            src="/logo.png"
+            alt="EHC"
+            width={40}
+            height={40}
+            className="brightness-0 invert"
+          />
           <span className="font-[family-name:var(--font-display)] text-base text-[#f4ecd5] sm:text-lg">
             Executive Hunting Club
           </span>
         </Link>
-        <div className="flex items-center gap-2 text-sm">
-          <a
-            href="#inquire"
-            className="hidden rounded border border-[#d4c89c]/30 px-3 py-1.5 text-[#d4c89c] hover:border-[#d4c89c] hover:text-white sm:inline-block"
-          >
-            Inquire
-          </a>
-          <Link
-            href="/login"
-            className="rounded bg-[#BF5700] px-4 py-1.5 font-medium text-white hover:bg-[#7a3500]"
-          >
-            Member login
-          </Link>
-        </div>
+        <Link
+          href="/login"
+          className="rounded bg-[#BF5700] px-4 py-1.5 text-sm font-medium text-white hover:bg-[#7a3500]"
+        >
+          Member login
+        </Link>
       </div>
     </header>
   );
@@ -71,6 +67,7 @@ function Hero() {
           width={140}
           height={140}
           priority
+          className="brightness-0 invert"
         />
 
         <h1 className="mt-8 font-[family-name:var(--font-display)] text-5xl font-semibold tracking-tight text-white sm:text-6xl">
@@ -85,20 +82,12 @@ function Hero() {
           Houston, Texas &nbsp;·&nbsp; Charter No.&nbsp;366138
         </p>
 
-        <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-          <a
-            href="#inquire"
-            className="rounded bg-[#BF5700] px-6 py-3 font-medium text-white shadow-lg hover:bg-[#7a3500]"
-          >
-            Inquire about membership
-          </a>
-          <Link
-            href="/login"
-            className="rounded border border-[#d4c89c]/40 px-6 py-3 font-medium text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
-          >
-            Member login
-          </Link>
-        </div>
+        <Link
+          href="/login"
+          className="mt-12 rounded border border-[#d4c89c]/50 px-6 py-3 font-medium text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
+        >
+          Member login
+        </Link>
       </div>
     </section>
   );
@@ -248,7 +237,7 @@ function HowToJoin() {
               key={s.n}
               className="rounded-lg border border-[#4a5d3e] bg-[#1d2a1d] p-6"
             >
-              <span className="font-[family-name:var(--font-display)] text-3xl text-[#F8971F]">
+              <span className="font-[family-name:var(--font-display)] text-3xl text-[#d4c89c]">
                 {s.n}
               </span>
               <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl font-semibold">
@@ -264,23 +253,6 @@ function HowToJoin() {
           Annual dues are currently <span className="text-white">$250</span> for
           regular members.
         </p>
-      </div>
-    </section>
-  );
-}
-
-function Inquire() {
-  return (
-    <section id="inquire" className="bg-[#f4ecd5] text-[#1d2a1d]">
-      <div className="mx-auto max-w-2xl px-6 py-20 md:py-24">
-        <SectionHeading kicker="Get in touch" title="Membership inquiry" />
-        <p className="mt-4 text-lg text-[#3a3826]">
-          Interested in joining? Tell us a little about yourself and we&apos;ll
-          be in touch.
-        </p>
-        <div className="mt-10 rounded-lg border border-[#d4c89c] bg-white p-8 shadow-sm">
-          <InquiryForm />
-        </div>
       </div>
     </section>
   );
@@ -311,11 +283,11 @@ function SiteFooter() {
 function Divider() {
   return (
     <div className="my-6 flex items-center gap-3">
-      <span className="h-px w-12 bg-[#BF5700]" />
-      <span aria-hidden className="text-[#BF5700]">
+      <span className="h-px w-12 bg-[#d4c89c]/60" />
+      <span aria-hidden className="text-[#d4c89c]">
         ✦
       </span>
-      <span className="h-px w-12 bg-[#BF5700]" />
+      <span className="h-px w-12 bg-[#d4c89c]/60" />
     </div>
   );
 }
@@ -360,7 +332,7 @@ function Activity({
 }) {
   return (
     <article className="group rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-6 transition-colors hover:border-[#BF5700]">
-      <span className="font-[family-name:var(--font-display)] text-3xl text-[#F8971F]">
+      <span className="font-[family-name:var(--font-display)] text-3xl text-[#d4c89c]">
         {number}
       </span>
       <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
