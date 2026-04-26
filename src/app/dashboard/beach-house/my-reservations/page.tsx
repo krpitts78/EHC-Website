@@ -18,10 +18,10 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 const STATUS_BADGE: Record<string, string> = {
-  requested: "bg-[#BF5700]/20 text-[#BF5700]",
-  confirmed: "bg-green-700/30 text-green-300",
-  cancelled: "bg-[#5a6470] text-[#5a6470]/70",
-  completed: "bg-[#5a6470] text-[#5a6470]",
+  requested: "bg-[#BF5700] text-white",
+  confirmed: "bg-green-700 text-white",
+  cancelled: "bg-[#5a6470] text-white",
+  completed: "bg-[#5a6470] text-white",
 };
 
 function dollars(cents: number): string {
