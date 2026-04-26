@@ -4,173 +4,391 @@ import { InquiryForm } from "./InquiryForm";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col bg-[#1d2a1d] text-white">
-      <header className="border-b border-[#4a5d3e]/60">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="EHC" width={48} height={48} />
-            <span className="text-sm font-semibold uppercase tracking-wider">
-              Executive Hunting Club
-            </span>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <a href="#inquire" className="hidden text-[#d4c89c] hover:text-white sm:inline">
-              Membership inquiry
-            </a>
-            <Link
-              href="/login"
-              className="rounded bg-[#BF5700] px-4 py-2 font-medium text-white hover:bg-[#7a3500]"
-            >
-              Member login
-            </Link>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero */}
-      <section className="border-b border-[#4a5d3e]/60">
-        <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-20 text-center">
-          <Image
-            src="/logo.png"
-            alt="Executive Hunting Club"
-            width={150}
-            height={150}
-            priority
-          />
-          <h1 className="mt-8 text-4xl font-semibold tracking-tight sm:text-5xl">
-            Executive Hunting Club
-          </h1>
-          <p className="mt-3 text-lg text-[#d4c89c]">
-            A Texas non-profit hunting and fishing club, founded 1975.
-          </p>
-          <p className="mt-1 text-sm text-[#d4c89c]/70">
-            Charter No.&nbsp;366138 &middot; Houston, Texas
-          </p>
-        </div>
-      </section>
-
-      {/* About */}
-      <section className="border-b border-[#4a5d3e]/60">
-        <div className="mx-auto max-w-3xl px-6 py-16">
-          <h2 className="text-2xl font-semibold">About the Club</h2>
-          <div className="mt-6 space-y-4 text-[#d4c89c]">
-            <p>
-              The Executive Hunting Club traces its roots to an organized
-              hunting trip to Laredo, Texas in September 1973. Charter members
-              paid their first year&apos;s dues in early 1974 and were
-              instrumental in formalizing the club shortly afterward.
-            </p>
-            <p>
-              For 50+ years EHC has been a fellowship of sportsmen bound
-              together by hunting, fishing, and the outdoors. Membership is by
-              sponsor proposal — every member is brought in by another, and the
-              Board reviews each candidate.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Activities */}
-      <section className="border-b border-[#4a5d3e]/60 bg-[#2a3624]/40">
-        <div className="mx-auto max-w-5xl px-6 py-16">
-          <h2 className="text-2xl font-semibold">What members do</h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            <Card
-              title="Annual Fall Dove Hunt"
-              body="A long-running tradition every October, members and their guests gather for a weekend of dove hunting and fellowship."
-            />
-            <Card
-              title="Annual Spring Fling"
-              body="The club&apos;s spring trip — fishing, fellowship, and the official kickoff to the warm-weather season."
-            />
-            <Card
-              title="Beach House on Bolivar"
-              body="Members can reserve weeks year-round at the club&apos;s beach house on Tropicana Drive, just past the Galveston Ferry."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Beach House detail */}
-      <section className="border-b border-[#4a5d3e]/60">
-        <div className="mx-auto max-w-3xl px-6 py-16">
-          <h2 className="text-2xl font-semibold">The Beach House</h2>
-          <div className="mt-6 space-y-4 text-[#d4c89c]">
-            <p>
-              The EHC owns a member-only beach house at{" "}
-              <span className="text-white">2940 Tropicana Drive</span> in the
-              Ramada Beach Subdivision on Bolivar Peninsula, about 13 miles
-              past the Galveston Ferry on Highway 87.
-            </p>
-            <p>
-              Members reserve Friday-to-Friday weeks at $1,000 per prime week
-              (May through Labor Day) and $600 per non-prime week, plus a $125
-              housekeeping fee. Bookings open one year in advance.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Membership */}
-      <section className="border-b border-[#4a5d3e]/60 bg-[#2a3624]/40">
-        <div className="mx-auto max-w-3xl px-6 py-16">
-          <h2 className="text-2xl font-semibold">Membership</h2>
-          <div className="mt-6 space-y-4 text-[#d4c89c]">
-            <p>
-              Per the club&apos;s bylaws, any adult is eligible for membership
-              provided they are proposed by one member and seconded by another.
-              The proposal goes to the Secretary of the Board of Trustees, who
-              presents the candidate at the next board meeting. A two-thirds
-              vote of the Board elects to membership.
-            </p>
-            <p>
-              Annual dues are currently <span className="text-white">$250</span>{" "}
-              for regular members. New members pay the initiation fee, if any,
-              and the first year&apos;s dues upon election.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Inquiry */}
-      <section id="inquire" className="border-b border-[#4a5d3e]/60">
-        <div className="mx-auto max-w-2xl px-6 py-16">
-          <h2 className="text-2xl font-semibold">Membership inquiry</h2>
-          <p className="mt-2 text-[#d4c89c]">
-            Interested in joining? Tell us a bit about yourself. A board member
-            will be in touch.
-          </p>
-          <div className="mt-8">
-            <InquiryForm />
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-[#141a10]">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-10 text-sm text-[#d4c89c]/70 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            Executive Hunting Club &middot; Houston, Texas
-            <br />
-            Charter No.&nbsp;366138 &middot; Founded August 11, 1975
-          </div>
-          <Link href="/login" className="text-[#F8971F] hover:text-white">
-            Member login →
-          </Link>
-        </div>
-      </footer>
+    <div className="flex flex-1 flex-col bg-[#1d2a1d]">
+      <SiteHeader />
+      <Hero />
+      <About />
+      <Activities />
+      <BeachHouse />
+      <HowToJoin />
+      <Inquire />
+      <SiteFooter />
     </div>
   );
 }
 
-function Card({ title, body }: { title: string; body: string }) {
+function SiteHeader() {
   return (
-    <article className="rounded-lg border border-[#4a5d3e] bg-[#1d2a1d] p-6">
-      <h3 className="text-lg font-medium text-white">{title}</h3>
+    <header className="sticky top-0 z-20 border-b border-[#4a5d3e]/60 bg-[#141a10]/95 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+        <Link href="/" className="flex items-center gap-3">
+          <Image src="/logo.png" alt="EHC" width={40} height={40} />
+          <span className="font-[family-name:var(--font-display)] text-base text-[#f4ecd5] sm:text-lg">
+            Executive Hunting Club
+          </span>
+        </Link>
+        <div className="flex items-center gap-2 text-sm">
+          <a
+            href="#inquire"
+            className="hidden rounded border border-[#d4c89c]/30 px-3 py-1.5 text-[#d4c89c] hover:border-[#d4c89c] hover:text-white sm:inline-block"
+          >
+            Inquire
+          </a>
+          <Link
+            href="/login"
+            className="rounded bg-[#BF5700] px-4 py-1.5 font-medium text-white hover:bg-[#7a3500]"
+          >
+            Member login
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="relative overflow-hidden border-b border-[#4a5d3e]/60 bg-[#1d2a1d]">
+      {/* Faint topographic-feel SVG background */}
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.06]"
+        viewBox="0 0 800 600"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1" fill="#d4c89c" />
+          </pattern>
+        </defs>
+        <rect width="800" height="600" fill="url(#dots)" />
+      </svg>
+
+      <div className="relative mx-auto flex max-w-4xl flex-col items-center px-6 py-24 text-center sm:py-32">
+        <Image
+          src="/logo.png"
+          alt="Executive Hunting Club"
+          width={140}
+          height={140}
+          priority
+        />
+
+        <h1 className="mt-8 font-[family-name:var(--font-display)] text-5xl font-semibold tracking-tight text-white sm:text-6xl">
+          Executive Hunting Club
+        </h1>
+        <Divider />
+        <p className="font-[family-name:var(--font-display)] text-xl italic text-[#d4c89c] sm:text-2xl">
+          Hunting, fishing, and fellowship since 1973.
+        </p>
+
+        <p className="mt-3 text-sm uppercase tracking-[0.25em] text-[#d4c89c]/60">
+          Houston, Texas &nbsp;·&nbsp; Charter No.&nbsp;366138
+        </p>
+
+        <div className="mt-12 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="#inquire"
+            className="rounded bg-[#BF5700] px-6 py-3 font-medium text-white shadow-lg hover:bg-[#7a3500]"
+          >
+            Inquire about membership
+          </a>
+          <Link
+            href="/login"
+            className="rounded border border-[#d4c89c]/40 px-6 py-3 font-medium text-[#d4c89c] hover:border-[#d4c89c] hover:text-white"
+          >
+            Member login
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section className="bg-[#f4ecd5] text-[#1d2a1d]">
+      <div className="mx-auto grid max-w-5xl gap-10 px-6 py-20 md:grid-cols-[2fr_1fr] md:py-24">
+        <div>
+          <SectionHeading kicker="About the Club" title="Five decades of fellowship in the field" />
+          <div className="mt-8 space-y-5 text-lg leading-relaxed text-[#3a3826]">
+            <p>
+              The Executive Hunting Club traces its roots to an organized
+              hunting trip to Laredo, Texas in September 1973. Charter members
+              paid their first year&apos;s dues in early 1974 and formalized
+              the club shortly afterward.
+            </p>
+            <p>
+              For 50+ years EHC has been a fellowship of sportsmen bound
+              together by hunting, fishing, and the outdoors. Membership is by
+              sponsor proposal — every member is brought in by another, and
+              the Board of Trustees reviews each candidate.
+            </p>
+          </div>
+        </div>
+
+        <aside className="rounded-lg border-l-4 border-[#BF5700] bg-white/60 p-6 shadow-sm">
+          <p className="font-[family-name:var(--font-display)] text-xl italic leading-relaxed text-[#1d2a1d]">
+            &ldquo;Charter members participated in the organized hunting trip
+            to Laredo, Texas in September of 1973 … and were instrumental in
+            the formation and structure of The Executive Hunting Club.&rdquo;
+          </p>
+          <p className="mt-3 text-xs uppercase tracking-wider text-[#7a3500]">
+            — Bylaws, Article&nbsp;I
+          </p>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function Activities() {
+  return (
+    <section className="border-t border-[#4a5d3e]/60 bg-[#1d2a1d] text-white">
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
+        <div className="text-center">
+          <SectionHeading
+            dark
+            kicker="What members do"
+            title="Trips, traditions, and time at the coast"
+          />
+        </div>
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <Activity
+            number="01"
+            title="Annual Fall Dove Hunt"
+            body="A long-running tradition every October — members and their guests gather for a weekend of dove hunting and camaraderie."
+          />
+          <Activity
+            number="02"
+            title="Annual Spring Fling"
+            body="The club's spring trip — fishing, fellowship, and the official kickoff to the warm-weather season."
+          />
+          <Activity
+            number="03"
+            title="Beach House on Bolivar"
+            body="A member-only beach house on the Bolivar Peninsula, available year-round Friday-to-Friday."
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BeachHouse() {
+  return (
+    <section className="bg-[#f4ecd5] text-[#1d2a1d]">
+      <div className="mx-auto grid max-w-5xl gap-12 px-6 py-20 md:grid-cols-2 md:py-24">
+        <div>
+          <SectionHeading kicker="The Beach House" title="On the Bolivar Peninsula" />
+          <div className="mt-8 space-y-4 text-lg leading-relaxed text-[#3a3826]">
+            <p>
+              The EHC owns a member-only beach house at{" "}
+              <strong>2940 Tropicana Drive</strong> in the Ramada Beach
+              Subdivision on Bolivar Peninsula, about 13 miles past the
+              Galveston Ferry on Highway 87.
+            </p>
+            <p>
+              Members reserve Friday-to-Friday weeks, with bookings opening
+              one full year in advance. Prime weeks run May through Labor
+              Day; non-prime fills the rest of the year.
+            </p>
+          </div>
+        </div>
+
+        <aside className="rounded-lg border border-[#d4c89c] bg-white shadow-sm">
+          <h3 className="border-b border-[#d4c89c] px-6 py-4 font-[family-name:var(--font-display)] text-lg font-semibold">
+            Member rates
+          </h3>
+          <dl className="divide-y divide-[#d4c89c]/60 px-6 py-2">
+            <Rate label="Prime week" sub="Friday before first full week of May → Friday after Labor Day" value="$1,000" />
+            <Rate label="Non-prime week" sub="The rest of the calendar year" value="$600" />
+            <Rate label="Housekeeping fee" sub="Paid to the on-site housekeeper" value="$125" />
+            <Rate label="Deposit" sub="Due within 2 weeks to hold the booking" value="$100" />
+          </dl>
+          <p className="border-t border-[#d4c89c] px-6 py-3 text-xs uppercase tracking-wider text-[#7a3500]">
+            Members only · Sign in to reserve
+          </p>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function HowToJoin() {
+  const steps = [
+    {
+      n: "01",
+      title: "Find a sponsor",
+      body: "Per the bylaws, every prospective member must be proposed by one current member and seconded by another. Reach out to whoever you know in the club.",
+    },
+    {
+      n: "02",
+      title: "Submit your inquiry",
+      body: "Use the form below — even if you don't yet have a sponsor. The Board will be in touch and can help connect you.",
+    },
+    {
+      n: "03",
+      title: "Board review",
+      body: "The Board of Trustees reviews each candidate. Election to membership requires a two-thirds vote and payment of dues.",
+    },
+  ];
+  return (
+    <section className="border-t border-[#4a5d3e]/60 bg-[#141a10] text-white">
+      <div className="mx-auto max-w-5xl px-6 py-20 md:py-24">
+        <div className="text-center">
+          <SectionHeading
+            dark
+            kicker="Joining the Club"
+            title="How membership works"
+          />
+        </div>
+        <ol className="mt-14 grid gap-6 md:grid-cols-3">
+          {steps.map((s) => (
+            <li
+              key={s.n}
+              className="rounded-lg border border-[#4a5d3e] bg-[#1d2a1d] p-6"
+            >
+              <span className="font-[family-name:var(--font-display)] text-3xl text-[#F8971F]">
+                {s.n}
+              </span>
+              <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl font-semibold">
+                {s.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#d4c89c]">
+                {s.body}
+              </p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-12 text-center text-sm text-[#d4c89c]/70">
+          Annual dues are currently <span className="text-white">$250</span> for
+          regular members.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function Inquire() {
+  return (
+    <section id="inquire" className="bg-[#f4ecd5] text-[#1d2a1d]">
+      <div className="mx-auto max-w-2xl px-6 py-20 md:py-24">
+        <SectionHeading kicker="Get in touch" title="Membership inquiry" />
+        <p className="mt-4 text-lg text-[#3a3826]">
+          Interested in joining? Tell us a little about yourself and we&apos;ll
+          be in touch.
+        </p>
+        <div className="mt-10 rounded-lg border border-[#d4c89c] bg-white p-8 shadow-sm">
+          <InquiryForm />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="border-t border-[#4a5d3e]/60 bg-[#141a10]">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-10 text-sm text-[#d4c89c]/70 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="font-[family-name:var(--font-display)] text-base text-[#f4ecd5]">
+            Executive Hunting Club
+          </p>
+          <p className="mt-1">
+            Houston, Texas · Charter No.&nbsp;366138 · Founded August 11, 1975
+          </p>
+        </div>
+        <Link href="/login" className="text-[#F8971F] hover:text-white">
+          Member login →
+        </Link>
+      </div>
+    </footer>
+  );
+}
+
+/* ---------- shared bits ---------- */
+
+function Divider() {
+  return (
+    <div className="my-6 flex items-center gap-3">
+      <span className="h-px w-12 bg-[#BF5700]" />
+      <span aria-hidden className="text-[#BF5700]">
+        ✦
+      </span>
+      <span className="h-px w-12 bg-[#BF5700]" />
+    </div>
+  );
+}
+
+function SectionHeading({
+  kicker,
+  title,
+  dark,
+}: {
+  kicker: string;
+  title: string;
+  dark?: boolean;
+}) {
+  return (
+    <>
       <p
-        className="mt-2 text-sm text-[#d4c89c]"
-        dangerouslySetInnerHTML={{ __html: body }}
-      />
+        className={`text-xs font-semibold uppercase tracking-[0.25em] ${
+          dark ? "text-[#F8971F]" : "text-[#7a3500]"
+        }`}
+      >
+        {kicker}
+      </p>
+      <h2
+        className={`mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold sm:text-4xl ${
+          dark ? "text-white" : "text-[#1d2a1d]"
+        }`}
+      >
+        {title}
+      </h2>
+    </>
+  );
+}
+
+function Activity({
+  number,
+  title,
+  body,
+}: {
+  number: string;
+  title: string;
+  body: string;
+}) {
+  return (
+    <article className="group rounded-lg border border-[#4a5d3e] bg-[#2a3624] p-6 transition-colors hover:border-[#BF5700]">
+      <span className="font-[family-name:var(--font-display)] text-3xl text-[#F8971F]">
+        {number}
+      </span>
+      <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
+        {title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-[#d4c89c]">{body}</p>
     </article>
+  );
+}
+
+function Rate({
+  label,
+  sub,
+  value,
+}: {
+  label: string;
+  sub: string;
+  value: string;
+}) {
+  return (
+    <div className="flex items-baseline justify-between gap-4 py-3">
+      <div>
+        <p className="font-medium">{label}</p>
+        <p className="text-xs text-[#7a3500]">{sub}</p>
+      </div>
+      <p className="font-[family-name:var(--font-display)] text-xl font-semibold text-[#BF5700]">
+        {value}
+      </p>
+    </div>
   );
 }

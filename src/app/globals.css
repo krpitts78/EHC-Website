@@ -22,6 +22,11 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-playfair);
+
+  /* Light surfaces for the public marketing pages */
+  --color-parchment: #f4ecd5;
+  --color-parchment-dark: #e8dcb6;
 }
 
 body {
