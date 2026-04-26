@@ -55,6 +55,15 @@ export default function BeachHousePage() {
             Utilities, vendors, housekeeper, WiFi.
           </p>
         </Link>
+        <Link
+          href="/dashboard/p/payment-instructions"
+          className="rounded-lg border border-[#a8a395] bg-white p-5 hover:border-[#BF5700]"
+        >
+          <h2 className="text-base font-medium text-[#1a2128]">Payment instructions</h2>
+          <p className="mt-1 text-sm text-[#5a6470]/80">
+            How to send your deposit and balance via Zelle or check.
+          </p>
+        </Link>
       </div>
     </main>
   );
