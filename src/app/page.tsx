@@ -249,7 +249,11 @@ function SiteFooter() {
             Executive Hunting Club
           </p>
           <p className="mt-1">
-            Houston, Texas · Charter No.&nbsp;366138 · Founded August 11, 1975
+            Houston, Texas · Charter No.&nbsp;366138{" "}
+            <span aria-hidden className="text-[#BF5700]/80">
+              🤘
+            </span>{" "}
+            · Founded August 11, 1975
           </p>
         </div>
         <Link href="/login" className="text-[#BF5700] hover:text-white">

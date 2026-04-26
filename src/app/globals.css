@@ -31,3 +31,11 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
 }
+
+/* UT easter egg: 🤘 next to member names, hidden until triple-click on logo. */
+.ut-badge {
+  display: none;
+}
+body.ut-revealed .ut-badge {
+  display: inline;
+}

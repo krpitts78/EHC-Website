@@ -17,6 +17,9 @@ export default async function DashboardPage() {
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-12 text-[#1a2128]">
       <h1 className="text-3xl font-semibold">
         Welcome{member ? `, ${member.first_name}` : ""}
+        <span className="ut-badge ml-2" aria-hidden>
+          🤘
+        </span>
       </h1>
       {member && (
         <p className="mt-2 text-[#5a6470]">

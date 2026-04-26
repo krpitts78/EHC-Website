@@ -174,14 +174,18 @@ Helpers in `src/lib/permissions.ts` (`isSiteAdmin`, `canManageBeachHouse`, `getC
 - Markdown source for content pages stays in `scripts/seed-content-pages.mjs` for first run only — once admins start editing, the DB is canonical.
 - Don't reseed data over user edits without confirming first.
 
-## Easter Eggs (UT) — not yet implemented
+## Easter Eggs (UT)
 
-- Type `texas` anywhere on the dashboard → full-screen "HOOK 'EM!" flash
-- Triple-click the EHC logo → reveals 🤘 next to member name + "UT '##" badge if applicable
-- Tiny 🤘 in the public footer next to the charter number
-- Hidden Longhorn silhouette watermark in dashboard corner (~6% opacity)
+All four are live:
 
-Keep these subtle and tasteful — the club site is brown/red/orange-themed and UT touches are accents only.
+- **Type `texas` anywhere on the dashboard** → full-screen burnt-orange "HOOK 'EM!" flash for ~1.5s. Implementation: `EasterEggClient.tsx` listens to `keydown` with a 5-char rolling buffer, ignored when focus is in inputs/textareas.
+- **Triple-click the EHC logo in the portal nav** (within 1.5s) → toggles `localStorage.utReveal`, dispatches a `ut-reveal-changed` event, and `EasterEggClient` toggles `body.ut-revealed`. CSS rule in `globals.css` reveals any `.ut-badge` 🤘 spans (currently next to member name in dashboard greeting; add more elsewhere as needed).
+- **🤘 in the public footer** next to the charter number — always visible (`src/app/page.tsx` SiteFooter).
+- **Longhorn silhouette watermark** at ~6% opacity in the bottom-right of every dashboard page — always visible (`src/app/dashboard/layout.tsx` inline SVG).
+
+The "UT '##" graduation-year badge from the original spec was dropped — we don't track grad year on members. Add a `ut_grad_year` column if you ever want it back.
+
+Keep additions subtle and tasteful — the club site is brown/orange themed and UT touches are accents only.
 
 ## Phase Plan
 
