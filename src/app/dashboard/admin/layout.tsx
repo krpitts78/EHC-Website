@@ -1,27 +1,15 @@
-import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { canManageBeachHouse, getCurrentMemberPerm } from "@/lib/permissions";
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
-
-  const { data: member } = await supabase
-    .from("members")
-    .select("is_admin, board_role")
-    .eq("auth_user_id", user.id)
-    .maybeSingle();
-
-  if (!member?.is_admin && !member?.board_role) {
-    redirect("/dashboard");
-  }
+  const perm = await getCurrentMemberPerm();
+  if (!perm) redirect("/login");
+  if (!canManageBeachHouse(perm)) redirect("/dashboard");
 
   return (
     <>

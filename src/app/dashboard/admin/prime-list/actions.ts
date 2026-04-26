@@ -2,8 +2,12 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
+import { canManageBeachHouse, getCurrentMemberPerm } from "@/lib/permissions";
 
 export async function togglePrimeListAction(formData: FormData) {
+  const perm = await getCurrentMemberPerm();
+  if (!canManageBeachHouse(perm)) return;
+
   const id = String(formData.get("id") ?? "");
   const next = formData.get("next") === "true";
   if (!id) return;

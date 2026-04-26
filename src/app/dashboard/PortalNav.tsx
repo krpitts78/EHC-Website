@@ -1,21 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { canManageBeachHouse, getCurrentMemberPerm } from "@/lib/permissions";
 
 export async function PortalNav() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  let isAdmin = false;
-  if (user) {
-    const { data } = await supabase
-      .from("members")
-      .select("is_admin, board_role")
-      .eq("auth_user_id", user.id)
-      .maybeSingle();
-    isAdmin = !!(data?.is_admin || data?.board_role);
-  }
+  const perm = await getCurrentMemberPerm();
+  const showAdmin = canManageBeachHouse(perm);
   return (
     <header className="sticky top-0 z-10 border-b border-[#333F48] bg-[#1a2128] text-[#D6D2C4]">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
@@ -51,7 +40,7 @@ export async function PortalNav() {
           <Link href="/dashboard/profile" className="hover:text-white">
             Profile
           </Link>
-          {isAdmin && (
+          {showAdmin && (
             <Link
               href="/dashboard/admin/reservations"
               className="text-[#F8971F] hover:text-white"
