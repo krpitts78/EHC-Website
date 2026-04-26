@@ -11,6 +11,24 @@ export default function BeachHousePage() {
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
         <Link
+          href="/dashboard/beach-house/calendar"
+          className="rounded-lg border border-[#333F48] bg-[#222b33] p-5 hover:border-[#BF5700]"
+        >
+          <h2 className="text-base font-medium text-white">Calendar</h2>
+          <p className="mt-1 text-sm text-[#D6D2C4]/80">
+            Browse open weeks and request a reservation.
+          </p>
+        </Link>
+        <Link
+          href="/dashboard/beach-house/my-reservations"
+          className="rounded-lg border border-[#333F48] bg-[#222b33] p-5 hover:border-[#BF5700]"
+        >
+          <h2 className="text-base font-medium text-white">My reservations</h2>
+          <p className="mt-1 text-sm text-[#D6D2C4]/80">
+            Status, payments, and history of your bookings.
+          </p>
+        </Link>
+        <Link
           href="/dashboard/p/beach-house-rules"
           className="rounded-lg border border-[#333F48] bg-[#222b33] p-5 hover:border-[#BF5700]"
         >
@@ -37,12 +55,6 @@ export default function BeachHousePage() {
             Utilities, vendors, housekeeper, WiFi.
           </p>
         </Link>
-        <div className="rounded-lg border border-dashed border-[#333F48] bg-[#222b33]/40 p-5 text-[#D6D2C4]/60">
-          <h2 className="text-base font-medium text-white/80">Calendar</h2>
-          <p className="mt-1 text-sm">
-            Interactive reservation calendar — coming soon.
-          </p>
-        </div>
       </div>
     </main>
   );
