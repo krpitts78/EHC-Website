@@ -126,6 +126,7 @@ export function DirectoryList({
   everyone: DirectoryMember[];
 }) {
   const [query, setQuery] = useState("");
+  const [scope, setScope] = useState<"all" | "board">("all");
 
   const q = query.trim().toLowerCase();
   const filtered = useMemo(() => {
@@ -136,17 +137,46 @@ export function DirectoryList({
     };
   }, [q, board, everyone]);
 
+  const showBoard = scope === "all" || scope === "board";
+  const showEveryone = scope === "all";
+
   return (
     <div className="mt-6">
-      <input
-        type="search"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search by name, city, member #..."
-        className="w-full max-w-md rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-sm text-white placeholder-[#D6D2C4]/50 focus:border-[#BF5700] focus:outline-none"
-      />
+      <div className="flex flex-wrap items-center gap-3">
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search by name, city, member #..."
+          className="w-full max-w-md rounded border border-[#333F48] bg-[#222b33] px-3 py-2 text-sm text-white placeholder-[#D6D2C4]/50 focus:border-[#BF5700] focus:outline-none"
+        />
+        <div className="inline-flex rounded border border-[#333F48] bg-[#222b33] p-0.5 text-sm">
+          <button
+            type="button"
+            onClick={() => setScope("all")}
+            className={`rounded px-3 py-1 ${
+              scope === "all"
+                ? "bg-[#BF5700] text-white"
+                : "text-[#D6D2C4] hover:text-white"
+            }`}
+          >
+            All
+          </button>
+          <button
+            type="button"
+            onClick={() => setScope("board")}
+            className={`rounded px-3 py-1 ${
+              scope === "board"
+                ? "bg-[#BF5700] text-white"
+                : "text-[#D6D2C4] hover:text-white"
+            }`}
+          >
+            Board only
+          </button>
+        </div>
+      </div>
 
-      {filtered.board.length > 0 && (
+      {showBoard && filtered.board.length > 0 && (
         <section className="mt-8">
           <h2 className="text-lg font-semibold text-[#D6D2C4]">
             Board of Directors
@@ -159,18 +189,24 @@ export function DirectoryList({
         </section>
       )}
 
-      <section className="mt-10">
-        <h2 className="text-lg font-semibold text-[#D6D2C4]">All Members</h2>
-        {filtered.everyone.length === 0 ? (
-          <p className="mt-3 text-sm text-[#D6D2C4]/70">No matches.</p>
-        ) : (
-          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.everyone.map((m) => (
-              <MemberCard key={m.id} m={m} />
-            ))}
-          </div>
-        )}
-      </section>
+      {showEveryone && (
+        <section className="mt-10">
+          <h2 className="text-lg font-semibold text-[#D6D2C4]">All Members</h2>
+          {filtered.everyone.length === 0 ? (
+            <p className="mt-3 text-sm text-[#D6D2C4]/70">No matches.</p>
+          ) : (
+            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {filtered.everyone.map((m) => (
+                <MemberCard key={m.id} m={m} />
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      {scope === "board" && filtered.board.length === 0 && (
+        <p className="mt-8 text-sm text-[#D6D2C4]/70">No board matches.</p>
+      )}
     </div>
   );
 }
