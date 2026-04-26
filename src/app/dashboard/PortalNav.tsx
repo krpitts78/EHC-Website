@@ -25,6 +25,9 @@ export function PortalNav() {
           <Link href="/dashboard/directory" className="hover:text-white">
             Directory
           </Link>
+          <Link href="/dashboard/profile" className="hover:text-white">
+            Profile
+          </Link>
           <form action="/auth/signout" method="post">
             <button
               type="submit"

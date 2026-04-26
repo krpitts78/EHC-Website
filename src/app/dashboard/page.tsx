@@ -44,6 +44,15 @@ export default async function DashboardPage() {
             Browse all members and the current board.
           </p>
         </Link>
+        <Link
+          href="/dashboard/profile"
+          className="rounded-lg border border-[#333F48] bg-[#222b33] p-6 hover:border-[#BF5700]"
+        >
+          <h2 className="text-lg font-medium text-white">Your profile</h2>
+          <p className="mt-1 text-sm text-[#D6D2C4]">
+            Update your contact info, spouse, and address.
+          </p>
+        </Link>
       </div>
     </main>
   );
