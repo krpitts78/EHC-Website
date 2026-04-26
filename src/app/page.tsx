@@ -166,38 +166,24 @@ function Activities() {
 function BeachHouse() {
   return (
     <section className="bg-[#f4ecd5] text-[#1d2a1d]">
-      <div className="mx-auto grid max-w-5xl gap-12 px-6 py-20 md:grid-cols-2 md:py-24">
-        <div>
-          <SectionHeading kicker="The Beach House" title="On the Bolivar Peninsula" />
-          <div className="mt-8 space-y-4 text-lg leading-relaxed text-[#3a3826]">
-            <p>
-              The EHC owns a member-only beach house at{" "}
-              <strong>2940 Tropicana Drive</strong> in the Ramada Beach
-              Subdivision on Bolivar Peninsula, about 13 miles past the
-              Galveston Ferry on Highway 87.
-            </p>
-            <p>
-              Members reserve Friday-to-Friday weeks, with bookings opening
-              one full year in advance. Prime weeks run May through Labor
-              Day; non-prime fills the rest of the year.
-            </p>
-          </div>
-        </div>
-
-        <aside className="rounded-lg border border-[#d4c89c] bg-white shadow-sm">
-          <h3 className="border-b border-[#d4c89c] px-6 py-4 font-[family-name:var(--font-display)] text-lg font-semibold">
-            Member rates
-          </h3>
-          <dl className="divide-y divide-[#d4c89c]/60 px-6 py-2">
-            <Rate label="Prime week" sub="Friday before first full week of May → Friday after Labor Day" value="$1,000" />
-            <Rate label="Non-prime week" sub="The rest of the calendar year" value="$600" />
-            <Rate label="Housekeeping fee" sub="Paid to the on-site housekeeper" value="$125" />
-            <Rate label="Deposit" sub="Due within 2 weeks to hold the booking" value="$100" />
-          </dl>
-          <p className="border-t border-[#d4c89c] px-6 py-3 text-xs uppercase tracking-wider text-[#7a3500]">
-            Members only · Sign in to reserve
+      <div className="mx-auto max-w-3xl px-6 py-20 md:py-24">
+        <SectionHeading kicker="The Beach House" title="On the Bolivar Peninsula" />
+        <div className="mt-8 space-y-5 text-lg leading-relaxed text-[#3a3826]">
+          <p>
+            The EHC owns a member-only beach house at{" "}
+            <strong>2940 Tropicana Drive</strong> in the Ramada Beach
+            Subdivision on Bolivar Peninsula, about 13 miles past the
+            Galveston Ferry on Highway 87.
           </p>
-        </aside>
+          <p>
+            Members reserve Friday-to-Friday weeks, with bookings opening one
+            full year in advance. Prime weeks run from May through Labor Day;
+            non-prime weeks fill the rest of the year.
+          </p>
+        </div>
+        <p className="mt-10 text-xs uppercase tracking-[0.2em] text-[#7a3500]">
+          Members only · Sign in to reserve
+        </p>
       </div>
     </section>
   );
@@ -249,10 +235,6 @@ function HowToJoin() {
             </li>
           ))}
         </ol>
-        <p className="mt-12 text-center text-sm text-[#d4c89c]/70">
-          Annual dues are currently <span className="text-white">$250</span> for
-          regular members.
-        </p>
       </div>
     </section>
   );
@@ -343,24 +325,3 @@ function Activity({
   );
 }
 
-function Rate({
-  label,
-  sub,
-  value,
-}: {
-  label: string;
-  sub: string;
-  value: string;
-}) {
-  return (
-    <div className="flex items-baseline justify-between gap-4 py-3">
-      <div>
-        <p className="font-medium">{label}</p>
-        <p className="text-xs text-[#7a3500]">{sub}</p>
-      </div>
-      <p className="font-[family-name:var(--font-display)] text-xl font-semibold text-[#BF5700]">
-        {value}
-      </p>
-    </div>
-  );
-}
