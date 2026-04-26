@@ -181,7 +181,7 @@ All four are live:
 - **Type `texas` anywhere on the dashboard** → full-screen burnt-orange "HOOK 'EM!" flash for ~1.5s. Implementation: `EasterEggClient.tsx` listens to `keydown` with a 5-char rolling buffer, ignored when focus is in inputs/textareas.
 - **Triple-click the EHC logo in the portal nav** (within 1.5s) → toggles `localStorage.utReveal`, dispatches a `ut-reveal-changed` event, and `EasterEggClient` toggles `body.ut-revealed`. CSS rule in `globals.css` reveals any `.ut-badge` 🤘 spans (currently next to member name in dashboard greeting; add more elsewhere as needed).
 - **🤘 in the public footer** next to the charter number — always visible (`src/app/page.tsx` SiteFooter).
-- **Longhorn silhouette watermark** at ~6% opacity in the bottom-right of every dashboard page — always visible (`src/app/dashboard/layout.tsx` inline SVG).
+- **Longhorn silhouette watermark** at 4% opacity in the bottom-right of every dashboard page — always visible. Asset is `public/longhorn.svg` (a PNG-embedded SVG supplied by the user); rendered via `<img>` in `src/app/dashboard/layout.tsx`.
 
 The "UT '##" graduation-year badge from the original spec was dropped — we don't track grad year on members. Add a `ut_grad_year` column if you ever want it back.
 
