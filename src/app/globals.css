@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-burnt-orange: #BF5700;
+  --color-burnt-orange-dark: #7a3500;
+  --color-light-orange: #F8971F;
+  --color-charcoal: #333F48;
+  --color-charcoal-dark: #1a2128;
+  --color-cream: #D6D2C4;
+  --color-ut-yellow: #FFD600;
+
+  --color-background: #ffffff;
+  --color-foreground: #1a2128;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
