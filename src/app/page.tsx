@@ -27,7 +27,7 @@ function SiteHeader() {
             height={40}
             className="brightness-0 invert"
           />
-          <span className="font-[family-name:var(--font-display)] text-base text-[#f4ecd5] sm:text-lg">
+          <span className="font-[family-name:var(--font-display)] text-base text-[#BF5700] sm:text-lg">
             Executive Hunting Club
           </span>
         </Link>
@@ -70,7 +70,7 @@ function Hero() {
           className="brightness-0 invert"
         />
 
-        <h1 className="mt-8 font-[family-name:var(--font-display)] text-5xl font-semibold tracking-tight text-white sm:text-6xl">
+        <h1 className="mt-8 font-[family-name:var(--font-display)] text-5xl font-semibold tracking-tight text-[#BF5700] sm:text-6xl">
           Executive Hunting Club
         </h1>
         <Divider />
@@ -245,7 +245,7 @@ function SiteFooter() {
     <footer className="border-t border-[#4a5d3e]/60 bg-[#141a10]">
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-10 text-sm text-[#d4c89c]/70 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="font-[family-name:var(--font-display)] text-base text-[#f4ecd5]">
+          <p className="font-[family-name:var(--font-display)] text-base text-[#BF5700]">
             Executive Hunting Club
           </p>
           <p className="mt-1">
@@ -265,11 +265,11 @@ function SiteFooter() {
 function Divider() {
   return (
     <div className="my-6 flex items-center gap-3">
-      <span className="h-px w-12 bg-[#d4c89c]/60" />
-      <span aria-hidden className="text-[#d4c89c]">
+      <span className="h-px w-12 bg-[#BF5700]/70" />
+      <span aria-hidden className="text-[#BF5700]">
         ✦
       </span>
-      <span className="h-px w-12 bg-[#d4c89c]/60" />
+      <span className="h-px w-12 bg-[#BF5700]/70" />
     </div>
   );
 }
