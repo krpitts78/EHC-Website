@@ -23,11 +23,11 @@ export default async function DashboardPage() {
           {member.first_name} {member.last_name} &middot; Member{" "}
           {member.member_number}
           {member.board_role_label ? (
-            <span className="ml-2 rounded bg-[#BF5700] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-[#1a2128]">
+            <span className="ml-2 rounded bg-[#BF5700] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-white">
               {member.board_role_label}
             </span>
           ) : member.is_admin ? (
-            <span className="ml-2 rounded bg-[#5a6470] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-[#5a6470]">
+            <span className="ml-2 rounded bg-[#5a6470] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-white">
               Website Admin
             </span>
           ) : null}

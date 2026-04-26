@@ -61,11 +61,11 @@ export default async function ProfilePage() {
               <dt className="text-[#5a6470]/70">Role</dt>
               <dd>
                 {member.board_role_label ? (
-                  <span className="rounded bg-[#BF5700] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-[#1a2128]">
+                  <span className="rounded bg-[#BF5700] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-white">
                     {member.board_role_label}
                   </span>
                 ) : (
-                  <span className="rounded bg-[#5a6470] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-[#5a6470]">
+                  <span className="rounded bg-[#5a6470] px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-white">
                     Website Admin
                   </span>
                 )}

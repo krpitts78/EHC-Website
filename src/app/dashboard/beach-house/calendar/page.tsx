@@ -25,7 +25,7 @@ const STATUS_STYLES: Record<string, string> = {
   available:
     "border-[#a8a395] bg-white hover:border-[#BF5700] text-[#1a2128]",
   requested: "border-[#BF5700] bg-[#BF5700]/15 text-[#BF5700]",
-  confirmed: "border-[#a8a395] bg-[#5a6470] text-[#5a6470]",
+  confirmed: "border-[#5a6470] bg-[#5a6470] text-white",
   block: "border-yellow-700/50 bg-yellow-900/20 text-yellow-200/90",
   event: "border-blue-700/50 bg-blue-900/20 text-blue-200/90",
   past: "border-[#a8a395]/30 bg-white/40 text-[#5a6470]/40",

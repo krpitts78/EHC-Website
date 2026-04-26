@@ -64,11 +64,11 @@ function MemberCard({ m }: { m: DirectoryMember }) {
           )}
         </div>
         {m.board_role_label ? (
-          <span className="shrink-0 rounded bg-[#BF5700] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[#1a2128]">
+          <span className="shrink-0 rounded bg-[#BF5700] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white">
             {m.board_role_label}
           </span>
         ) : m.is_admin ? (
-          <span className="shrink-0 rounded bg-[#5a6470] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[#5a6470]">
+          <span className="shrink-0 rounded bg-[#5a6470] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white">
             Website Admin
           </span>
         ) : null}

@@ -79,7 +79,7 @@ export default async function DocumentsPage() {
                     <div className="flex-1 min-w-0">
                       <a
                         href={`/dashboard/documents/${doc.id}/download`}
-                        className="font-medium text-white hover:text-[#BF5700]"
+                        className="font-medium text-[#1a2128] hover:text-[#BF5700]"
                       >
                         {doc.title}
                       </a>
