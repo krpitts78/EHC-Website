@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import {
   toUtcDate,
@@ -78,7 +79,15 @@ export default async function AdminReservationsPage() {
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-12 text-[#1a2128]">
-      <h1 className="text-3xl font-semibold">Reservations</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-3xl font-semibold">Reservations</h1>
+        <Link
+          href="/dashboard/admin/reservations/new"
+          className="rounded bg-[#BF5700] px-4 py-2 text-sm font-medium text-white hover:bg-[#7a3500]"
+        >
+          + New reservation
+        </Link>
+      </div>
 
       {overdueDeposits.length > 0 && (
         <section className="mt-6 rounded-lg border border-amber-700/50 bg-amber-50 p-4">
@@ -178,17 +187,25 @@ function MemberLine({ r }: { r: ReservationRow }) {
 function WeekHeader({ r }: { r: ReservationRow }) {
   const friday = toUtcDate(r.week_start_friday);
   return (
-    <div>
-      <h3 className="text-base font-medium">
-        {formatWeekRange(friday)}
-        {r.is_prime && (
-          <span className="ml-2 text-xs text-[#BF5700]">★ Prime</span>
-        )}
-        <span className="ml-2 text-xs text-[#5a6470]/60">
-          ({formatLong(friday)})
-        </span>
-      </h3>
-      <MemberLine r={r} />
+    <div className="flex items-start justify-between gap-3">
+      <div>
+        <h3 className="text-base font-medium">
+          {formatWeekRange(friday)}
+          {r.is_prime && (
+            <span className="ml-2 text-xs text-[#BF5700]">★ Prime</span>
+          )}
+          <span className="ml-2 text-xs text-[#5a6470]/60">
+            ({formatLong(friday)})
+          </span>
+        </h3>
+        <MemberLine r={r} />
+      </div>
+      <Link
+        href={`/dashboard/admin/reservations/${r.id}/edit`}
+        className="shrink-0 rounded border border-[#a8a395] px-2 py-1 text-xs text-[#5a6470] hover:bg-[#D6D2C4]"
+      >
+        Edit
+      </Link>
     </div>
   );
 }
