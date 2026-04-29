@@ -153,7 +153,7 @@ export function DirectoryList({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by name, city, member #..."
-          className="w-full max-w-md rounded border border-[#a8a395] bg-white px-3 py-2 text-sm text-white placeholder-[#d4c89c]/50 focus:border-[#BF5700] focus:outline-none"
+          className="w-full max-w-md rounded border border-[#a8a395] bg-white px-3 py-2 text-sm text-[#1a2128] placeholder-[#5a6470]/60 focus:border-[#BF5700] focus:outline-none"
         />
         <div className="inline-flex rounded border border-[#a8a395] bg-white p-0.5 text-sm">
           <button
